@@ -1,0 +1,13 @@
+# Окружение и кэш
+.venv/
+__pycache__/
+*.pyc
+
+# Секреты и данные участников — не в репозиторий
+.env
+*.sqlite3
+media/
+staticfiles/
+
+# Собирается командой: python frontend/build_site.py
+backend/frontend/site/

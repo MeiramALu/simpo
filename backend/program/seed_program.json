@@ -1,0 +1,2303 @@
+[
+ {
+  "tab": {
+   "ru": "5 ноября",
+   "kk": "5 қараша",
+   "en": "5 November"
+  },
+  "date": {
+   "ru": "5 ноября 2026 года (четверг)",
+   "kk": "5 қараша 2026 жыл (бейсенбі)",
+   "en": "5 November 2026 (Thursday)"
+  },
+  "note": {
+   "ru": "прибытие иностранных участников в г. Алматы",
+   "kk": "шетелдік қатысушылардың Алматы қаласына келуі",
+   "en": "Arrival of international participants in Almaty"
+  },
+  "event": {
+   "ru": "",
+   "kk": "",
+   "en": ""
+  },
+  "rows": [
+   {
+    "time": {
+     "ru": "В течение дня",
+     "kk": "Күні бойы",
+     "en": "Throughout the day"
+    },
+    "title": {
+     "ru": "Встреча иностранных участников в Международном аэропорту Алматы, трансфер в гостиницу",
+     "kk": "Шетелдік қатысушыларды Алматы халықаралық әуежайында қарсы алу, қонақүйге трансфер",
+     "en": "Meeting international participants at Almaty International Airport and transfer to the hotel"
+    },
+    "room": {
+     "ru": "согласно графику прилета",
+     "kk": "ұшып келу кестесіне сәйкес",
+     "en": "according to the flight arrival schedule"
+    },
+    "blocks": []
+   },
+   {
+    "time": {
+     "ru": "В течение дня",
+     "kk": "Күні бойы",
+     "en": "Throughout the day"
+    },
+    "title": {
+     "ru": "Размещение участников в гостинице",
+     "kk": "Қатысушыларды қонақүйге орналастыру",
+     "en": "Hotel accommodation for participants"
+    },
+    "room": {
+     "ru": "гостиница уточняется",
+     "kk": "қонақүй нақтыланады",
+     "en": "hotel to be confirmed"
+    },
+    "blocks": []
+   }
+  ]
+ },
+ {
+  "tab": {
+   "ru": "6 ноября",
+   "kk": "6 қараша",
+   "en": "6 November"
+  },
+  "date": {
+   "ru": "6 ноября 2026 года (пятница)",
+   "kk": "6 қараша 2026 жыл (жұма)",
+   "en": "6 November 2026 (Friday)"
+  },
+  "note": {
+   "ru": "Научная библиотека «Аль-Фараби», Казахский национальный университет имени аль-Фараби, пр. аль-Фараби, 71, г. Алматы",
+   "kk": "«Әл-Фараби» ғылыми кітапханасы, әл-Фараби атындағы Қазақ ұлттық университеті, әл-Фараби даңғылы, 71, Алматы қ.",
+   "en": "Al-Farabi Scientific Library, Al-Farabi Kazakh National University, 71 Al-Farabi Avenue, Almaty"
+  },
+  "event": {
+   "ru": "ГЛОБАЛЬНЫЙ СИМПОЗИУМ АЛЬ-ФАРАБИ-2026\n«Философия. Добродетель. Будущее»",
+   "kk": "ӘЛ-ФАРАБИ ЖАҺАНДЫҚ СИМПОЗИУМЫ-2026\n«Философия. Ізгілік. Болашақ»",
+   "en": "AL-FARABI GLOBAL SYMPOSIUM – 2026\n“Philosophy. Virtue. Future”"
+  },
+  "rows": [
+   {
+    "time": {
+     "ru": "07:30 – 08:30",
+     "kk": "07:30 – 08:30",
+     "en": "07:30 – 08:30"
+    },
+    "title": {
+     "ru": "Завтрак для участников, проживающих в гостинице",
+     "kk": "Қонақүйде тұратын қатысушыларға арналған таңғы ас",
+     "en": "Breakfast for participants staying at the hotel"
+    },
+    "room": {
+     "ru": "уточняется",
+     "kk": "нақтыланады",
+     "en": "hotel to be confirmed"
+    },
+    "blocks": []
+   },
+   {
+    "time": {
+     "ru": "08:30 – 09:00",
+     "kk": "08:30 – 09:00",
+     "en": "08:30 – 09:00"
+    },
+    "title": {
+     "ru": "Трансфер на автобусе из гостиницы в Научную библиотеку «Аль-Фараби» КазНУ имени аль-Фараби",
+     "kk": "Қонақүйден әл-Фараби атындағы ҚазҰУ-дың «Әл-Фараби» ғылыми кітапханасына автобуспен трансфер",
+     "en": "Bus transfer from the hotel to the Al-Farabi Scientific Library of Al-Farabi Kazakh National University"
+    },
+    "room": {
+     "ru": "пр. аль-Фараби, 71",
+     "kk": "әл-Фараби даңғылы, 71",
+     "en": "71 Al-Farabi Avenue"
+    },
+    "blocks": []
+   },
+   {
+    "time": {
+     "ru": "09:00 – 10:00",
+     "kk": "09:00 – 10:00",
+     "en": "09:00 – 10:00"
+    },
+    "title": {
+     "ru": "Регистрация участников",
+     "kk": "Қатысушыларды тіркеу",
+     "en": "Registration of participants"
+    },
+    "room": {
+     "ru": "",
+     "kk": "",
+     "en": ""
+    },
+    "blocks": [
+     {
+      "label": {
+       "ru": "",
+       "kk": "",
+       "en": ""
+      },
+      "items": [
+       {
+        "text": {
+         "ru": "Интерактивная мультимедийная выставка «По следам аль-Фараби»",
+         "kk": "«Әл-Фараби ізімен» интерактивті мультимедиялық көрме",
+         "en": "Interactive multimedia exhibition “In the Footsteps of Al-Farabi”"
+        },
+        "tbc": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "time": {
+     "ru": "10:00 – 10:05",
+     "kk": "10:00 – 10:05",
+     "en": "10:00 – 10:05"
+    },
+    "title": {
+     "ru": "Официальная часть симпозиума",
+     "kk": "Симпозиумның ресми бөлімі",
+     "en": "Official Part of the Symposium"
+    },
+    "room": {
+     "ru": "Холл 4-го этажа Научной библиотеки «Аль-Фараби»",
+     "kk": "«Әл-Фараби» ғылыми кітапханасының холлы, 4 қабат",
+     "en": "Hall of the 4 floor, Al-Farabi Scientific Library"
+    },
+    "blocks": [
+     {
+      "label": {
+       "ru": "",
+       "kk": "",
+       "en": ""
+      },
+      "items": [
+       {
+        "text": {
+         "ru": "Торжественное открытие Глобального симпозиума аль-Фараби",
+         "kk": "Әл-Фараби жаһандық симпозиумының салтанатты ашылуы",
+         "en": "Ceremonial Opening of the Al-Farabi Global Symposium"
+        },
+        "tbc": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "time": {
+     "ru": "10:05 – 10:40",
+     "kk": "10:05 – 10:40",
+     "en": "10:05 – 10:40"
+    },
+    "title": {
+     "ru": "Приветственные слова (ТВС):",
+     "kk": "Құттықтау сөзі",
+     "en": "Welcome Remarks (TBC):"
+    },
+    "room": {
+     "ru": "",
+     "kk": "TBC",
+     "en": ""
+    },
+    "blocks": [
+     {
+      "label": {
+       "ru": "",
+       "kk": "",
+       "en": ""
+      },
+      "items": [
+       {
+        "name": {
+         "ru": "Ерлан Тынымбайулы Карин",
+         "kk": "Қарин Ерлан Тынымбайұлы",
+         "en": "Karin Erlan Tynymbaiuly"
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "Вице-президент Республики Казахстан",
+         "kk": "Қазақстан Республикасының Вице-президенті",
+         "en": "Vice President of the Republic of Kazakhstan"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Саясат Нурбек",
+         "kk": "Саясат Нұрбек",
+         "en": "Sayasat Nurbek"
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "Министр науки и высшего образования Республики Казахстан",
+         "kk": "Қазақстан Республикасының Ғылым және жоғары білім министрі",
+         "en": "Minister of Science and Higher Education of the Republic of Kazakhstan"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Жансеит Кансеитович Туймебаев",
+         "kk": "Түймебаев Жансейіт Қансейітұлы",
+         "en": "Tuimebayev Zhanseit Kanseituly"
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "Председатель Правления – Ректор Казахского национального университета имени аль-Фараби",
+         "kk": "әл-Фараби атындағы Қазақ ұлттық университетінің Басқарма төрағасы – Ректор",
+         "en": "Chairman of the Board – Rector of Al-Farabi Kazakh National University"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Салим М. Аль-Малик",
+         "kk": "Салим М. Әл-Мәлик",
+         "en": "Salim M. Al-Malik"
+        },
+        "country": {
+         "ru": "Марокко",
+         "kk": "Марокко",
+         "en": "Morocco"
+        },
+        "role": {
+         "ru": "Генеральный директор Исламской организации по вопросам образования, науки и культуры (ICESCO)",
+         "kk": "Ислам әлемінің білім, ғылым және мәдениет мәселелері жөніндегі ұйымының (ICESCO) Бас директоры",
+         "en": "Director-General of the Islamic World Educational, Scientific and Cultural Organization (ICESCO)"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Руководство Университета Чженьчжоу",
+         "kk": "Чженьчжоу университетінің басшылығы",
+         "en": "Representatives of the University of Zhengzhou"
+        },
+        "country": {
+         "ru": "КНР",
+         "kk": "ҚХР",
+         "en": "PRC"
+        },
+        "role": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "time": {
+     "ru": "10:40 – 11:40",
+     "kk": "10:40 – 11:40",
+     "en": "10:40 – 11:40"
+    },
+    "title": {
+     "ru": "Пленарное заседание",
+     "kk": "Пленарлық отырыс",
+     "en": "Plenary Session"
+    },
+    "room": {
+     "ru": "",
+     "kk": "",
+     "en": ""
+    },
+    "blocks": [
+     {
+      "label": {
+       "ru": "Докладчики",
+       "kk": "Баяндамашылар",
+       "en": "Speakers"
+      },
+      "items": [
+       {
+        "name": {
+         "ru": "Эллиотт Марк С.",
+         "kk": "Марк С. Эллиотт",
+         "en": "Mark C. Elliott"
+        },
+        "country": {
+         "ru": "США",
+         "kk": "АҚШ",
+         "en": "USA"
+        },
+        "role": {
+         "ru": "проректор Гарвардского университета, профессор истории Китая и Внутренней Азии кафедры языков и цивилизаций Восточной Азии",
+         "kk": "Гарвард университетінің проректоры, Шығыс Азия тілдері мен өркениеттері кафедрасының Қытай және Ішкі Азия тарихы профессоры",
+         "en": "Vice Provost of Harvard University; Professor of Chinese and Inner Asian History, Department of East Asian Languages and Civilizations"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       },
+       {
+        "name": {
+         "ru": "Алтаев Жакыпбек Алтаевич",
+         "kk": "Алтаев Жақыпбек Алтайұлы",
+         "en": "Zhakypbek Altayev"
+        },
+        "country": {
+         "ru": "Казахстан",
+         "kk": "Қазақстан",
+         "en": "Kazakhstan"
+        },
+        "role": {
+         "ru": "доктор философских наук, профессор кафедры философии КазНУ имени аль-Фараби",
+         "kk": "филос.ғ.д., әл-Фараби атындағы ҚазҰУ философия кафедрасының профессоры",
+         "en": "Doctor of Philosophy, Professor at the Department of Philosophy, Al-Farabi Kazakh National University"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       },
+       {
+        "name": {
+         "ru": "Аяди Салем",
+         "kk": "Аяди Салем",
+         "en": "Salem Ayadi"
+        },
+        "country": {
+         "ru": "Тунисская Республика",
+         "kk": "Тунис Республикасы",
+         "en": "Tunisian Republic"
+        },
+        "role": {
+         "ru": "ассоциированный профессор, Университет Сфакса",
+         "kk": "қауымдастырылған профессор, Сфакс университеті",
+         "en": "Associate Professor, University of Sfax"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       },
+       {
+        "name": {
+         "ru": "Низами Фархан Ахмад",
+         "kk": "Фархан Ахмад Низами",
+         "en": "Farhan Ahmad Nizami"
+        },
+        "country": {
+         "ru": "Великобритания",
+         "kk": "Ұлы Британия",
+         "en": "United Kingdom"
+        },
+        "role": {
+         "ru": "основатель и директор Оксфордского центра исламских исследований, научный сотрудник Магдален-колледжа Оксфордского университета и научный сотрудник King Charles III по изучению исламского мира",
+         "kk": "Оксфорд исламдық зерттеулер орталығының негізін қалаушысы әрі директоры, Оксфорд университетінің Магдален-колледжінің ғылыми қызметкері және ислам әлемін зерттеу жөніндегі King Charles III ғылыми қызметкері",
+         "en": "Founder and Director of the Oxford Centre for Islamic Studies; Research Fellow, Magdalen College, University of Oxford; King Charles III Fellow for the Study of the Islamic World"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       },
+       {
+        "name": {
+         "ru": "Сулиаман Исхак Бин Хаджи",
+         "kk": "Исхак Бин Хаджи Сулиаман",
+         "en": "Ishak Bin Haji Sulaiman"
+        },
+        "country": {
+         "ru": "Малайзия",
+         "kk": "Малайзия",
+         "en": "Malaysia"
+        },
+        "role": {
+         "ru": "профессор, заведующий кафедрой Корана и хадисов Академии исламских исследований Университета Малайя",
+         "kk": "профессор, Малайя университеті Исламтану академиясы Құран және хадис кафедрасының меңгерушісі",
+         "en": "Professor, Head of the Department of Qur’an and Hadith, Academy of Islamic Studies, University of Malaya"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       },
+       {
+        "name": {
+         "ru": "Курмангалиева Галия Курмангалиевна",
+         "kk": "Құрманғалиева Ғалия Құрманғалиқызы",
+         "en": "Galiya Kurmangaliyevna Kurmangaliyeva"
+        },
+        "country": {
+         "ru": "Казахстан",
+         "kk": "Қазақстан",
+         "en": "Kazakhstan"
+        },
+        "role": {
+         "ru": "доктор философских наук, доцент, главный научный сотрудник Центра философии Института философии, политологии и религиоведения КН МНВО РК",
+         "kk": "филос.ғ.д., доцент, ҚР ҒЖБМ ҒК ФСДИ Философия орталығының бас ғылыми қызметкері",
+         "en": "Doctor of Philosophy, Associate Professor, Chief Research Fellow at the Philosophy Center, Institute of Philosophy, Political Science and Religious Studies of the Science Committee of the Ministry of Science and Higher Education of the Republic of Kazakhstan"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "time": {
+     "ru": "11:40 – 11:45",
+     "kk": "11:40 – 11:45",
+     "en": "11:40 – 11:45"
+    },
+    "title": {
+     "ru": "Презентация монографии доктора философских наук, профессора, известного фарабиеведа",
+     "kk": "Филос.ғ.д., профессор, белгілі фарабитанушы",
+     "en": "Presentation of the Monograph by Doctor of Philosophy, Professor and Renowned Al-Farabi Scholar"
+    },
+    "room": {
+     "ru": "",
+     "kk": "",
+     "en": ""
+    },
+    "blocks": [
+     {
+      "label": {
+       "ru": "",
+       "kk": "",
+       "en": ""
+      },
+      "items": [
+       {
+        "name": {
+         "ru": "Ж.А. Алтаева",
+         "kk": "",
+         "en": "Zhakypbek Altayev"
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "topic": {
+         "ru": "«Аль-Фараби – золотой век тюрко-мусульманской философии»",
+         "kk": "",
+         "en": "“Al-Farabi: The Golden Age of Turkic-Muslim Philosophy”"
+        },
+        "text": {
+         "ru": "",
+         "kk": "Ж.А. Алтаевтың «Әл-Фараби түркі-мұсылман философиясының алтын ғасыры» атты монографиясының тұсаукесері",
+         "en": ""
+        },
+        "tbc": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "time": {
+     "ru": "11:45 – 11:50",
+     "kk": "11:45 – 11:50",
+     "en": "11:45 – 11:50"
+    },
+    "title": {
+     "ru": "Церемония подписания меморандума между Университетом Чженьчжоу КНР и КазНУ имени аль-Фараби об открытии филиала «Центра аль-Фараби» на базе Университета Чженьчжоу.",
+     "kk": "ҚХР Чженьчжоу университетімен әл-Фараби атындағы ҚазҰУ арасында Чженьчжоу университетінің базасында «Әл-Фараби орталығы» филиалын ашу туралы меморандумға қол қою рәсімі.",
+     "en": "Memorandum Signing Ceremony between Zhengzhou University of the People’s Republic of China and Al-Farabi Kazakh National University on the Establishment of a Branch of the Al-Farabi Center at Zhengzhou University"
+    },
+    "room": {
+     "ru": "",
+     "kk": "",
+     "en": ""
+    },
+    "blocks": []
+   },
+   {
+    "time": {
+     "ru": "11:50 – 11:55",
+     "kk": "11:50 – 11:55",
+     "en": "11:50 – 11:55"
+    },
+    "title": {
+     "ru": "Церемония представления кафедры религиоведения и культурологии КазНУ имени аль-Фараби на получение статуса «ICESCO Chair»",
+     "kk": "«ICESCO Chair» мәртебесіне әл-Фараби атындағы ҚазҰУ дінтану және мәдениеттану кафедрасын ұсыну рәсімі",
+     "en": "Presentation Ceremony for the Department of Religious Studies and Cultural Studies of Al-Farabi Kazakh National University for the Establishment of an “ICESCO Chair”"
+    },
+    "room": {
+     "ru": "",
+     "kk": "",
+     "en": ""
+    },
+    "blocks": []
+   },
+   {
+    "time": {
+     "ru": "12:00 – 12:20",
+     "kk": "12:00 – 12:20",
+     "en": "12:00 – 12:20"
+    },
+    "title": {
+     "ru": "Кофе-брейк",
+     "kk": "Кофе-брейк",
+     "en": "Coffee Break"
+    },
+    "room": {
+     "ru": "фойе Научной библиотеки «Аль-Фараби»",
+     "kk": "«Әл-Фараби» ғылыми кітапханасының фойесі",
+     "en": "Foyer of the Al-Farabi Scientific Library"
+    },
+    "blocks": []
+   },
+   {
+    "time": {
+     "ru": "12:20 – 13:30",
+     "kk": "12:20 – 13:30",
+     "en": "12:20 – 13:30"
+    },
+    "title": {
+     "ru": "Панель 1: «Наследие аль-Фараби и глобальные вызовы»",
+     "kk": "Панель 1: «Әл-Фараби мұрасы және жаһандық сын-қатерлер»",
+     "en": "Panel 1: “Al-Farabi’s Legacy and Global Challenges”"
+    },
+    "room": {
+     "ru": "конференц-зал №409 Научной библиотеки «Аль-Фараби»",
+     "kk": "«Әл-Фараби» ғылыми кітапханасының №409 конференц-залы",
+     "en": "Conference Hall No. 409, Al-Farabi Scientific Library"
+    },
+    "blocks": [
+     {
+      "label": {
+       "ru": "Модератор",
+       "kk": "Модератор",
+       "en": "Moderator"
+      },
+      "items": [
+       {
+        "name": {
+         "ru": "Мейрбаев Бекжан Берикбаевич",
+         "kk": "филос.ғ.к., қауымдастырылған профессор Мейрбаев Бекжан Берікбайұлы",
+         "en": "Bekzhan Berikbayevich Meirbayev"
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "кандидат философских наук, ассоциированный профессор",
+         "kk": "",
+         "en": "Candidate of Philosophical Sciences, Associate Professor"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       }
+      ]
+     },
+     {
+      "label": {
+       "ru": "Участники",
+       "kk": "Қатысушылар",
+       "en": "Participants"
+      },
+      "items": [
+       {
+        "name": {
+         "ru": "Друар Тереза-Анна",
+         "kk": "Друар Тереза-Анна",
+         "en": "Teresa-Anne Druart"
+        },
+        "country": {
+         "ru": "Соединенные Штаты Америки",
+         "kk": "Америка Құрама Штаттары",
+         "en": "United States of America"
+        },
+        "role": {
+         "ru": "Католический университет Америки",
+         "kk": "Америка католик университеті",
+         "en": "The Catholic University of America"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       },
+       {
+        "name": {
+         "ru": "Кая М. Джюнейт",
+         "kk": "Кая М. Джюнейт",
+         "en": "Kaya M. Cüneyt"
+        },
+        "country": {
+         "ru": "Турецкая Республика",
+         "kk": "Түркия Республикасы",
+         "en": "Republic of Türkiye"
+        },
+        "role": {
+         "ru": "Стамбульский университет",
+         "kk": "Ыстанбұл университеті",
+         "en": "Istanbul University"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       },
+       {
+        "name": {
+         "ru": "Адамсон Питер",
+         "kk": "Адамсон Питер",
+         "en": "Peter Adamson"
+        },
+        "country": {
+         "ru": "Федеративная Республика Германия",
+         "kk": "Германия Федеративтік Республикасы",
+         "en": "Federal Republic of Germany"
+        },
+        "role": {
+         "ru": "Мюнхенский университет Людвига и Максимилиана",
+         "kk": "Людвиг және Максимилиан атындағы Мюнхен университеті",
+         "en": "Ludwig Maximilian University of Munich"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       },
+       {
+        "name": {
+         "ru": "Менн Стивен",
+         "kk": "Менн Стивен",
+         "en": "Steven Menn"
+        },
+        "country": {
+         "ru": "Канада",
+         "kk": "Канада",
+         "en": "Canada"
+        },
+        "role": {
+         "ru": "Университет Торонто / Университет Макгилла",
+         "kk": "Торонто университеті / Макгилл университеті",
+         "en": "University of Toronto / McGill University"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       },
+       {
+        "name": {
+         "ru": "Германн Надя",
+         "kk": "Германн Надя",
+         "en": "Nadia Hermann"
+        },
+        "country": {
+         "ru": "Федеративная Республика Германия",
+         "kk": "Германия Федеративтік Республикасы",
+         "en": "Federal Republic of Germany"
+        },
+        "role": {
+         "ru": "Фрайбургский университет, профессор философии",
+         "kk": "Фрайбург университеті, философия профессоры",
+         "en": "University of Freiburg, Professor of Philosophy"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "time": {
+     "ru": "13:30 – 14:30",
+     "kk": "13:30 – 14:30",
+     "en": "13:30 – 14:30"
+    },
+    "title": {
+     "ru": "Обед",
+     "kk": "Түскі ас",
+     "en": "Lunch"
+    },
+    "room": {
+     "ru": "",
+     "kk": "",
+     "en": ""
+    },
+    "blocks": []
+   },
+   {
+    "time": {
+     "ru": "",
+     "kk": "",
+     "en": ""
+    },
+    "title": {
+     "ru": "II Международная конференция КазНУ имени аль-Фараби и ICESCO «Аль-Фараби и его вклад в историю человечества»",
+     "kk": "Әл-Фараби атындағы ҚазҰУ және ИСЕСКО бірлескен «Әл-Фараби және оның адамзат тарихына қосқан үлесі» атты ІІ халықаралық конференциясы",
+     "en": "II International Conference of Al-Farabi Kazakh National University and ICESCO “Al-Farabi and His Contributions Throughout Human History”"
+    },
+    "room": {
+     "ru": "TBC",
+     "kk": "ТBC",
+     "en": "TBC"
+    },
+    "blocks": []
+   },
+   {
+    "time": {
+     "ru": "14:30 – 15:40",
+     "kk": "14:30 – 15:40",
+     "en": "14:30 – 15:40"
+    },
+    "title": {
+     "ru": "Панель 2: «Аль-Фараби и философия будущего»",
+     "kk": "Панель 2: «Әл-Фараби және болашақ философиясы»",
+     "en": "Panel 2: “Al-Farabi and the Philosophy of the Future”"
+    },
+    "room": {
+     "ru": "конференц-зал №408 Научной библиотеки «Аль-Фараби»",
+     "kk": "«Әл-Фараби» ғылыми кітапханасының №408 конференц-залы",
+     "en": "Conference Hall No. 408, Al-Farabi Scientific Library"
+    },
+    "blocks": [
+     {
+      "label": {
+       "ru": "Модератор",
+       "kk": "Модератор",
+       "en": "Moderator"
+      },
+      "items": [
+       {
+        "name": {
+         "ru": "Курманалиева Айнур Дурбеленовна - доктор философских наук",
+         "kk": "философия ғылымдарының докторы, профессор Құрманалиева Айнұр Дүрбелеңқызы",
+         "en": "Ainur Durbelinovna Kurmanaliyeva"
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "профессор",
+         "kk": "",
+         "en": "Doctor of Philosophy, Professor"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       }
+      ]
+     },
+     {
+      "label": {
+       "ru": "Участники",
+       "kk": "Қатысушылар",
+       "en": "Participants"
+      },
+      "items": [
+       {
+        "name": {
+         "ru": "Алпер Омер Махир",
+         "kk": "Алпер Омер Махир",
+         "en": "Ömer Mahir Alper"
+        },
+        "country": {
+         "ru": "Турецкая Республика",
+         "kk": "Түркия Республикасы",
+         "en": "Republic of Türkiye"
+        },
+        "role": {
+         "ru": "Стамбульский университет",
+         "kk": "Ыстанбұл университеті",
+         "en": "Istanbul University"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       },
+       {
+        "name": {
+         "ru": "Блэк Дебора",
+         "kk": "Блэк Дебора",
+         "en": "Deborah Black"
+        },
+        "country": {
+         "ru": "Канада",
+         "kk": "Канада",
+         "en": "Canada"
+        },
+        "role": {
+         "ru": "Университет Торонто",
+         "kk": "Торонто университеті",
+         "en": "University of Toronto"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       },
+       {
+        "name": {
+         "ru": "Эль-Джурр Халиль",
+         "kk": "Эль-Джурр Халиль",
+         "en": "Khalil El-Jurr"
+        },
+        "country": {
+         "ru": "Ливанская Республика",
+         "kk": "Ливан Республикасы",
+         "en": "Lebanese Republic"
+        },
+        "role": {
+         "ru": "Ливанский университет",
+         "kk": "Ливан университеті",
+         "en": "Lebanese University"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       },
+       {
+        "name": {
+         "ru": "Якуб Луай Хатем",
+         "kk": "Якуб Луай Хатем",
+         "en": "Luay Hatem Yakub"
+        },
+        "country": {
+         "ru": "Турецкая Республика",
+         "kk": "Түркия Республикасы",
+         "en": "Republic of Türkiye"
+        },
+        "role": {
+         "ru": "факультет теологии, Анкарский университет социальных наук",
+         "kk": "теология факультеті, Анкара әлеуметтік ғылымдар университеті",
+         "en": "Faculty of Theology, Ankara Social Sciences University"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       },
+       {
+        "name": {
+         "ru": "Путра Адела Фернанда",
+         "kk": "Путра Адела Фернанда",
+         "en": "Adela Fernanda Putra"
+        },
+        "country": {
+         "ru": "Республика Индонезия",
+         "kk": "Индонезия Республикасы",
+         "en": "Republic of Indonesia"
+        },
+        "role": {
+         "ru": "факультет политических и социальных наук, Университет Северной Суматры",
+         "kk": "саяси және әлеуметтік ғылымдар факультеті, Солтүстік Суматра университеті",
+         "en": "Faculty of Political and Social Sciences, University of North Sumatra"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "time": {
+     "ru": "15:40 – 16:00",
+     "kk": "15:40 – 16:00",
+     "en": "15:40 – 16:00"
+    },
+    "title": {
+     "ru": "Кофе-брейк",
+     "kk": "Кофе-брейк",
+     "en": "Coffee Break"
+    },
+    "room": {
+     "ru": "фойе Научной библиотеки «Аль-Фараби»",
+     "kk": "«Әл-Фараби» ғылыми кітапханасының фойесі",
+     "en": "Foyer of the Al-Farabi Scientific Library"
+    },
+    "blocks": []
+   },
+   {
+    "time": {
+     "ru": "16:00 – 17:00",
+     "kk": "16:00 – 17:00",
+     "en": "16:00 – 17:00"
+    },
+    "title": {
+     "ru": "Панель 3: «Аль-Фараби и воспитание ответственного гражданина»",
+     "kk": "Панель 3: «Әл-Фараби және жауапты азамат тәрбиесі»",
+     "en": "Panel 3: “Al-Farabi and the Development of Responsible Citizens”"
+    },
+    "room": {
+     "ru": "конференц-зал №409 Научной библиотеки «Аль-Фараби»",
+     "kk": "«Әл-Фараби» ғылыми кітапханасының №409 конференц-залы",
+     "en": "Conference Hall No. 409, Al-Farabi Scientific Library"
+    },
+    "blocks": [
+     {
+      "label": {
+       "ru": "Модератор",
+       "kk": "Модератор",
+       "en": "Moderator"
+      },
+      "items": [
+       {
+        "name": {
+         "ru": "Балтымова Мира Рашидовна",
+         "kk": "филология ғылымдарының кандидаты, қауымдастырылған профессор Балтымова Мира Рашидқызы",
+         "en": "Mira Rashidovna Baltymova"
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "кандидат филологических наук, ассоциированный профессор",
+         "kk": "",
+         "en": "Candidate of Philological Sciences, Associate Professor"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       }
+      ]
+     },
+     {
+      "label": {
+       "ru": "Участники",
+       "kk": "Қатысушылар",
+       "en": "Participants"
+      },
+      "items": [
+       {
+        "name": {
+         "ru": "Эль-Бизри Надер",
+         "kk": "Эль-Бизри Надер",
+         "en": "Nader El-Bizri"
+        },
+        "country": {
+         "ru": "Соединенное Королевство Великобритании и Северной Ирландии",
+         "kk": "Ұлыбритания және Солтүстік Ирландия Біріккен Корольдігі",
+         "en": "United Kingdom"
+        },
+        "role": {
+         "ru": "Институт исмаилитских исследований (г. Лондон), профессор",
+         "kk": "Исмаилиттік зерттеулер институты (Лондон қ.), профессор",
+         "en": "Institute of Ismaili Studies, London, Professor"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       },
+       {
+        "name": {
+         "ru": "Смирнов Андрей Вадимович",
+         "kk": "Смирнов Андрей Вадимович",
+         "en": "Andrey Vadimovich Smirnov"
+        },
+        "country": {
+         "ru": "Российская Федерация",
+         "kk": "Ресей Федерациясы",
+         "en": "Russian Federation"
+        },
+        "role": {
+         "ru": "Институт философии Российской академии наук, академик РАН",
+         "kk": "Ресей ғылым академиясының Философия институты, РҒА академигі",
+         "en": "Institute of Philosophy, Russian Academy of Sciences, Academician of the Russian Academy of Sciences"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       },
+       {
+        "name": {
+         "ru": "Шираванд Мохсен",
+         "kk": "Шираванд Мохсен",
+         "en": "Mohsen Shiravand"
+        },
+        "country": {
+         "ru": "Исламская Республика Иран",
+         "kk": "Иран Ислам Республикасы",
+         "en": "Islamic Republic of Iran"
+        },
+        "role": {
+         "ru": "кафедра исламоведения, Исфаханский университет",
+         "kk": "исламтану кафедрасы, Исфахан университеті",
+         "en": "Department of Islamic Studies, University of Isfahan"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       },
+       {
+        "name": {
+         "ru": "Доре Фатма",
+         "kk": "Доре Фатма",
+         "en": "Fatma Dore"
+        },
+        "country": {
+         "ru": "Турецкая Республика",
+         "kk": "Түркия Республикасы",
+         "en": "Republic of Türkiye"
+        },
+        "role": {
+         "ru": "кафедра социологии, факультет естественных и гуманитарных наук, Университет Коджатепе",
+         "kk": "әлеуметтану кафедрасы, жаратылыстану және гуманитарлық ғылымдар факультеті, Афьон Коджатепе университеті",
+         "en": "Department of Sociology, Faculty of Arts and Sciences, Kocatepe University"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "time": {
+     "ru": "17:00 – 17:30",
+     "kk": "17:00 – 17:30",
+     "en": "17:00 – 17:30"
+    },
+    "title": {
+     "ru": "Подведение итогов работы симпозиума. Принятие итоговой резолюции",
+     "kk": "Симпозиум жұмысын қорытындылау. Қорытынды резолюцияны қабылдау",
+     "en": "Summary of the Symposium Proceedings and Adoption of the Final Resolution"
+    },
+    "room": {
+     "ru": "",
+     "kk": "",
+     "en": ""
+    },
+    "blocks": []
+   },
+   {
+    "time": {
+     "ru": "17:40",
+     "kk": "17:40",
+     "en": "17:40"
+    },
+    "title": {
+     "ru": "Торжественный ужин для гостей",
+     "kk": "Қонақтарға арналған салтанатты кешкі ас",
+     "en": "Gala Dinner for Guests"
+    },
+    "room": {
+     "ru": "",
+     "kk": "",
+     "en": ""
+    },
+    "blocks": []
+   }
+  ]
+ },
+ {
+  "tab": {
+   "ru": "7 ноября",
+   "kk": "7 қараша",
+   "en": "7 November"
+  },
+  "date": {
+   "ru": "7 ноября 2026 года (суббота)",
+   "kk": "7 қараша 2026 жыл",
+   "en": "7 November 2026 (Saturday)"
+  },
+  "note": {
+   "ru": "г. Алматы",
+   "kk": "Алматы қ.",
+   "en": "Almaty"
+  },
+  "event": {
+   "ru": "IV Конгресс философов Казахстана\n«Философия казахстанского общества: ценностные ориентиры и перспективы развития»",
+   "kk": "Қазақстан философтарының IV конгресі\n«Қазақстандық қоғам философиясы: құндылықтық бағдарлар және даму перспективалары»",
+   "en": "IV Congress of Philosophers of Kazakhstan\n“Philosophy of Kazakhstani Society: Value Orientations and Development Prospects”"
+  },
+  "rows": [
+   {
+    "time": {
+     "ru": "07:30 – 08:30",
+     "kk": "07:30 – 08:30",
+     "en": "07:30 – 08:30"
+    },
+    "title": {
+     "ru": "Завтрак для участников, проживающих в гостинице",
+     "kk": "Қонақүйде тұратын қатысушыларға арналған таңғы ас",
+     "en": "Breakfast for Hotel Guests"
+    },
+    "room": {
+     "ru": "",
+     "kk": "",
+     "en": ""
+    },
+    "blocks": []
+   },
+   {
+    "time": {
+     "ru": "08:30 – 09:30",
+     "kk": "08:30 – 09:30",
+     "en": "08:30 – 09:30"
+    },
+    "title": {
+     "ru": "Трансфер на автобусе к месту проведения",
+     "kk": "Өтетін орынға автобуспен трансфер",
+     "en": "Bus Transfer to the Venue"
+    },
+    "room": {
+     "ru": "",
+     "kk": "",
+     "en": ""
+    },
+    "blocks": []
+   },
+   {
+    "time": {
+     "ru": "09:00 – 10:00",
+     "kk": "09:00 – 10:00",
+     "en": "09:00 – 10:00"
+    },
+    "title": {
+     "ru": "Регистрация участников Конгресса",
+     "kk": "Конгресс қатысушыларын тіркеу",
+     "en": "Registration of Congress Participants"
+    },
+    "room": {
+     "ru": "",
+     "kk": "",
+     "en": ""
+    },
+    "blocks": []
+   },
+   {
+    "time": {
+     "ru": "10:00 – 10:10",
+     "kk": "10:00 – 10:10",
+     "en": "10:00 – 10:10"
+    },
+    "title": {
+     "ru": "Открытие IV Конгресса философов Казахстана",
+     "kk": "Қазақстан философтарының IV конгресінің ашылуы",
+     "en": "Opening of the IV Congress of Philosophers of Kazakhstan"
+    },
+    "room": {
+     "ru": "Конференция зал Ғылым ордасы",
+     "kk": "Ғылым ордасы конференция залы",
+     "en": "Conference Hall, Gylym Ordasy"
+    },
+    "blocks": []
+   },
+   {
+    "time": {
+     "ru": "10:10 – 11:30",
+     "kk": "10:10 – 11:30",
+     "en": "10:10 – 11:30"
+    },
+    "title": {
+     "ru": "Приветственные слова:",
+     "kk": "Конгресс қатысушыларына арналған құттықтау сөздер",
+     "en": "Welcome Remarks:"
+    },
+    "room": {
+     "ru": "",
+     "kk": "",
+     "en": ""
+    },
+    "blocks": [
+     {
+      "label": {
+       "ru": "",
+       "kk": "",
+       "en": ""
+      },
+      "items": [
+       {
+        "name": {
+         "ru": "Нурбек С.",
+         "kk": "Нұрбек С.",
+         "en": "Nurbek S."
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "Министр науки и высшего образования Республики Казахстан",
+         "kk": "Қазақстан Республикасының Ғылым және жоғары білім министрі",
+         "en": "Minister of Science and Higher Education of the Republic of Kazakhstan"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Сатыбалды Д.А.",
+         "kk": "Сатыбалды Д.А.",
+         "en": "Satybaldy D.A."
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "аким города Алматы",
+         "kk": "Алматы қаласының әкімі",
+         "en": "Akim of Almaty"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Куришбаев А.К.",
+         "kk": "Күрішбаев А.К.",
+         "en": "Kurishbayev A.K."
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "президент Национальной академии наук Республики Казахстан при Президента Республики Казахстан",
+         "kk": "Қазақстан Республикасы Ұлттық ғылым академиясының президенті, академик",
+         "en": "President of the National Academy of Sciences of the Republic of Kazakhstan under the President of the Republic of Kazakhstan"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Хисук Ким",
+         "kk": "Хисук Ким",
+         "en": "Hee-Suk Kim"
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "президент Международной федерации философских обществ, профессор",
+         "kk": "Халықаралық философиялық қоғамдар федерациясының президенті, профессор",
+         "en": "President of the International Federation of Philosophical Societies, Professor"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Смирнов А.В.",
+         "kk": "Смирнов А.В.",
+         "en": "Smirnov A.V."
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "президент Российского философского общества, академик РАН",
+         "kk": "Ресей философиялық қоғамының президенті, РҒА академигі",
+         "en": "President of the Russian Philosophical Society, Academician of the Russian Academy of Sciences"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       },
+       {
+        "text": {
+         "ru": "Представитель Китайского философского общества (Ф.И.О. уточняется)",
+         "kk": "Қытай философиялық қоғамының өкілі (аты-жөні нақтыланады)",
+         "en": "Representative of the Chinese Philosophical Society (Name to be confirmed)"
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Бабосов Е.М.",
+         "kk": "Бабосов Е.М.",
+         "en": "Babosov E.M."
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "президент Белорусского философского общества, доктор философских наук, профессор",
+         "kk": "Беларусь философиялық қоғамының президенті, философия ғылымдарының докторы, профессор",
+         "en": "President of the Belarusian Philosophical Society, Doctor of Philosophical Sciences, Professor"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Лазаревич А.А.",
+         "kk": "Лазаревич А.А.",
+         "en": "Lazarevich A.A."
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "директор Института философии Национальной академии наук Беларуси, кандидат философских наук, доцент",
+         "kk": "Беларусь Ұлттық ғылым академиясы Философия институтының директоры, философия ғылымдарының кандидаты, доцент",
+         "en": "Director of the Institute of Philosophy of the National Academy of Sciences of Belarus, Candidate of Philosophical Sciences, Associate Professor"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Шермухамедова Н.А.",
+         "kk": "Шермұхамедова Н.А.",
+         "en": "Shermukhamedova N.A."
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "президент Философского общества Узбекистана, доктор философских наук, профессор",
+         "kk": "Өзбекстан философиялық қоғамының президенті, философия ғылымдарының докторы, профессор",
+         "en": "President of the Philosophical Society of Uzbekistan, Doctor of Philosophical Sciences, Professor"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Мамедзаде И.Р.",
+         "kk": "Мамедзаде И.Р.",
+         "en": "Mamedzade I.R."
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "директор Института философии и социологии Национальной академии наук Азербайджана, доктор философских наук, профессор",
+         "kk": "Әзербайжан Ұлттық ғылым академиясы Философия және әлеуметтану институтының директоры, философия ғылымдарының докторы, профессор",
+         "en": "Director of the Institute of Philosophy and Sociology of the National Academy of Sciences of Azerbaijan, Doctor of Philosophical Sciences, Professor"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Саралаев Н.К.",
+         "kk": "Саралаев Н.К.",
+         "en": "Saralaev N.K."
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "директор Института философии, права и социально-политических исследований имени А. Алтмышбаева Национальной академии наук Кыргызской Республики",
+         "kk": "Қырғыз Республикасы Ұлттық ғылым академиясының А. Алтмышбаев атындағы Философия, құқық және әлеуметтік-саяси зерттеулер институтының директоры",
+         "en": "Director of the A. Altmyshbayev Institute of Philosophy, Law and Socio-Political Studies of the National Academy of Sciences of the Kyrgyz Republic"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Габитов Т.Х.",
+         "kk": "Ғабитов Т.Х.",
+         "en": "Gabitov T.Kh."
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "сопредседатель Философского общества тюркоязычных стран, доктор философских наук, профессор",
+         "kk": "Түркітілдес елдер философиялық қоғамының тең төрағасы, философия ғылымдарының докторы, профессор",
+         "en": "Co-Chair of the Philosophical Society of Turkic-Speaking Countries, Doctor of Philosophical Sciences, Professor"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Сейдуманов С.Т.",
+         "kk": "Сейдуманов С.Т.",
+         "en": "Seidumanov S.T."
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "президент Казахстанского философского конгресса, доктор социологических наук, профессор",
+         "kk": "Қазақстан философиялық конгресінің президенті, әлеуметтану ғылымдарының докторы, профессор",
+         "en": "President of the Kazakhstan Philosophical Congress, Doctor of Sociological Sciences, Professor"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Садуакасова А.К.",
+         "kk": "Сәдуақасова А.К.",
+         "en": "Saduakassova A.K."
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "генеральный директор Института философии, политологии и религиоведения КН МНВО РК, доктор социологических наук",
+         "kk": "ҚР ҒЖБМ ҒК Философия, саясаттану және дінтану институтының бас директоры, әлеуметтану ғылымдарының докторы",
+         "en": "Director General of the Institute of Philosophy, Political Science and Religious Studies of the Science Committee of the Ministry of Science and Higher Education of the Republic of Kazakhstan, Doctor of Sociological Sciences"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "time": {
+     "ru": "11:30 – 12:00",
+     "kk": "11:30 – 12:00",
+     "en": "11:30 – 12:00"
+    },
+    "title": {
+     "ru": "Кофе-брейк",
+     "kk": "Кофе-брейк",
+     "en": "Coffee Break"
+    },
+    "room": {
+     "ru": "",
+     "kk": "",
+     "en": ""
+    },
+    "blocks": []
+   },
+   {
+    "time": {
+     "ru": "12:00 – 14:00",
+     "kk": "12:00 – 14:00",
+     "en": "12:00 – 14:00"
+    },
+    "title": {
+     "ru": "Пленарное заседание",
+     "kk": "Пленарлық отырыс баяндамалары",
+     "en": "Plenary Session"
+    },
+    "room": {
+     "ru": "",
+     "kk": "",
+     "en": ""
+    },
+    "blocks": [
+     {
+      "label": {
+       "ru": "Модератор",
+       "kk": "Модератор",
+       "en": "Moderator"
+      },
+      "items": [
+       {
+        "name": {
+         "ru": "Сагикызы А.",
+         "kk": "Сағиқызы А.",
+         "en": "A. Sagikyzy"
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "главный научный сотрудник Института философии, политологии и религиоведения КН МНВО РК, доктор философских наук, профессор.",
+         "kk": "ҚР ҒЖБМ ҒК Философия, саясаттану және дінтану институтының бас ғылыми қызметкері, философия ғылымдарының докторы, профессор",
+         "en": "Chief Research Fellow, Institute of Philosophy, Political Science and Religious Studies, Science Committee of the Ministry of Science and Higher Education of the Republic of Kazakhstan, Doctor of Philosophical Sciences, Professor"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       }
+      ]
+     },
+     {
+      "label": {
+       "ru": "Докладчики пленарного заседания (15 минут)",
+       "kk": "Пленарлық отырыс баяндамашылары (15 минут)",
+       "en": "Plenary Session Speakers (15 minutes each)"
+      },
+      "items": [
+       {
+        "name": {
+         "ru": "Колчигин С.Ю.",
+         "kk": "Колчигин С.Ю.",
+         "en": "S.Yu. Kolchigin"
+        },
+        "country": {
+         "ru": "г. Алматы",
+         "kk": "Алматы қ.",
+         "en": "Almaty"
+        },
+        "role": {
+         "ru": "доктор философских наук, профессор",
+         "kk": "философия ғылымдарының докторы, профессор",
+         "en": "Doctor of Philosophical Sciences, Professor"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       },
+       {
+        "name": {
+         "ru": "Габитов Т.Х.",
+         "kk": "Ғабитов Т.Х.",
+         "en": "T.Kh. Gabitov"
+        },
+        "country": {
+         "ru": "г. Алматы",
+         "kk": "Алматы қ.",
+         "en": "Almaty"
+        },
+        "role": {
+         "ru": "КазНУ имени аль-Фараби, доктор философских наук, профессор",
+         "kk": "әл-Фараби атындағы ҚазҰУ, философия ғылымдарының докторы, профессор",
+         "en": "Al-Farabi Kazakh National University, Doctor of Philosophical Sciences, Professor"
+        },
+        "topic": {
+         "ru": "«Казахская философия: диалог с современными ценностями»",
+         "kk": "«Казахская философия: диалог с современными ценностями»",
+         "en": "“Kazakh Philosophy: A Dialogue with Contemporary Values”"
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Смирнов А.В.",
+         "kk": "Смирнов А.В.",
+         "en": "A.V. Smirnov"
+        },
+        "country": {
+         "ru": "Российская Федерация, г. Москва",
+         "kk": "Ресей Федерациясы, Мәскеу қ.",
+         "en": "Russian Federation, Moscow"
+        },
+        "role": {
+         "ru": "первый заместитель директора Института философии РАН, академик РАН, доктор философских наук",
+         "kk": "РҒА Философия институты директорының бірінші орынбасары, РҒА академигі, философия ғылымдарының докторы",
+         "en": "First Deputy Director of the Institute of Philosophy of the Russian Academy of Sciences, Academician of the Russian Academy of Sciences, Doctor of Philosophical Sciences"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       },
+       {
+        "name": {
+         "ru": "Скарантино Л.",
+         "kk": "Скарантино Л.",
+         "en": "L. Scarantino"
+        },
+        "country": {
+         "ru": "Итальянская Республика",
+         "kk": "Италия Республикасы",
+         "en": "Italian Republic"
+        },
+        "role": {
+         "ru": "президент Римского философского конгресса, доктор философии",
+         "kk": "Рим философиялық конгресінің президенті, философия докторы",
+         "en": "President of the Rome Philosophical Congress, Doctor of Philosophy"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       },
+       {
+        "name": {
+         "ru": "Кулсариева А.Т.",
+         "kk": "Құлсариева А.Т.",
+         "en": "A.T. Kulsarieva"
+        },
+        "country": {
+         "ru": "г. Алматы",
+         "kk": "Алматы қ.",
+         "en": "Almaty"
+        },
+        "role": {
+         "ru": "проректор Казахского национального женского педагогического университета, доктор философских наук, профессор",
+         "kk": "Қазақ ұлттық қыздар педагогикалық университетінің проректоры, философия ғылымдарының докторы, профессор",
+         "en": "Vice-Rector of the Kazakh National Women’s Teacher Training University, Doctor of Philosophical Sciences, Professor"
+        },
+        "topic": {
+         "ru": "«Модернизация общественного сознания и поиск идентичности: философский потенциал казахской традиции»",
+         "kk": "«Қоғамдық сананы жаңғырту және бірегейлікті іздеу: қазақ дәстүрінің философиялық әлеуеті»",
+         "en": "“Modernization of Public Consciousness and the Search for Identity: The Philosophical Potential of the Kazakh Tradition”"
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Карипбаев Б.И.",
+         "kk": "Кәріпбаев Б.И.",
+         "en": "B.I. Karipbayev"
+        },
+        "country": {
+         "ru": "г. Караганда",
+         "kk": "Қарағанды қ.",
+         "en": "Karaganda"
+        },
+        "role": {
+         "ru": "Карагандинский национальный исследовательский университет имени академика Е.А. Букетова, доктор философских наук, профессор",
+         "kk": "академик Е.А. Бөкетов атындағы Қарағанды ұлттық зерттеу университеті, философия ғылымдарының докторы, профессор",
+         "en": "Academician Y.A. Buketov Karaganda National Research University, Doctor of Philosophical Sciences, Professor"
+        },
+        "topic": {
+         "ru": "«Философия в образовательном процессе как пространство формирования субъектности личности»",
+         "kk": "«Білім беру үдерісіндегі философия тұлға субъектілігін қалыптастыру кеңістігі ретінде»",
+         "en": "“Philosophy in the Educational Process as a Space for the Formation of Personal Agency”"
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Сейтахметова Н.Л.",
+         "kk": "Сейтахметова Н.Л.",
+         "en": "N.L. Seitakhmetova"
+        },
+        "country": {
+         "ru": "г. Алматы",
+         "kk": "Алматы қ.",
+         "en": "Almaty"
+        },
+        "role": {
+         "ru": "главный научный сотрудник Института философии, политологии и религиоведения КН МНВО РК, академик НАН РК, доктор философских наук, профессор",
+         "kk": "ҚР ҒЖБМ ҒК Философия, саясаттану және дінтану институтының бас ғылыми қызметкері, ҚР ҰҒА академигі, философия ғылымдарының докторы, профессор",
+         "en": "Chief Research Fellow, Institute of Philosophy, Political Science and Religious Studies, Science Committee of the Ministry of Science and Higher Education of the Republic of Kazakhstan, Academician of the National Academy of Sciences of the Republic of Kazakhstan, Doctor of Philosophical Sciences, Professor"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": true
+       },
+       {
+        "name": {
+         "ru": "Сагикызы А.",
+         "kk": "Сағиқызы А.",
+         "en": "A. Sagikyzy"
+        },
+        "country": {
+         "ru": "г. Алматы",
+         "kk": "Алматы қ.",
+         "en": "Almaty"
+        },
+        "role": {
+         "ru": "главный научный сотрудник Института философии, политологии и религиоведения КН МНВО РК, доктор философских наук, профессор",
+         "kk": "ҚР ҒЖБМ ҒК Философия, саясаттану және дінтану институтының бас ғылыми қызметкері, философия ғылымдарының докторы, профессор",
+         "en": "Chief Research Fellow, Institute of Philosophy, Political Science and Religious Studies, Science Committee of the Ministry of Science and Higher Education of the Republic of Kazakhstan, Doctor of Philosophical Sciences, Professor"
+        },
+        "topic": {
+         "ru": "«Противоречия глобальных трансформаций и задачи философии в XXI веке»",
+         "kk": "«Жаһандық трансформациялардың қайшылықтары және XXI ғасырдағы философияның міндеттері»",
+         "en": "“Contradictions of Global Transformations and the Tasks of Philosophy in the 21st Century”"
+        },
+        "tbc": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "time": {
+     "ru": "14:00 – 15:00",
+     "kk": "14:00 – 15:00",
+     "en": "14:00 – 15:00"
+    },
+    "title": {
+     "ru": "Обед",
+     "kk": "Түскі ас",
+     "en": "Lunch"
+    },
+    "room": {
+     "ru": "место проведения уточняется",
+     "kk": "өтетін орны нақтыланады",
+     "en": "Venue to be confirmed"
+    },
+    "blocks": []
+   },
+   {
+    "time": {
+     "ru": "15:00 – 16:30",
+     "kk": "15:00 – 16:30",
+     "en": "15:00 – 16:30"
+    },
+    "title": {
+     "ru": "I сессия: «Казахская философия и вызовы современной культуры»",
+     "kk": "I сессия: «Қазақ философиясы және қазіргі мәдениеттің сын-қатерлері»",
+     "en": "Session I: “Kazakh Philosophy and the Challenges of Contemporary Culture”"
+    },
+    "room": {
+     "ru": "зал уточняется",
+     "kk": "зал нақтыланады",
+     "en": "Room to be confirmed"
+    },
+    "blocks": [
+     {
+      "label": {
+       "ru": "Модераторы",
+       "kk": "Модераторлар",
+       "en": "Moderators"
+      },
+      "items": [
+       {
+        "name": {
+         "ru": "Нурмуратов С.Е.",
+         "kk": "Нұрмұратов С.Е.",
+         "en": "S.Ye. Nurmuratov"
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "доктор философских наук, профессор",
+         "kk": "философия ғылымдарының докторы, профессор",
+         "en": "Doctor of Philosophical Sciences, Professor"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Нурышева Г.Ж.",
+         "kk": "Нұрышева Г.Ж.",
+         "en": "G.Zh. Nurysheva"
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "доктор философских наук, профессор",
+         "kk": "философия ғылымдарының докторы, профессор",
+         "en": "Doctor of Philosophical Sciences, Professor"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "time": {
+     "ru": "15:00 – 16:30",
+     "kk": "15:00 – 16:30",
+     "en": "15:00 – 16:30"
+    },
+    "title": {
+     "ru": "II сессия: «Культура философского мышления и ее место в системе образования»",
+     "kk": "II сессия: «Философиялық ойлау мәдениеті және оның білім беру жүйесіндегі орны»",
+     "en": "Session II: “The Culture of Philosophical Thinking and Its Place in the Education System”"
+    },
+    "room": {
+     "ru": "зал уточняется",
+     "kk": "зал нақтыланады",
+     "en": "Room to be confirmed"
+    },
+    "blocks": [
+     {
+      "label": {
+       "ru": "Модераторы",
+       "kk": "Модераторлар",
+       "en": "Moderators"
+      },
+      "items": [
+       {
+        "name": {
+         "ru": "Мейрбаев Б.Б.",
+         "kk": "Мейірбаев Б.Б.",
+         "en": "B.B. Meyrbaev"
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "кандидат философских наук, ассоциированный профессор",
+         "kk": "философия ғылымдарының кандидаты, қауымдастырылған профессор",
+         "en": "Candidate of Philosophical Sciences, Associate Professor"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Коянбаева Г.Р.",
+         "kk": "Қоянбаева Г.Р.",
+         "en": "G.R. Koyanbayeva"
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "кандидат философских наук",
+         "kk": "философия ғылымдарының кандидаты",
+         "en": "Candidate of Philosophical Sciences"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "time": {
+     "ru": "15:00 – 16:30",
+     "kk": "15:00 – 16:30",
+     "en": "15:00 – 16:30"
+    },
+    "title": {
+     "ru": "Молодежная сессия: «Будущее философии: новые тренды, методы, философские технологии»",
+     "kk": "Жастар сессиясы: «Философияның болашағы: жаңа трендтер, әдістер, философиялық технологиялар»",
+     "en": "Youth Session: “The Future of Philosophy: New Trends, Methods, and Philosophical Technologies”"
+    },
+    "room": {
+     "ru": "зал уточняется",
+     "kk": "зал нақтыланады",
+     "en": "Room to be confirmed"
+    },
+    "blocks": [
+     {
+      "label": {
+       "ru": "Модераторы",
+       "kk": "Модераторлар",
+       "en": "Moderators"
+      },
+      "items": [
+       {
+        "name": {
+         "ru": "Токтаров Е.Б.",
+         "kk": "Тоқтаров Е.Б.",
+         "en": "E.B. Toktarov"
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "доктор PhD",
+         "kk": "PhD",
+         "en": "PhD"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       },
+       {
+        "name": {
+         "ru": "Жанабаева Д.М.",
+         "kk": "Жанабаева Д.М.",
+         "en": "D.M. Zhanabayeva"
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "доктор PhD",
+         "kk": "PhD",
+         "en": "PhD"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "time": {
+     "ru": "16:30 – 16:45",
+     "kk": "16:30 – 16:45",
+     "en": "16:30 – 16:45"
+    },
+    "title": {
+     "ru": "Кофе-брейк",
+     "kk": "Кофе-брейк",
+     "en": "Coffee Break"
+    },
+    "room": {
+     "ru": "",
+     "kk": "",
+     "en": ""
+    },
+    "blocks": []
+   },
+   {
+    "time": {
+     "ru": "16:45 – 17:45",
+     "kk": "16:45 – 17:45",
+     "en": "16:45 – 17:45"
+    },
+    "title": {
+     "ru": "Круглый стол – встреча редакторов философских журналов",
+     "kk": "Дөңгелек үстел – философиялық журналдар редакторларының кездесуі",
+     "en": "Round Table – Meeting of Editors of Philosophical Journals"
+    },
+    "room": {
+     "ru": "зал уточняется",
+     "kk": "зал нақтыланады",
+     "en": "Room to be confirmed"
+    },
+    "blocks": [
+     {
+      "label": {
+       "ru": "Модератор",
+       "kk": "Модератор",
+       "en": "Moderator"
+      },
+      "items": [
+       {
+        "name": {
+         "ru": "Сейтахметова Н.Л.",
+         "kk": "Сейтахметова Н.Л.",
+         "en": "N.L. Seitakhmetova"
+        },
+        "country": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "role": {
+         "ru": "академик НАН РК, доктор философских наук, профессор",
+         "kk": "ҚР ҰҒА академигі, философия ғылымдарының докторы, профессор",
+         "en": "Academician of the National Academy of Sciences of the Republic of Kazakhstan, Doctor of Philosophical Sciences, Professor"
+        },
+        "topic": {
+         "ru": "",
+         "kk": "",
+         "en": ""
+        },
+        "tbc": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "time": {
+     "ru": "17:45 – 18:00",
+     "kk": "17:45 – 18:00",
+     "en": "17:45 – 18:00"
+    },
+    "title": {
+     "ru": "Подведение итогов IV Конгресса философов Казахстана",
+     "kk": "Қазақстан философтарының IV конгресінің қорытындысын шығару",
+     "en": "Summary of the IV Congress of Philosophers of Kazakhstan"
+    },
+    "room": {
+     "ru": "",
+     "kk": "",
+     "en": ""
+    },
+    "blocks": []
+   }
+  ]
+ },
+ {
+  "tab": {
+   "ru": "8 ноября",
+   "kk": "8 қараша",
+   "en": "8 November"
+  },
+  "date": {
+   "ru": "8 ноября 2026 года (воскресенье)",
+   "kk": "8 қараша 2026 жыл",
+   "en": "8 November 2026 (Sunday)"
+  },
+  "note": {
+   "ru": "отъезд иностранных участников",
+   "kk": "шетелдік қатысушылардың қайтуы",
+   "en": "Departure of International Participants"
+  },
+  "event": {
+   "ru": "",
+   "kk": "",
+   "en": ""
+  },
+  "rows": [
+   {
+    "time": {
+     "ru": "07:30 – 10:00",
+     "kk": "07:30 – 10:00",
+     "en": "07:30 – 10:00"
+    },
+    "title": {
+     "ru": "Завтрак для участников, проживающих в гостинице",
+     "kk": "Қонақүйде тұратын қатысушыларға арналған таңғы ас",
+     "en": "Breakfast for Participants Staying at the Hotel"
+    },
+    "room": {
+     "ru": "",
+     "kk": "",
+     "en": ""
+    },
+    "blocks": []
+   },
+   {
+    "time": {
+     "ru": "Согласно графику вылетов",
+     "kk": "Ұшу кестесіне сәйкес",
+     "en": "According to the Flight Schedule"
+    },
+    "title": {
+     "ru": "Трансфер на автобусе в Международный аэропорт Алматы",
+     "kk": "Алматы халықаралық әуежайына автобуспен трансфер",
+     "en": "Transfer to Almaty International Airport"
+    },
+    "room": {
+     "ru": "",
+     "kk": "",
+     "en": ""
+    },
+    "blocks": [
+     {
+      "label": {
+       "ru": "",
+       "kk": "",
+       "en": ""
+      },
+      "items": [
+       {
+        "text": {
+         "ru": "Проводы участников",
+         "kk": "Қатысушыларды шығарып салу",
+         "en": "Departure of Participants"
+        },
+        "tbc": false
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+]

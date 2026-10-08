@@ -1,0 +1,9 @@
+# Проверенные версии (python -m pip install -r requirements.txt внутри .venv)
+Django==6.1.2
+djangorestframework==3.18.3
+django-cors-headers==4.9.0
+Pillow==12.3.0  # фото докладчиков и значок вкладки из логотипа КазНУ (build_site.py)
+# для PostgreSQL:
+# psycopg[binary]>=3.2
+# для продакшена:
+# gunicorn>=23

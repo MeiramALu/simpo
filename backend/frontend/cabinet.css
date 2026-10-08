@@ -1,0 +1,68 @@
+/* --- личный кабинет (frontend/cabinet.css, вставляется build_site.py) --- */
+.acct{font-family:var(--serif);font-weight:700;text-transform:uppercase;color:var(--gold-text);text-decoration:none;font-size:14px;letter-spacing:.03em;white-space:nowrap;border:1px solid rgba(221,178,123,.55);border-radius:var(--radius-pill);padding:6px 16px}
+.acct:hover,.acct[aria-current="page"]{color:#fff;border-color:#fff}
+@media (max-width:760px){.acct{font-size:12.5px;padding:5px 11px}}
+#cab{max-width:940px}
+.cab-top{display:flex;justify-content:space-between;align-items:center;gap:12px 20px;flex-wrap:wrap}
+.cab-card{border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;background:var(--paper);margin-top:16px}
+.cab-card>.form{margin-top:0}
+.cab-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px 16px;flex-wrap:wrap}
+.cab-head h3{font-size:21px;line-height:1.3;margin:0;min-width:0;overflow-wrap:anywhere}
+.cab-dl{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px 24px;margin:16px 0 0}
+.cab-dl div{min-width:0}
+.cab-dl dt{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.cab-dl dd{margin:2px 0 0;overflow-wrap:anywhere}
+.cab-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:18px}
+.btn-sm{font-size:16px;padding:10px 22px;gap:8px}
+.linkbtn{font:inherit;background:none;border:0;padding:0;color:var(--link);text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.linkbtn.danger{color:#C0392B}
+.linkbtn[data-armed]{font-weight:700}
+.st{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;border:1px solid var(--line);border-radius:var(--radius-pill);padding:4px 14px;white-space:nowrap}
+.st i{width:9px;height:9px;border-radius:50%;background:#9AA0AB;flex:none}
+.st-ok i{background:#2E9D55}.st-warn i{background:#D39B2A}.st-bad i{background:#C0392B}
+.tab .cnt{display:inline-block;min-width:22px;padding:0 6px;border-radius:11px;background:var(--wash);color:var(--ink);font-size:13px;line-height:22px;text-align:center;margin-left:4px}
+.cab-pay{margin-top:18px;padding:16px 18px;border-radius:12px;background:var(--wash)}
+.cab-pay.ok{font-weight:700;color:#2E9D55}
+.bank{display:grid;grid-template-columns:auto 1fr auto;gap:8px 16px;align-items:baseline;margin:12px 0 0}
+.bank dt{color:var(--muted);font-size:14.5px}
+.bank dd{margin:0;font-weight:700;overflow-wrap:anywhere}
+.cab .form{margin-top:20px}
+.cab .subh{margin-top:44px}
+.form[aria-busy="true"]{opacity:.65}
+input[readonly]{background:var(--wash)!important;color:var(--muted)!important}
+#regstate .notice:first-child{margin-top:0}
+#regstate{margin-bottom:18px;max-width:880px}
+.pub-cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
+@media (max-width:760px){.cab-card{padding:18px}.bank{grid-template-columns:1fr auto}.bank dt{grid-column:1/-1}.btn-sm{font-size:15px;padding:9px 18px}}
+/* --- шапка: кнопка кабинета в строке меню (на телефоне — в выпадающем меню), подпись партнёра,
+   слова с дефисом не разрываются; казахские пункты меню длиннее — для них компактнее --- */
+.nw{white-space:nowrap}
+.util .acct{display:none}
+.partner span{white-space:nowrap}
+html[lang="kk"] .partner span{display:none}
+@media (min-width:1181px){
+  nav.main{display:flex;align-items:center;justify-content:space-between;gap:24px}
+  nav.main ul{gap:0 26px}
+  nav.main a.acct-nav{display:inline-block;padding:7px 18px;border:1px solid rgba(221,178,123,.55);border-radius:var(--radius-pill);color:var(--gold-text);font-size:14px;letter-spacing:.03em;white-space:nowrap;flex:none}
+  nav.main a.acct-nav:hover,nav.main a.acct-nav[aria-current="page"]{color:#fff;border-color:#fff}
+  .util{gap:22px}
+  html[lang="kk"] nav.main ul{gap:0 20px}
+  html[lang="kk"] nav.main a{font-size:14px}
+  html[lang="kk"] .unav{gap:6px 18px}
+  html[lang="kk"] .unav a{font-size:13.5px}
+}
+@media (min-width:1181px) and (max-width:1500px){
+  .bar{gap:28px}
+  html[lang="kk"] .brand .bt{max-width:200px}
+  html[lang="kk"] .partners{display:none}
+}
+@media (max-width:1180px){
+  nav.main a.acct-nav{display:block;color:var(--gold-text);padding:13px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+}
+@media (min-width:1181px) and (max-width:1300px){
+  nav.main{gap:16px}
+  nav.main ul{gap:0 18px}
+  nav.main a.acct-nav{padding:6px 12px;font-size:13px}
+  html[lang="kk"] nav.main ul{gap:0 16px}
+  html[lang="kk"] nav.main a{font-size:13.5px}
+}

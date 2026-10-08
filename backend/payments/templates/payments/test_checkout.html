@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Тестовая оплата — AFGS 2026</title>
+<style>
+  body{font-family:system-ui,sans-serif;background:#f5f1ea;color:#2a1f1a;margin:0;padding:40px 16px}
+  .card{max-width:440px;margin:0 auto;background:#fff;border-radius:14px;padding:28px;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+  .warn{background:#fff4d6;border-radius:8px;padding:10px 12px;font-size:14px;margin-bottom:18px}
+  .sum{font-size:32px;font-weight:700;margin:6px 0 18px}
+  button{font:inherit;padding:12px 18px;border-radius:999px;border:0;cursor:pointer;margin-right:8px}
+  .ok{background:#7a1f2b;color:#fff}.no{background:#eee}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="warn">Тестовый режим: деньги не списываются.</div>
+  <div>{{ payment.paper.title }}</div>
+  <div class="sum">{{ payment.amount }} {{ payment.currency }}</div>
+  {% if payment.status == 'pending' %}
+  <form method="post">{% csrf_token %}
+    <button class="ok" name="result" value="success">Оплатить</button>
+    <button class="no" name="result" value="fail">Отказ</button>
+  </form>
+  {% else %}
+  <p>Статус платежа: {{ payment.get_status_display }}</p>
+  {% endif %}
+</div>
+</body>
+</html>
