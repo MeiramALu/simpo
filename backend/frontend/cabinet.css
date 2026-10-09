@@ -61,3 +61,17 @@ html[lang="kk"] .partner span{display:none}
   html[lang="kk"] nav.main ul{gap:0 16px}
   html[lang="kk"] nav.main a{font-size:13.5px}
 }
+/* меню «Открыть на карте» в карточках мест проведения */
+.maps summary{list-style:none;cursor:pointer;display:inline-flex}
+.maps summary::-webkit-details-marker{display:none}
+.maps summary::after{content:'▾';margin-left:8px;transition:transform .2s}
+.maps[open] summary::after{transform:rotate(180deg)}
+.maps-pop{margin-top:16px;border-top:1px solid rgba(255,255,255,.14)}
+.maps-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.maps-row span{font-weight:700;color:#fff}
+.maps-row div{display:flex;flex-wrap:wrap;gap:8px}
+.maps-row a{padding:6px 12px;border:1px solid rgba(255,255,255,.25);border-radius:999px;color:var(--gold-text);font-size:14px;text-decoration:none;white-space:nowrap}
+.maps-row a:hover{background:rgba(255,255,255,.08);border-color:var(--gold)}
+/* длинные названия направлений в выпадающем списке растягивали форму шире экрана телефона */
+.form > .field, .form > fieldset{min-width:0}
+.form select, .form input, .form textarea{max-width:100%;min-width:0}

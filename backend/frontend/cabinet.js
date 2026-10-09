@@ -598,3 +598,40 @@ async function loadProgram(){
   if (PRG[l] && route() === 'program' && l === lang) render(true);
 }
 const progDays = () => PRG[lang] || P();
+
+/* ---- «Открыть на карте»: место, отели, где поесть, остановки — в Google, 2ГИС и Яндексе ---- */
+// координаты — OpenStreetMap: библиотека КазНУ и «Ғылым ордасы»; addr — для поиска здания в 2ГИС
+const VENUE_GEO = [{lat:43.22209, lon:76.92392, addr:'проспект аль-Фараби, 71'}, {lat:43.24618, lon:76.95230, addr:'улица Шевченко, 28'}];
+const MAP_TXT = {
+  ru:{place:'Место проведения', hotels:'Отели рядом', food:'Где поесть', stops:'Остановки', g:'Google Maps', d:'2ГИС', y:'Яндекс Карты'},
+  kk:{place:'Өткізу орны', hotels:'Жақын қонақүйлер', food:'Тамақтану орындары', stops:'Аялдамалар', g:'Google Maps', d:'2ГИС', y:'Яндекс Карталар'},
+  en:{place:'Venue', hotels:'Hotels nearby', food:'Places to eat', stops:'Bus stops', g:'Google Maps', d:'2GIS', y:'Yandex Maps'}
+};
+// что искать: 2ГИС и Яндекс лучше понимают русские запросы, Google — язык сайта
+const MAP_Q = {
+  hotels:{ru:'гостиницы', en:'hotels'}, food:{ru:'кафе', en:'restaurants'}, stops:{ru:'остановки', en:'bus stops'}
+};
+function mapLinks(g, kind, gq){
+  const e = encodeURIComponent, ll = `${g.lon},${g.lat}`;
+  if (kind === 'place') return [
+    `https://www.google.com/maps/search/?api=1&query=${e(gq)}`,
+    `https://2gis.kz/almaty/search/${e(g.addr)}?m=${e(ll + '/17')}`,
+    `https://yandex.kz/maps/?pt=${ll}&z=17&l=map`];
+  const q = MAP_Q[kind], gword = lang === 'en' ? q.en : q.ru;
+  return [
+    `https://www.google.com/maps/search/${e(gword)}/@${g.lat},${g.lon},16z`,
+    `https://2gis.kz/almaty/search/${e(q.ru)}?m=${e(ll + '/16')}`,
+    `https://yandex.kz/maps/?ll=${ll}&z=16&text=${e(q.ru)}`];
+}
+function mapMenu(vi, v, label){
+  const g = VENUE_GEO[vi], M = MAP_TXT[lang] || MAP_TXT.en;
+  const fallback = `<a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v[3])}" target="_blank" rel="noopener">${esc(label)}</a>`;
+  if (!g) return fallback;
+  const rows = ['place', 'hotels', 'food', 'stops'].map(k => {
+    const [gu, du, yu] = mapLinks(g, k, v[3]);
+    return `<div class="maps-row"><span>${esc(M[k])}</span><div>`
+      + [[gu, M.g], [du, M.d], [yu, M.y]].map(([u, n]) => `<a href="${u}" target="_blank" rel="noopener">${esc(n)}</a>`).join('')
+      + `</div></div>`;
+  }).join('');
+  return `<details class="maps"><summary class="btn btn-outline">${esc(label)}</summary><div class="maps-pop">${rows}</div></details>`;
+}

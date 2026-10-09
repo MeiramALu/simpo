@@ -150,6 +150,10 @@ CABINET_STEPS = [
     ('${esc(L.pubWarn)}</div></div>',
      '${esc(L.pubWarn)}</div></div><div class="pub pub-cta"><a class="btn btn-maroon" href="#/cabinet?tab=papers">'
      '${esc(ct().newPaper)} ${ARROW}</a><span class="muted">${esc(ct().pubCtaHint)}</span></div>'),
+    # «Открыть на карте»: вместо одной ссылки на Google — меню: место, отели, где поесть, остановки
+    # в Google Maps, 2ГИС и Яндекс Картах (mapMenu в cabinet.js)
+    ('<a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v[3])}" '
+     'target="_blank" rel="noopener">${esc(L.map)}</a>', '${mapMenu(vi, v, L.map)}'),
 ]
 
 

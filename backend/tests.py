@@ -759,3 +759,9 @@ class HeaderPolishTests(BaseAPITest):
         self.assertIn('function noBreakHyphens', html)
         self.assertIn('progDays()[di]', html)
         self.assertIn('/api/documents/', html)
+
+    def test_venue_map_menu(self):
+        html = self.c.get('/').content.decode()
+        self.assertIn('${mapMenu(vi, v, L.map)}', html)
+        for marker in ('2gis.kz/almaty/search/', 'yandex.kz/maps/', 'VENUE_GEO', "hotels:'Отели рядом'"):
+            self.assertIn(marker, html)
