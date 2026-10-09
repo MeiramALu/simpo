@@ -34,13 +34,6 @@ ROLES = {
             'papers.view_paper', 'papers.change_paper', 'papers.export_paper', 'papers.view_publicationfee',
         ],
     },
-    'Бухгалтерия': {
-        'description': 'Платежи: квитанции, подтверждение оплаты, выгрузка. Просмотр взносов.',
-        'perms': VIEW_USERS + [
-            'payments.view_payment', 'payments.change_payment', 'payments.confirm_payment', 'payments.export_payment',
-            'papers.view_paper', 'papers.view_publicationfee',
-        ],
-    },
     'Администратор симпозиума': {
         'description': 'Всё выше + настройки симпозиума, суммы взносов, управление сотрудниками и их ролями.',
         'perms': [
@@ -49,7 +42,6 @@ ROLES = {
             'registrations.delete_registration', 'registrations.export_registration',
             'papers.view_paper', 'papers.change_paper', 'papers.export_paper',
             'papers.view_publicationfee', 'papers.change_publicationfee',
-            'payments.view_payment', 'payments.change_payment', 'payments.confirm_payment', 'payments.export_payment',
             'siteconfig.view_sitesettings', 'siteconfig.change_sitesettings',
             'speakers.view_speaker', 'speakers.add_speaker', 'speakers.change_speaker', 'speakers.delete_speaker',
             'speakers.view_speakergroup', 'speakers.add_speakergroup', 'speakers.change_speakergroup', 'speakers.delete_speakergroup',

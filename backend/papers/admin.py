@@ -23,11 +23,12 @@ def notify_status(p):
     u = p.user
     lang = u.lang if u.lang in STATUS_TXT else 'ru'
     comment = p.reviewer_comment
-    if p.can_pay:
-        amount, currency = p.fee
-        comment += {'ru': f'\n\nПубликационный взнос: {amount} {currency}. Оплатить можно в личном кабинете.',
-                    'kk': f'\n\nЖарияланым жарнасы: {amount} {currency}. Жеке кабинетте төлеуге болады.',
-                    'en': f'\n\nPublication fee: {amount} {currency}. You can pay in your personal account.'}[lang]
+    amount, currency = p.fee
+    if p.status == 'accepted' and amount > 0:
+        # на сайте оплаты нет — реквизиты оргкомитет присылает сам
+        comment += {'ru': f'\n\nПубликационный взнос: {amount} {currency}. Реквизиты для оплаты оргкомитет пришлёт отдельным письмом.',
+                    'kk': f'\n\nЖарияланым жарнасы: {amount} {currency}. Төлем деректемелерін ұйымдастыру комитеті бөлек хатпен жібереді.',
+                    'en': f'\n\nPublication fee: {amount} {currency}. The organisers will send you the payment details in a separate email.'}[lang]
     send_localized('paper_status', u.email, lang, name=u.full_name, title=p.title,
                    status=STATUS_TXT[lang][p.status], comment=comment)
 

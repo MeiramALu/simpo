@@ -2,19 +2,18 @@
 const LANG_NAMES = {ru:'Русский', kk:'Қазақша', en:'English'};
 const CT = {
 ru: {
-  login:'Вход', account:'Кабинет', cabTitle:'Личный кабинет', cabLead:'Заявка на участие, статьи и оплата публикационного взноса.',
+  login:'Вход', account:'Кабинет', cabTitle:'Личный кабинет', cabLead:'Заявка на участие и подача статей.',
   loading:'Загрузка…', netErr:'Не удалось связаться с сервером. Проверьте интернет и попробуйте ещё раз.', err:'Что-то пошло не так. Попробуйте ещё раз.',
   fileMode:'Личный кабинет работает только на сайте симпозиума, а не в сохранённом файле страницы.',
-  authLead:'Аккаунт нужен, чтобы подать статью, оплатить взнос и следить за заявкой. Для заявки на участие он не обязателен.',
+  authLead:'Аккаунт нужен, чтобы подать статью и следить за заявкой. Для заявки на участие он не обязателен.',
   tabLogin:'Вход', tabRegister:'Регистрация', tabForgot:'Забыли пароль?', password2:'Повторите пароль', passHint:'Не короче 8 символов и не только цифры.',
   btnLogin:'Войти', btnRegister:'Создать аккаунт', btnReset:'Отправить ссылку',
   resetSent:'Если этот адрес зарегистрирован, мы отправили на него ссылку для смены пароля.', passMismatch:'Пароли не совпадают.',
   registeredOk:'Аккаунт создан. Мы отправили письмо со ссылкой для подтверждения почты.', fillIn:'Заполните: ',
   hello:'Вы вошли как', logout:'Выйти',
-  notVerified:'Почта не подтверждена: без этого нельзя подать статью и оплатить взнос. Откройте ссылку из нашего письма.', resend:'Отправить письмо ещё раз',
+  notVerified:'Почта не подтверждена: без этого нельзя подать статью. Откройте ссылку из нашего письма.', resend:'Отправить письмо ещё раз',
   emailVerifiedOk:'Почта подтверждена.', emailVerifiedBad:'Ссылка недействительна или устарела. Войдите и отправьте письмо ещё раз.',
-  payReturnOk:'Платёж принят. Если статус ещё не «Оплачено», обновите страницу через минуту.', payReturnFail:'Оплата не прошла. Попробуйте ещё раз или выберите другой способ.',
-  tReg:'Заявка на участие', tPapers:'Статьи', tPay:'Оплата', tProfile:'Профиль',
+  tReg:'Заявка на участие', tPapers:'Статьи', tProfile:'Профиль',
   noReg:'У вас пока нет заявки на участие.', goReg:'Заполнить заявку',
   regLinkHint:'Заявки, поданные с этого email без входа в аккаунт, появятся здесь после подтверждения почты.',
   orgComment:'Комментарий оргкомитета', edit:'Изменить', save:'Сохранить', cancel:'Отмена', cancelReg:'Отменить заявку',
@@ -23,17 +22,8 @@ ru: {
   authorsHint:'Через запятую, как в статье.', fileHint:'DOC, DOCX, PDF, RTF или ODT, до {mb} МБ.', fileKeep:'Оставьте пустым, чтобы не менять файл.',
   free:'бесплатно', submitPaper:'Отправить статью', paperSent:'Статья отправлена. О решении мы сообщим по почте.',
   download:'Скачать файл', withdraw:'Отозвать статью', paperWithdrawn:'Статья отозвана.', editorComment:'Комментарий редакции',
-  fee:'Взнос', feePaid:'Взнос оплачен', payNow:'Оплатить взнос', payLater:'Оплата станет доступна, когда статью примут к публикации.',
-  payUnavailable:'Оплата временно недоступна.', chooseMethod:'Выберите способ оплаты:',
-  invoiceOpen:'Счёт уже выставлен — продолжите оплату во вкладке «Оплата».', toPayTab:'Открыть оплату',
+  fee:'Взнос', feeNote:'Как оплатить взнос, оргкомитет сообщит по почте после рассмотрения статьи.',
   revisionNote:'Загрузите исправленную версию — статья снова уйдёт на рассмотрение.', submittedAt:'Подана', dirNone:'— не выбрано —',
-  noPayments:'Платежей пока нет. Оплатить взнос можно во вкладке «Статьи», когда статью примут к публикации.',
-  bankTitle:'Реквизиты для перевода', amount:'Сумма', purpose:'Назначение платежа', copy:'Копировать', copied:'Скопировано',
-  bankMissing:'Реквизиты ещё не опубликованы. Напишите, пожалуйста, на al-farabi@kaznu.kz.',
-  receiptHint:'PDF, JPG или PNG, до 10 МБ. После проверки бухгалтерией статус станет «Оплачено».',
-  uploadReceipt:'Загрузить квитанцию', uploadAnother:'Загрузить другую квитанцию', receiptSent:'Квитанция отправлена на проверку.', receiptUploaded:'загружена',
-  cancelPay:'Отменить счёт', payCancelled:'Счёт отменён.', goPay:'Перейти к оплате', accounting:'Комментарий бухгалтерии',
-  method:'Способ', created:'Создан', paidAt:'Оплачен',
   profileSaved:'Профиль сохранён.', changePass:'Смена пароля', passChanged:'Пароль изменён.',
   emailFixed:'Email изменить нельзя. Если нужен другой адрес, напишите оргкомитету.',
   resetTitle:'Новый пароль', resetLead:'Придумайте новый пароль для входа в личный кабинет.', resetBtn:'Сохранить пароль',
@@ -41,30 +31,27 @@ ru: {
   regAsUser:'Вы вошли как {name}. Заявка появится в личном кабинете.',
   regHave:'У вас уже есть заявка на участие. Посмотреть, изменить или отменить её можно в личном кабинете.',
   toCabinet:'Перейти в личный кабинет', regAccountHint:'Хотите следить за статусом заявки?', regAccountLink:'Войдите или создайте аккаунт с тем же email.',
-  regSentCab:'Статус заявки — в личном кабинете.', pubCtaHint:'Подача статей и оплата взноса — в личном кабинете участника.',
+  regSentCab:'Статус заявки — в личном кабинете.', pubCtaHint:'Статьи подаются через личный кабинет участника.',
   stReg:{new:'Новая — на рассмотрении', confirmed:'Подтверждена', waitlist:'Лист ожидания', rejected:'Отклонена', cancelled:'Отменена'},
   stPaper:{submitted:'Подана', under_review:'На рассмотрении', revision:'Нужна доработка', recommended:'Рекомендована в журнал', accepted:'Принята к публикации', rejected:'Отклонена', published:'Опубликована', withdrawn:'Отозвана'},
-  stPay:{pending:'Ожидает оплаты', review:'Квитанция на проверке', paid:'Оплачено', failed:'Ошибка оплаты', cancelled:'Отменён', refunded:'Возврат'},
-  bank:{recipient:'Получатель', bin:'БИН', iik:'ИИК (IBAN)', bank:'Банк', bik:'БИК (SWIFT)', kbe:'КБе', knp:'КНП'},
   f:{email:'Электронная почта', password:'Пароль', full_name:'ФИО', organization:'Организация', country:'Страна', phone:'Телефон', lang:'Язык писем',
      title:'Название статьи', authors:'Авторы', abstract:'Аннотация', keywords:'Ключевые слова', direction:'Научное направление', language:'Язык статьи',
-     target:'Издание', file:'Файл рукописи', receipt:'Квитанция', comment:'Комментарий', old_password:'Текущий пароль', new_password:'Новый пароль',
-     paper:'Статья', provider:'Способ оплаты', name:'ФИО', org:'Организация', day:'День участия', role:'Формат участия', topic:'Тема доклада', note:'Комментарий'}
+     target:'Издание', file:'Файл рукописи', comment:'Комментарий', old_password:'Текущий пароль', new_password:'Новый пароль',
+     paper:'Статья', name:'ФИО', org:'Организация', day:'День участия', role:'Формат участия', topic:'Тема доклада', note:'Комментарий'}
 },
 kk: {
-  login:'Кіру', account:'Кабинет', cabTitle:'Жеке кабинет', cabLead:'Қатысуға өтінім, мақалалар және жарияланым жарнасын төлеу.',
+  login:'Кіру', account:'Кабинет', cabTitle:'Жеке кабинет', cabLead:'Қатысуға өтінім және мақала жіберу.',
   loading:'Жүктелуде…', netErr:'Сервермен байланыс орнамады. Интернетті тексеріп, қайталап көріңіз.', err:'Бірдеңе дұрыс болмады. Қайталап көріңіз.',
   fileMode:'Жеке кабинет сақталған бет файлында емес, тек симпозиум сайтында жұмыс істейді.',
-  authLead:'Мақала жіберу, жарнаны төлеу және өтінімді бақылау үшін аккаунт қажет. Қатысуға өтінім беру үшін ол міндетті емес.',
+  authLead:'Мақала жіберу және өтінімді бақылау үшін аккаунт қажет. Қатысуға өтінім беру үшін ол міндетті емес.',
   tabLogin:'Кіру', tabRegister:'Тіркелу', tabForgot:'Құпиясөзді ұмыттыңыз ба?', password2:'Құпиясөзді қайталаңыз', passHint:'Кемінде 8 таңба, тек сандардан тұрмауы керек.',
   btnLogin:'Кіру', btnRegister:'Аккаунт ашу', btnReset:'Сілтеме жіберу',
   resetSent:'Егер бұл мекенжай тіркелген болса, оған құпиясөзді өзгерту сілтемесін жібердік.', passMismatch:'Құпиясөздер сәйкес келмейді.',
   registeredOk:'Аккаунт ашылды. Поштаны растау сілтемесі бар хат жібердік.', fillIn:'Толтырыңыз: ',
   hello:'Сіз кірдіңіз:', logout:'Шығу',
-  notVerified:'Пошта расталмаған: онсыз мақала жіберуге және жарна төлеуге болмайды. Біздің хаттағы сілтемені ашыңыз.', resend:'Хатты қайта жіберу',
+  notVerified:'Пошта расталмаған: онсыз мақала жіберуге болмайды. Біздің хаттағы сілтемені ашыңыз.', resend:'Хатты қайта жіберу',
   emailVerifiedOk:'Пошта расталды.', emailVerifiedBad:'Сілтеме жарамсыз немесе ескірген. Кіріп, хатты қайта жіберіңіз.',
-  payReturnOk:'Төлем қабылданды. Мәртебе әлі «Төленді» болмаса, бір минуттан кейін бетті жаңартыңыз.', payReturnFail:'Төлем өтпеді. Қайталап көріңіз немесе басқа тәсілді таңдаңыз.',
-  tReg:'Қатысуға өтінім', tPapers:'Мақалалар', tPay:'Төлем', tProfile:'Профиль',
+  tReg:'Қатысуға өтінім', tPapers:'Мақалалар', tProfile:'Профиль',
   noReg:'Сізде әзірге қатысуға өтінім жоқ.', goReg:'Өтінім толтыру',
   regLinkHint:'Осы email арқылы аккаунтсыз берілген өтінімдер пошта расталғаннан кейін осында шығады.',
   orgComment:'Ұйымдастыру комитетінің пікірі', edit:'Өзгерту', save:'Сақтау', cancel:'Болдырмау', cancelReg:'Өтінімнен бас тарту',
@@ -73,17 +60,8 @@ kk: {
   authorsHint:'Мақаладағыдай, үтір арқылы.', fileHint:'DOC, DOCX, PDF, RTF немесе ODT, {mb} МБ-қа дейін.', fileKeep:'Файлды өзгертпеу үшін бос қалдырыңыз.',
   free:'тегін', submitPaper:'Мақаланы жіберу', paperSent:'Мақала жіберілді. Шешім туралы поштамен хабарлаймыз.',
   download:'Файлды жүктеу', withdraw:'Мақаланы кері алу', paperWithdrawn:'Мақала кері алынды.', editorComment:'Редакция пікірі',
-  fee:'Жарна', feePaid:'Жарна төленді', payNow:'Жарнаны төлеу', payLater:'Мақала жариялауға қабылданғанда төлеуге болады.',
-  payUnavailable:'Төлем уақытша қолжетімсіз.', chooseMethod:'Төлем тәсілін таңдаңыз:',
-  invoiceOpen:'Шот шығарылған — «Төлем» қойындысында төлеуді жалғастырыңыз.', toPayTab:'Төлемге өту',
+  fee:'Жарна', feeNote:'Жарнаны қалай төлеу керектігін ұйымдастыру комитеті мақала қаралғаннан кейін поштамен хабарлайды.',
   revisionNote:'Түзетілген нұсқаны жүктеңіз — мақала қайта қаралады.', submittedAt:'Жіберілген күні', dirNone:'— таңдалмаған —',
-  noPayments:'Әзірге төлем жоқ. Мақала жариялауға қабылданғанда жарнаны «Мақалалар» қойындысында төлеуге болады.',
-  bankTitle:'Аударым деректемелері', amount:'Сомасы', purpose:'Төлем мақсаты', copy:'Көшіру', copied:'Көшірілді',
-  bankMissing:'Деректемелер әлі жарияланбаған. al-farabi@kaznu.kz мекенжайына жазыңыз.',
-  receiptHint:'PDF, JPG немесе PNG, 10 МБ-қа дейін. Бухгалтерия тексергеннен кейін мәртебе «Төленді» болады.',
-  uploadReceipt:'Түбіртекті жүктеу', uploadAnother:'Басқа түбіртек жүктеу', receiptSent:'Түбіртек тексеруге жіберілді.', receiptUploaded:'жүктелді',
-  cancelPay:'Шоттан бас тарту', payCancelled:'Шоттан бас тартылды.', goPay:'Төлемге өту', accounting:'Бухгалтерия пікірі',
-  method:'Тәсіл', created:'Құрылды', paidAt:'Төленді',
   profileSaved:'Профиль сақталды.', changePass:'Құпиясөзді өзгерту', passChanged:'Құпиясөз өзгертілді.',
   emailFixed:'Email-ді өзгертуге болмайды. Басқа мекенжай керек болса, ұйымдастыру комитетіне жазыңыз.',
   resetTitle:'Жаңа құпиясөз', resetLead:'Жеке кабинетке кіру үшін жаңа құпиясөз ойлап табыңыз.', resetBtn:'Құпиясөзді сақтау',
@@ -91,30 +69,27 @@ kk: {
   regAsUser:'Сіз {name} ретінде кірдіңіз. Өтінім жеке кабинетте көрінеді.',
   regHave:'Сізде қатысуға өтінім бар. Оны жеке кабинетте көруге, өзгертуге немесе одан бас тартуға болады.',
   toCabinet:'Жеке кабинетке өту', regAccountHint:'Өтінім мәртебесін бақылағыңыз келе ме?', regAccountLink:'Сол email арқылы кіріңіз немесе аккаунт ашыңыз.',
-  regSentCab:'Өтінім мәртебесі — жеке кабинетте.', pubCtaHint:'Мақала жіберу және жарна төлеу — қатысушының жеке кабинетінде.',
+  regSentCab:'Өтінім мәртебесі — жеке кабинетте.', pubCtaHint:'Мақалалар қатысушының жеке кабинеті арқылы жіберіледі.',
   stReg:{new:'Жаңа — қаралуда', confirmed:'Расталды', waitlist:'Күту тізімі', rejected:'Қабылданбады', cancelled:'Бас тартылды'},
   stPaper:{submitted:'Жіберілді', under_review:'Қаралуда', revision:'Пысықтау қажет', recommended:'Журналға ұсынылды', accepted:'Жариялауға қабылданды', rejected:'Қабылданбады', published:'Жарияланды', withdrawn:'Кері алынды'},
-  stPay:{pending:'Төлемді күтуде', review:'Түбіртек тексерілуде', paid:'Төленді', failed:'Төлем қатесі', cancelled:'Бас тартылды', refunded:'Қайтарылды'},
-  bank:{recipient:'Алушы', bin:'БСН', iik:'ЖСК (IBAN)', bank:'Банк', bik:'БСК (SWIFT)', kbe:'КБе', knp:'ТМК'},
   f:{email:'Электрондық пошта', password:'Құпиясөз', full_name:'Аты-жөні', organization:'Ұйым', country:'Ел', phone:'Телефон', lang:'Хаттар тілі',
      title:'Мақала атауы', authors:'Авторлар', abstract:'Аңдатпа', keywords:'Түйін сөздер', direction:'Ғылыми бағыт', language:'Мақала тілі',
-     target:'Басылым', file:'Қолжазба файлы', receipt:'Түбіртек', comment:'Пікір', old_password:'Ағымдағы құпиясөз', new_password:'Жаңа құпиясөз',
-     paper:'Мақала', provider:'Төлем тәсілі', name:'Аты-жөні', org:'Ұйым', day:'Қатысу күні', role:'Қатысу форматы', topic:'Баяндама тақырыбы', note:'Пікір'}
+     target:'Басылым', file:'Қолжазба файлы', comment:'Пікір', old_password:'Ағымдағы құпиясөз', new_password:'Жаңа құпиясөз',
+     paper:'Мақала', name:'Аты-жөні', org:'Ұйым', day:'Қатысу күні', role:'Қатысу форматы', topic:'Баяндама тақырыбы', note:'Пікір'}
 },
 en: {
-  login:'Sign in', account:'Account', cabTitle:'My account', cabLead:'Your application, papers and publication fee.',
+  login:'Sign in', account:'Account', cabTitle:'My account', cabLead:'Your application and paper submissions.',
   loading:'Loading…', netErr:'Could not reach the server. Check your connection and try again.', err:'Something went wrong. Please try again.',
   fileMode:'Your account works only on the symposium website, not in a saved copy of the page.',
-  authLead:'An account lets you submit a paper, pay the publication fee and follow your application. You do not need one just to register for the symposium.',
+  authLead:'An account lets you submit a paper and follow your application. You do not need one just to register for the symposium.',
   tabLogin:'Sign in', tabRegister:'Create account', tabForgot:'Forgot password?', password2:'Repeat password', passHint:'At least 8 characters, not only digits.',
   btnLogin:'Sign in', btnRegister:'Create account', btnReset:'Send link',
   resetSent:'If this address is registered, we have sent it a link to reset your password.', passMismatch:'The passwords do not match.',
   registeredOk:'Your account has been created. We have emailed you a link to confirm your address.', fillIn:'Please fill in: ',
   hello:'Signed in as', logout:'Sign out',
-  notVerified:'Your email is not confirmed yet. You need to confirm it before submitting a paper or paying the fee — open the link in our email.', resend:'Send the email again',
+  notVerified:'Your email is not confirmed yet. You need to confirm it before submitting a paper — open the link in our email.', resend:'Send the email again',
   emailVerifiedOk:'Your email is confirmed.', emailVerifiedBad:'The link is invalid or has expired. Sign in and request a new one.',
-  payReturnOk:'Payment received. If the status is not “Paid” yet, refresh the page in a minute.', payReturnFail:'The payment did not go through. Try again or choose another method.',
-  tReg:'Application', tPapers:'Papers', tPay:'Payments', tProfile:'Profile',
+  tReg:'Application', tPapers:'Papers', tProfile:'Profile',
   noReg:'You have not applied to take part yet.', goReg:'Fill in the application',
   regLinkHint:'Applications sent from this email without signing in will appear here once you confirm your email.',
   orgComment:'Note from the organisers', edit:'Edit', save:'Save', cancel:'Cancel', cancelReg:'Withdraw application',
@@ -123,17 +98,8 @@ en: {
   authorsHint:'Comma-separated, as in the paper.', fileHint:'DOC, DOCX, PDF, RTF or ODT, up to {mb} MB.', fileKeep:'Leave empty to keep the current file.',
   free:'free', submitPaper:'Submit paper', paperSent:'Your paper has been submitted. We will email you about the decision.',
   download:'Download file', withdraw:'Withdraw paper', paperWithdrawn:'The paper has been withdrawn.', editorComment:'Note from the editors',
-  fee:'Fee', feePaid:'Fee paid', payNow:'Pay the fee', payLater:'You can pay once the paper is accepted for publication.',
-  payUnavailable:'Payment is temporarily unavailable.', chooseMethod:'Choose a payment method:',
-  invoiceOpen:'An invoice has already been issued — continue on the Payments tab.', toPayTab:'Open payments',
+  fee:'Fee', feeNote:'The organisers will email you how to pay the fee once your paper has been reviewed.',
   revisionNote:'Upload the revised version — the paper will go back for review.', submittedAt:'Submitted', dirNone:'— not selected —',
-  noPayments:'No payments yet. You can pay the fee on the Papers tab once your paper is accepted.',
-  bankTitle:'Bank details', amount:'Amount', purpose:'Payment reference', copy:'Copy', copied:'Copied',
-  bankMissing:'Bank details have not been published yet. Please write to al-farabi@kaznu.kz.',
-  receiptHint:'PDF, JPG or PNG, up to 10 MB. The status changes to “Paid” once our accountants have checked it.',
-  uploadReceipt:'Upload receipt', uploadAnother:'Upload another receipt', receiptSent:'Your receipt has been sent for checking.', receiptUploaded:'uploaded',
-  cancelPay:'Cancel invoice', payCancelled:'The invoice has been cancelled.', goPay:'Go to payment', accounting:'Note from accounts',
-  method:'Method', created:'Created', paidAt:'Paid',
   profileSaved:'Profile saved.', changePass:'Change password', passChanged:'Password changed.',
   emailFixed:'Your email cannot be changed. If you need a different address, contact the organisers.',
   resetTitle:'Set a new password', resetLead:'Choose a new password for your account.', resetBtn:'Save password',
@@ -141,15 +107,13 @@ en: {
   regAsUser:'You are signed in as {name}. Your application will appear in your account.',
   regHave:'You have already applied. You can view, change or withdraw your application in your account.',
   toCabinet:'Go to my account', regAccountHint:'Want to follow your application?', regAccountLink:'Sign in or create an account with the same email.',
-  regSentCab:'You can follow its status in your account.', pubCtaHint:'Paper submission and fee payment are in your participant account.',
+  regSentCab:'You can follow its status in your account.', pubCtaHint:'Papers are submitted through your participant account.',
   stReg:{new:'New — under review', confirmed:'Confirmed', waitlist:'Waiting list', rejected:'Declined', cancelled:'Withdrawn'},
   stPaper:{submitted:'Submitted', under_review:'Under review', revision:'Revision required', recommended:'Recommended to a journal', accepted:'Accepted for publication', rejected:'Declined', published:'Published', withdrawn:'Withdrawn'},
-  stPay:{pending:'Awaiting payment', review:'Receipt being checked', paid:'Paid', failed:'Payment failed', cancelled:'Cancelled', refunded:'Refunded'},
-  bank:{recipient:'Recipient', bin:'BIN', iik:'IBAN', bank:'Bank', bik:'SWIFT/BIC', kbe:'Beneficiary code (KBe)', knp:'Payment purpose code (KNP)'},
   f:{email:'Email', password:'Password', full_name:'Full name', organization:'Organisation', country:'Country', phone:'Phone', lang:'Language for emails',
      title:'Title', authors:'Authors', abstract:'Abstract', keywords:'Keywords', direction:'Research area', language:'Language of the paper',
-     target:'Publication', file:'Manuscript file', receipt:'Receipt', comment:'Comment', old_password:'Current password', new_password:'New password',
-     paper:'Paper', provider:'Payment method', name:'Full name', org:'Organisation', day:'Day of attendance', role:'Participation', topic:'Presentation topic', note:'Comment'}
+     target:'Publication', file:'Manuscript file', comment:'Comment', old_password:'Current password', new_password:'New password',
+     paper:'Paper', name:'Full name', org:'Organisation', day:'Day of attendance', role:'Participation', topic:'Presentation topic', note:'Comment'}
 }
 };
 Object.values(CT).forEach(c => { c.f.password2 = c.password2; c.f.new_password2 = c.password2; });
@@ -299,7 +263,6 @@ function dirOpts(current){
 }
 const metaNow = () => (CAB.data && CAB.data.meta) || {};
 function targetLabel(code, fallback){ const x = (metaNow().publication_targets || []).find(t => t.value === code); return x ? x.label : (fallback || code); }
-function provTitle(code){ const x = (metaNow().payment_providers || []).find(p => p.code === code); return x ? x.title : code; }
 
 /* ---- страницы ---- */
 PAGES.cabinet = () => { setTimeout(initCabinet); return head(ct().cabTitle, ct().cabLead) + `<section class="section cab" style="padding-top:28px"><div class="wrap"><div id="cab"><p class="muted">${esc(ct().loading)}</p></div></div></section>`; };
@@ -311,7 +274,6 @@ async function initCabinet(){
   if (location.protocol === 'file:'){ box.innerHTML = cabNote(T.fileMode, true); return; }
   const q = hashQuery();
   if (q.has('email_verified')){ const ok = q.get('email_verified') === '1'; cabFlash(ok ? T.emailVerifiedOk : T.emailVerifiedBad, !ok); }
-  if (q.has('payment')){ const ok = q.get('result') === 'success'; cabFlash(ok ? T.payReturnOk : T.payReturnFail, !ok); CAB.tab = 'pay'; }
   if (q.has('tab')) CAB.tab = q.get('tab');
   if ([...q.keys()].length) history.replaceState(null, '', '#/cabinet');
   const me = await loadMe(true);
@@ -369,11 +331,10 @@ async function submitAuth(e){
 async function renderCabinet(){
   const box = $('#cab'); if (!box) return;
   if (!CAB.data) box.innerHTML = `<p class="muted">${esc(ct().loading)}</p>`;
-  const [regs, papers, pays, meta] = await Promise.all([cabApi('GET', '/api/registrations/'), cabApi('GET', '/api/papers/'),
-                                                        cabApi('GET', '/api/payments/'), loadMeta(true)]);
+  const [regs, papers, meta] = await Promise.all([cabApi('GET', '/api/registrations/'), cabApi('GET', '/api/papers/'), loadMeta(true)]);
   if (!$('#cab')) return;
   if (!CAB.me) return renderAuth('login');
-  CAB.data = {regs: regs.ok ? regs.data : [], papers: papers.ok ? papers.data : [], pays: pays.ok ? pays.data : [], meta: meta || {}};
+  CAB.data = {regs: regs.ok ? regs.data : [], papers: papers.ok ? papers.data : [], meta: meta || {}};
   if (!regs.ok && regs.status === 0) cabFlash(ct().netErr, true);
   drawCabinet();
 }
@@ -381,9 +342,9 @@ async function renderCabinet(){
 function drawCabinet(){
   const box = $('#cab'); if (!box || !CAB.me || !CAB.data) return;
   const T = ct(), me = CAB.me, d = CAB.data;
-  const tabs = [['reg', T.tReg, d.regs.length], ['papers', T.tPapers, d.papers.length], ['pay', T.tPay, d.pays.length], ['profile', T.tProfile, 0]];
+  const tabs = [['reg', T.tReg, d.regs.length], ['papers', T.tPapers, d.papers.length], ['profile', T.tProfile, 0]];
   if (!tabs.some(x => x[0] === CAB.tab)) CAB.tab = 'reg';
-  const panes = {reg:paneReg, papers:panePapers, pay:panePay, profile:paneProfile};
+  const panes = {reg:paneReg, papers:panePapers, profile:paneProfile};
   box.innerHTML = `<div id="cabmsg" aria-live="polite">${flashHTML()}</div>`
     + `<div class="cab-top"><div><span class="muted">${esc(T.hello)}</span> <b>${esc(me.full_name)}</b> <span class="muted">· ${esc(me.email)}</span></div>`
     + `<button type="button" class="btn btn-outline btn-sm" data-act="logout">${esc(T.logout)}</button></div>`
@@ -462,69 +423,20 @@ function paperCard(p){
   const T = ct();
   if (CAB.editPaper === p.id) return `<article class="cab-card">${paperForm(p)}</article>`;
   const editable = ['submitted', 'revision'].includes(p.status);
+  // взнос — только для сведения: оплата проходит вне сайта, по письму оргкомитета
   const paid = Number(p.fee_amount) > 0;
-  // оплаченная сумма — из платежа: взнос в админке мог измениться после выставления счёта
-  const paidPay = CAB.data.pays.find(x => x.paper === p.id && x.status === 'paid');
-  const feeShown = paidPay ? cabMoney(paidPay.amount, paidPay.currency) : (paid ? cabMoney(p.fee_amount, p.fee_currency) : T.free);
-  let pay = '';
-  if (p.is_paid) pay = `<div class="cab-pay ok">✓ ${esc(T.feePaid)}</div>`;
-  else if (p.can_pay) pay = payBlock(p);
-  else if (paid && !['rejected', 'withdrawn'].includes(p.status)) pay = `<p class="hint">${esc(T.payLater)}</p>`;
+  const feeShown = paid ? cabMoney(p.fee_amount, p.fee_currency) : T.free;
   return `<article class="cab-card"><div class="cab-head"><h3>${esc(p.title)}</h3>${cabSt(T.stPaper, p.status)}</div>`
     + `<dl class="cab-dl">${cabDl(T.f.target, targetLabel(p.target, p.target_display))}${cabDl(T.fee, feeShown)}`
     + `${cabDl(T.f.authors, p.authors)}${cabDl(T.f.direction, p.direction)}${cabDl(T.f.language, LANG_NAMES[p.language])}${cabDl(T.submittedAt, cabDate(p.created_at))}</dl>`
     + (p.reviewer_comment ? cabNote(`${T.editorComment}: ${p.reviewer_comment}`) : '')
     + (p.status === 'revision' ? `<p class="hint">${esc(T.revisionNote)}</p>` : '')
-    + pay
+    + (paid && !['rejected', 'withdrawn'].includes(p.status) ? `<p class="hint">${esc(T.feeNote)}</p>` : '')
     + `<div class="cab-actions"><button type="button" class="btn btn-outline btn-sm" data-act="paper-file" data-id="${p.id}" data-name="${esc(p.original_filename || 'paper')}">${esc(T.download)}</button>`
     + (editable ? `<button type="button" class="btn btn-outline btn-sm" data-act="paper-edit" data-id="${p.id}">${esc(T.edit)}</button>` : '')
-    + (!['published', 'withdrawn', 'rejected'].includes(p.status) && !p.is_paid ? `<button type="button" class="linkbtn danger" data-act="paper-withdraw" data-id="${p.id}" data-confirm="1">${esc(T.withdraw)}</button>` : '')
+    + (!['published', 'withdrawn', 'rejected'].includes(p.status) ? `<button type="button" class="linkbtn danger" data-act="paper-withdraw" data-id="${p.id}" data-confirm="1">${esc(T.withdraw)}</button>` : '')
     + `</div></article>`;
 }
-function payBlock(p){
-  const T = ct(), m = metaNow(), amount = cabMoney(p.fee_amount, p.fee_currency);
-  const open = CAB.data.pays.find(x => x.paper === p.id && ['pending', 'review'].includes(x.status));
-  if (open) return `<div class="cab-pay"><p style="margin:0 0 10px">${esc(T.invoiceOpen)}</p><button type="button" class="btn btn-outline btn-sm" data-cabtab="pay">${esc(T.toPayTab)}</button></div>`;
-  if (m.payments && !m.payments.open) return `<div class="cab-pay">${esc(m.payments.closed_message || T.payUnavailable)}</div>`;
-  const provs = m.payment_providers || [];
-  if (!provs.length) return `<div class="cab-pay">${esc(T.payUnavailable)}</div>`;
-  if (CAB.payPaper !== p.id) return `<div class="cab-pay"><button type="button" class="btn btn-maroon btn-sm" data-act="paper-pay" data-id="${p.id}">${esc(T.payNow)} · ${esc(amount)}</button></div>`;
-  return `<div class="cab-pay"><p style="margin:0"><b>${esc(T.chooseMethod)}</b></p><div class="cab-actions" style="margin-top:10px">`
-    + provs.map(x => `<button type="button" class="btn btn-maroon btn-sm" data-act="pay-start" data-id="${p.id}" data-provider="${esc(x.code)}">${esc(x.title)}</button>`).join('')
-    + `<button type="button" class="linkbtn" data-act="paper-pay-cancel">${esc(T.cancel)}</button></div></div>`;
-}
-
-/* ---- вкладка «Оплата» ---- */
-function panePay(){
-  const T = ct(), pays = CAB.data.pays;
-  if (!pays.length) return `<p class="muted">${esc(T.noPayments)}</p>`;
-  return pays.map(x => {
-    const open = ['pending', 'review'].includes(x.status);
-    let body = '';
-    if (x.provider === 'manual' && open) body = bankBlock(x) + receiptForm(x);
-    if (x.provider !== 'manual' && x.status === 'pending' && x.payment_url) body = `<div class="cab-actions"><a class="btn btn-maroon btn-sm" href="${esc(x.payment_url)}">${esc(T.goPay)}</a></div>`;
-    return `<article class="cab-card"><div class="cab-head"><h3>${esc(cabMoney(x.amount, x.currency))} · ${esc(x.paper_title)}</h3>${cabSt(T.stPay, x.status)}</div>`
-      + `<dl class="cab-dl">${cabDl(T.method, provTitle(x.provider))}${cabDl(T.created, cabDate(x.created_at))}${cabDl(T.paidAt, cabDate(x.paid_at))}${x.has_receipt ? cabDl(T.f.receipt, T.receiptUploaded) : ''}</dl>`
-      + (x.admin_comment ? cabNote(`${T.accounting}: ${x.admin_comment}`) : '') + body
-      + (x.status === 'pending' ? `<div class="cab-actions"><button type="button" class="linkbtn danger" data-act="pay-cancel" data-id="${x.id}" data-confirm="1">${esc(T.cancelPay)}</button></div>` : '')
-      + `</article>`;
-  }).join('');
-}
-function bankBlock(x){
-  const T = ct(), b = x.bank_details || {};
-  const row = (k, v, copy) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd><span>${copy ? `<button type="button" class="linkbtn" data-act="copy" data-text="${esc(v)}">${esc(T.copy)}</button>` : ''}</span>`;
-  const rows = ['recipient', 'bin', 'iik', 'bank', 'bik', 'kbe', 'knp'].filter(k => b[k]).map(k => row(T.bank[k], b[k], k === 'iik' || k === 'bin')).join('');
-  return `<div class="cab-pay"><p style="margin:0"><b>${esc(T.bankTitle)}</b></p>` + (b.iik ? '' : `<p>${esc(T.bankMissing)}</p>`)
-    + `<dl class="bank">${rows}${row(T.amount, cabMoney(x.amount, x.currency), false)}${row(T.purpose, x.purpose, true)}</dl>`
-    + (b.extra ? `<p class="hint" style="white-space:pre-line;margin-bottom:0">${esc(b.extra)}</p>` : '') + `</div>`;
-}
-function receiptForm(x){
-  const T = ct();
-  return `<form class="form" data-form="receipt" data-id="${x.id}" novalidate style="margin-top:18px">`
-    + cabFld({form:'rc' + x.id, name:'receipt', label:x.has_receipt ? T.uploadAnother : T.f.receipt, type:'file', accept:'.pdf,.jpg,.jpeg,.png', req:true, hint:T.receiptHint})
-    + cabFld({form:'rc' + x.id, name:'comment', label:T.f.comment}) + cabSubmitRow(T.uploadReceipt) + `</form>`;
-}
-
 /* ---- вкладка «Профиль» ---- */
 function paneProfile(){
   const T = ct(), F = T.f, me = CAB.me;
@@ -566,19 +478,6 @@ async function cabClick(e){
   if (act === 'paper-edit-cancel'){ CAB.editPaper = null; return drawCabinet(); }
   if (act === 'paper-withdraw'){ const r = await cabApi('POST', `/api/papers/${id}/withdraw/`); return r.ok ? refresh(T.paperWithdrawn) : cabMsg(cabErr(r.data), true); }
   if (act === 'paper-file') return cabDownload(`/api/papers/${id}/file/`, b.dataset.name);
-  if (act === 'paper-pay'){ CAB.payPaper = +id; return drawCabinet(); }
-  if (act === 'paper-pay-cancel'){ CAB.payPaper = null; return drawCabinet(); }
-  if (act === 'pay-start'){
-    b.disabled = true;
-    const r = await cabApi('POST', '/api/payments/', {paper:+id, provider:b.dataset.provider});
-    b.disabled = false;
-    if (!r.ok) return cabMsg(cabErr(r.data), true);
-    CAB.payPaper = null;
-    if (r.data.action && r.data.action.type === 'redirect' && r.data.action.payment_url){ location.href = r.data.action.payment_url; return; }
-    CAB.tab = 'pay'; return refresh();
-  }
-  if (act === 'pay-cancel'){ const r = await cabApi('POST', `/api/payments/${id}/cancel/`); return r.ok ? refresh(T.payCancelled) : cabMsg(cabErr(r.data), true); }
-  if (act === 'copy'){ try { await navigator.clipboard.writeText(b.dataset.text); b.textContent = T.copied; } catch(err){} }
 }
 
 async function cabSubmit(e){
@@ -590,7 +489,6 @@ async function cabSubmit(e){
   let need = [], r;
   if (kind === 'paper-new') need = ['title', 'authors', 'abstract', 'file'];
   if (kind === 'paper-edit') need = ['title', 'authors', 'abstract'];
-  if (kind === 'receipt') need = ['receipt'];
   if (kind === 'profile') need = ['full_name'];
   if (kind === 'password') need = ['old_password', 'new_password', 'new_password2'];
   const miss = missing(f, need);
@@ -604,7 +502,6 @@ async function cabSubmit(e){
     if (file && !file.name) fd.delete('file');
     r = await cabApi(kind === 'paper-new' ? 'POST' : 'PATCH', kind === 'paper-new' ? '/api/papers/' : `/api/papers/${id}/`, fd);
   }
-  else if (kind === 'receipt') r = await cabApi('POST', `/api/payments/${id}/receipt/`, fd);
   else if (kind === 'profile') r = await cabApi('PATCH', '/api/auth/me/', {full_name:fd.get('full_name').trim(), organization:fd.get('organization').trim(),
     country:fd.get('country').trim(), phone:fd.get('phone').trim(), lang:fd.get('lang')});
   else if (kind === 'password') r = await cabApi('POST', '/api/auth/password/change/', {old_password:fd.get('old_password'), new_password:fd.get('new_password')});
@@ -613,7 +510,6 @@ async function cabSubmit(e){
   if (kind === 'reg-edit'){ CAB.editReg = null; return done(T.saved); }
   if (kind === 'paper-new'){ CAB.newPaper = false; return done(T.paperSent); }
   if (kind === 'paper-edit'){ CAB.editPaper = null; return done(T.saved); }
-  if (kind === 'receipt') return done(T.receiptSent);
   if (kind === 'profile'){ CAB.me = r.data; return done(T.profileSaved); }
   if (kind === 'password'){ setToken(r.data.token); CAB.me = r.data.user; return done(T.passChanged); }
 }

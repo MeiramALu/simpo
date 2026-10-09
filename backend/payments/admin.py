@@ -9,7 +9,9 @@ from .models import Payment
 from .services import mark_paid
 
 
-@admin.register(Payment)
+# Оплата на сайте отключена: раздел «Платежи» в админке не показывается.
+# Модель и старые записи сохранены — чтобы вернуть, раскомментируйте регистрацию.
+# @admin.register(Payment)
 class PaymentAdmin(ExportPermissionMixin, admin.ModelAdmin):
     list_display = ['short_id', 'user', 'paper', 'amount', 'currency', 'provider', 'status', 'created_at', 'paid_at']
     list_filter = ['status', 'provider', 'currency']

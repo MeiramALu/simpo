@@ -16,8 +16,6 @@ from django.contrib.auth.models import Group
 
 from accounts.models import User
 from papers.models import Paper, PublicationFee
-from payments.models import Payment
-from payments.services import mark_paid
 from registrations.models import Registration
 from siteconfig.models import SiteSettings
 
@@ -35,8 +33,8 @@ def doc(name='paper.docx', size=100):
     return SimpleUploadedFile(name, b'x' * size, content_type='application/octet-stream')
 
 
-@override_settings(MEDIA_ROOT=TMP_MEDIA, ORGANIZERS_EMAILS=['org@example.com'], PAYMENT_PROVIDERS=['manual', 'test'],
-                   PAYMENTS_TEST_MODE=True, FRONTEND_URL='http://front')
+@override_settings(MEDIA_ROOT=TMP_MEDIA, ORGANIZERS_EMAILS=['org@example.com'],
+                   FRONTEND_URL='http://front')
 class BaseAPITest(TestCase):
     @classmethod
     def tearDownClass(cls):
@@ -226,76 +224,25 @@ class PaperTests(BaseAPITest):
         self.assertEqual(self.c.get(f'/api/papers/{pid}/file/').status_code, 200)
 
 
-class PaymentTests(BaseAPITest):
-    def setUp(self):
-        super().setUp()
-        self.user = self.make_user()
-        self.login(self.user)
-        self.paper = Paper.objects.create(user=self.user, title='Статья', authors='A', abstract='B', target='tuva',
-                                          file=doc(), status='accepted')
+class PaymentRemovedTests(BaseAPITest):
+    """Оплаты на сайте нет: взнос только для сведения, путь участника заканчивается подачей статьи."""
 
-    def test_cannot_pay_not_accepted_or_foreign(self):
-        self.paper.status = 'submitted'
-        self.paper.save()
-        r = self.c.post('/api/payments/', {'paper': self.paper.pk, 'provider': 'manual'}, format='json')
-        self.assertEqual(r.status_code, 400)
-        self.login(self.make_user(email='other@example.com'))
-        r = self.c.post('/api/payments/', {'paper': self.paper.pk, 'provider': 'manual'}, format='json')
-        self.assertEqual(r.status_code, 400)
-
-    def test_unknown_provider(self):
-        r = self.c.post('/api/payments/', {'paper': self.paper.pk, 'provider': 'bitcoin'}, format='json')
-        self.assertEqual(r.status_code, 400)
-
-    def test_manual_flow(self):
-        r = self.c.post('/api/payments/', {'paper': self.paper.pk, 'provider': 'manual'}, format='json')
-        self.assertEqual(r.status_code, 201, r.data)
-        self.assertEqual(r.data['action']['type'], 'bank_transfer')
-        self.assertEqual((r.data['payment']['amount'], r.data['payment']['currency']), ('300.00', 'USD'))
-        pid = r.data['payment']['id']
-        # повторный клик не создаёт второй счёт
-        r2 = self.c.post('/api/payments/', {'paper': self.paper.pk, 'provider': 'manual'}, format='json')
-        self.assertEqual(r2.data['payment']['id'], pid)
-
-        r = self.c.post(f'/api/payments/{pid}/receipt/', {'receipt': doc('check.pdf')}, format='multipart')
-        self.assertEqual(r.status_code, 200, r.data)
-        self.assertEqual(r.data['status'], 'review')
-
-        mail.outbox.clear()
-        with self.captureOnCommitCallbacks(execute=True):
-            self.assertTrue(mark_paid(pid))
-        self.assertFalse(mark_paid(pid))  # идемпотентно
-        self.paper.refresh_from_db()
-        self.assertTrue(self.paper.is_paid)
-        self.assertEqual(sorted(m.to[0] for m in mail.outbox), ['org@example.com', 'user@example.com'])
-        r = self.c.post('/api/payments/', {'paper': self.paper.pk, 'provider': 'manual'}, format='json')
-        self.assertEqual(r.status_code, 400)  # уже оплачено
-
-    def test_test_checkout(self):
-        r = self.c.post('/api/payments/', {'paper': self.paper.pk, 'provider': 'test'}, format='json')
-        url = r.data['action']['payment_url']
-        self.assertEqual(self.c.get(url).status_code, 200)
-        r = self.c.post(url, {'result': 'success'})
-        self.assertEqual(r.status_code, 302)
-        self.assertTrue(r['Location'].startswith('http://front/#/cabinet?payment='))
-        self.assertEqual(Payment.objects.get().status, 'paid')
-
-    @override_settings(PAYMENTS_TEST_MODE=False)
-    def test_test_provider_disabled_in_prod(self):
-        r = self.c.post('/api/payments/', {'paper': self.paper.pk, 'provider': 'test'}, format='json')
-        self.assertEqual(r.status_code, 400)
-
-    def test_second_payment_after_paid_is_flagged(self):
-        a = Payment.objects.create(user=self.user, paper=self.paper, amount=Decimal('300'), currency='USD', provider='manual')
-        b = Payment.objects.create(user=self.user, paper=self.paper, amount=Decimal('300'), currency='USD', provider='test')
-        mark_paid(a.pk)
-        b.refresh_from_db()
-        self.assertEqual(b.status, 'cancelled')  # открытые счета закрываются
-        b.status = 'pending'
-        b.save()
-        self.assertFalse(mark_paid(b.pk))
-        b.refresh_from_db()
-        self.assertEqual(b.status, 'failed')
+    def test_no_payment_api_admin_or_cabinet_tab(self):
+        user = self.make_user()
+        self.login(user)
+        paper = Paper.objects.create(user=user, title='T', authors='A', abstract='B', target='tuva', file=doc(), status='accepted')
+        self.assertEqual(self.c.post('/api/payments/', {'paper': paper.pk, 'provider': 'manual'}, format='json').status_code, 404)
+        self.assertEqual(self.c.get('/api/payments/').status_code, 404)
+        self.assertNotIn('payment_providers', self.c.get('/api/meta/').data)
+        # сумма взноса по-прежнему видна автору
+        self.assertEqual(self.c.get(f'/api/papers/{paper.pk}/').data['fee_amount'], '300.00')
+        admin = User.objects.create_superuser(email='admin@example.com', password='Strong-pass-123', full_name='Админ')
+        self.client.force_login(admin)
+        self.assertEqual(self.client.get('/admin/payments/payment/').status_code, 404)
+        self.assertNotIn('bank_iik', self.client.get('/admin/siteconfig/sitesettings/1/change/').content.decode())
+        html = self.c.get('/').content.decode()
+        self.assertNotIn('/api/payments/', html)
+        self.assertIn('feeNote', html)
 
 
 class SiteTests(BaseAPITest):
@@ -305,7 +252,6 @@ class SiteTests(BaseAPITest):
         self.assertIn(b"/api/registrations/", r.content)
         self.assertIn('csrftoken', r.cookies)
         m = self.c.get('/api/meta/').data
-        self.assertEqual({p['code'] for p in m['payment_providers']}, {'manual', 'test'})
         self.assertEqual(len(m['publication_targets']), 6)
 
 
@@ -314,13 +260,11 @@ class AdminSmokeTests(BaseAPITest):
         admin = User.objects.create_superuser(email='admin@example.com', password='Strong-pass-123', full_name='Админ')
         user = self.make_user()
         paper = Paper.objects.create(user=user, title='T', authors='A', abstract='B', file=doc())
-        pay = Payment.objects.create(user=user, paper=paper, amount=1, currency='KZT', provider='manual')
         reg = Registration.objects.create(full_name='A', organization='B', email='a@b.kz', day='6', role='listener')
         self.client.force_login(admin)
         for url in ['/admin/', '/admin/accounts/user/', '/admin/accounts/user/add/', f'/admin/accounts/user/{user.pk}/change/',
                     '/admin/registrations/registration/', f'/admin/registrations/registration/{reg.pk}/change/',
-                    '/admin/papers/paper/', f'/admin/papers/paper/{paper.pk}/change/',
-                    '/admin/payments/payment/', f'/admin/payments/payment/{pay.pk}/change/']:
+                    '/admin/papers/paper/', f'/admin/papers/paper/{paper.pk}/change/']:
             self.assertEqual(self.client.get(url).status_code, 200, url)
         # создание пользователя через админку
         r = self.client.post('/admin/accounts/user/add/', {'email': 'added@example.com', 'full_name': 'Добавленный',
@@ -336,11 +280,6 @@ class AdminSmokeTests(BaseAPITest):
         reg.refresh_from_db()
         self.assertEqual(reg.status, 'confirmed')
         self.assertEqual(mail.outbox[0].to, ['a@b.kz'])
-        # подтверждение оплаты из админки
-        with self.captureOnCommitCallbacks(execute=True):
-            self.client.post('/admin/payments/payment/', {'action': 'confirm_paid', '_selected_action': [pay.pk]})
-        pay.refresh_from_db()
-        self.assertEqual(pay.status, 'paid')
 
     def test_session_user_can_still_register_via_site(self):
         """Сотрудник залогинен в админке и заполняет форму на сайте — CSRF-токен из cookie должен сработать."""
@@ -389,26 +328,11 @@ class SiteSettingsTests(BaseAPITest):
         self.conf(papers_open=False)
         self.assertEqual(self.c.post('/api/papers/', data('proceedings'), format='multipart').status_code, 403)
 
-    def test_fee_and_payment_switches(self):
+    def test_fee_amount_from_admin(self):
         user = self.make_user()
-        self.login(user)
-        paper = Paper.objects.create(user=user, title='T', authors='A', abstract='B', target='tuva', file=doc(), status='recommended')
-        self.assertFalse(paper.can_pay)
-        self.conf(payable_statuses='recommended,accepted')
-        self.assertTrue(paper.can_pay)
+        paper = Paper.objects.create(user=user, title='T', authors='A', abstract='B', target='tuva', file=doc())
         PublicationFee.objects.filter(target='tuva').update(amount=250)
         self.assertEqual(paper.fee[0], 250)
-
-        self.conf(manual_payment_enabled=False)
-        r = self.c.post('/api/payments/', {'paper': paper.pk, 'provider': 'manual'}, format='json')
-        self.assertEqual(r.status_code, 400)
-        self.conf(manual_payment_enabled=True, bank_iik='KZ00TEST')
-        r = self.c.post('/api/payments/', {'paper': paper.pk, 'provider': 'manual'}, format='json')
-        self.assertEqual(r.data['action']['bank_details']['iik'], 'KZ00TEST')
-        self.assertEqual(r.data['payment']['amount'], '250.00')
-        self.conf(payments_open=False)
-        r = self.c.post('/api/payments/', {'paper': paper.pk, 'provider': 'manual'}, format='json')
-        self.assertEqual(r.status_code, 403)
 
     def test_admin_settings_page(self):
         admin = User.objects.create_superuser(email='admin@example.com', password='Strong-pass-123', full_name='Админ')
@@ -431,43 +355,24 @@ class RoleTests(BaseAPITest):
         super().setUp()
         self.user = self.make_user()
         self.paper = Paper.objects.create(user=self.user, title='T', authors='A', abstract='B', file=doc(), status='accepted', target='tuva')
-        self.pay = Payment.objects.create(user=self.user, paper=self.paper, amount=300, currency='USD', provider='manual')
         self.reg = Registration.objects.create(full_name='A', organization='B', email='a@b.kz', day='6', role='listener')
 
     def test_roles_created(self):
         self.assertEqual(set(Group.objects.values_list('name', flat=True)),
-                         {'Оргкомитет', 'Редакция', 'Бухгалтерия', 'Администратор симпозиума'})
+                         {'Оргкомитет', 'Редакция', 'Администратор симпозиума'})
 
     def test_orgcommittee(self):
         self.staff('Оргкомитет', 'org@kaznu.kz')
         self.assertEqual(self.client.get('/admin/registrations/registration/').status_code, 200)
-        self.assertEqual(self.client.get('/admin/payments/payment/').status_code, 403)
         self.assertEqual(self.client.get('/admin/siteconfig/sitesettings/1/change/').status_code, 403)
         r = self.client.post('/admin/registrations/registration/', {'action': 'export_csv_registrations', '_selected_action': [self.reg.pk]})
         self.assertEqual(r['Content-Type'], 'text/csv; charset=utf-8')
 
-    def test_editor_cannot_export_registrations_or_pay(self):
+    def test_editor_cannot_export_registrations(self):
         self.staff('Редакция', 'ed@kaznu.kz')
         self.assertEqual(self.client.get('/admin/registrations/registration/').status_code, 403)
         self.assertEqual(self.client.get(f'/admin/papers/paper/{self.paper.pk}/change/').status_code, 200)
         self.assertEqual(self.client.get(f'/api/papers/{self.paper.pk}/file/').status_code, 200)
-
-    def test_accounting_confirms_payment(self):
-        self.staff('Бухгалтерия', 'acc@kaznu.kz')
-        page = self.client.get('/admin/payments/payment/').content.decode()
-        self.assertIn('confirm_paid', page)
-        self.client.post('/admin/payments/payment/', {'action': 'confirm_paid', '_selected_action': [self.pay.pk]})
-        self.pay.refresh_from_db()
-        self.assertEqual(self.pay.status, 'paid')
-
-    def test_orgcommittee_cannot_confirm_payment(self):
-        u = self.staff('Оргкомитет', 'org@kaznu.kz')
-        u.user_permissions.add(*Group.objects.get(name='Бухгалтерия').permissions.exclude(codename='confirm_payment'))
-        self.client.force_login(User.objects.get(pk=u.pk))
-        self.assertNotIn('confirm_paid', self.client.get('/admin/payments/payment/').content.decode())
-        self.client.post('/admin/payments/payment/', {'action': 'confirm_paid', '_selected_action': [self.pay.pk]})
-        self.pay.refresh_from_db()
-        self.assertEqual(self.pay.status, 'pending')
 
     def test_symposium_admin_limits(self):
         boss = self.staff('Администратор симпозиума', 'boss@kaznu.kz')
@@ -486,14 +391,14 @@ class RoleTests(BaseAPITest):
         emp = self.make_user(email='emp@kaznu.kz')
         r = self.client.post(f'/admin/accounts/user/{emp.pk}/change/', {
             'email': emp.email, 'full_name': emp.full_name, 'lang': 'ru', 'is_active': 'on', 'is_staff': 'on',
-            'groups': [Group.objects.get(name='Бухгалтерия').pk], 'is_superuser': 'on',
+            'groups': [Group.objects.get(name='Редакция').pk], 'is_superuser': 'on',
             'date_joined_0': '2026-09-30', 'date_joined_1': '10:00:00',
         })
         self.assertEqual(r.status_code, 302, r.content[:2000])
         emp.refresh_from_db()
         self.assertTrue(emp.is_staff)
         self.assertFalse(emp.is_superuser)  # повысить до суперпользователя нельзя
-        self.assertEqual([g.name for g in emp.groups.all()], ['Бухгалтерия'])
+        self.assertEqual([g.name for g in emp.groups.all()], ['Редакция'])
 
 
 class SiteFormTests(BaseAPITest):
@@ -724,20 +629,13 @@ class DeadlineAndLanguageTests(BaseAPITest):
         self.assertIn('Настройки симпозиума', page)
         self.assertIn('Выйти', page)  # интерфейс Django на русском
 
-    def test_meta_localized_targets_and_providers(self):
+    def test_meta_localized_targets(self):
         m = self.c.get('/api/meta/', HTTP_ACCEPT_LANGUAGE='en').data
         tuva = next(t for t in m['publication_targets'] if t['value'] == 'tuva')
         self.assertEqual(tuva['label'], '“New Research of Tuva” (Scopus Q1)')
         self.assertTrue(tuva['is_active'])
-        self.assertEqual({p['title'] for p in m['payment_providers']}, {'Bank transfer', 'Test payment'})
 
-    def test_payment_has_bank_details_and_verify_link_goes_to_cabinet(self):
-        user = self.make_user()
-        self.login(user)
-        self.conf(bank_iik='KZ123')
-        paper = Paper.objects.create(user=user, title='T', authors='A', abstract='B', target='tuva', file=doc(), status='accepted')
-        self.c.post('/api/payments/', {'paper': paper.pk, 'provider': 'manual'}, format='json')
-        self.assertEqual(self.c.get('/api/payments/').data[0]['bank_details']['iik'], 'KZ123')
+    def test_verify_link_goes_to_cabinet(self):
         u2 = User.objects.create_user(email='v@example.com', password='Strong-pass-123', full_name='V')
         from accounts.tokens import email_verification_token, encode_uid
         r = self.c.get(f'/api/auth/email/verify/link/?uid={encode_uid(u2)}&token={email_verification_token.make_token(u2)}')
@@ -830,61 +728,27 @@ class ProgramTests(BaseAPITest):
         self.assertIn('Выступления в программе', self.client.get(urls[-1]).content.decode())
 
 
-class SpeakerPaymentGateTests(BaseAPITest):
-    def setUp(self):
-        super().setUp()
-        from speakers.services import create_draft_card
-        self.user = self.make_user(email='spk@example.com')
-        self.reg = Registration.objects.create(full_name='Платящий Докладчик', organization='X', email='spk@example.com',
-                                               day='6', role='speaker', status='confirmed', user=self.user)
-        self.card, _ = create_draft_card(self.reg)
-        admin = User.objects.create_superuser(email='admin@example.com', password='Strong-pass-123', full_name='Админ')
-        self.client.force_login(admin)
+class SpeakerPublishTests(BaseAPITest):
+    """Оплаты нет: карточку из заявки показывает на сайте админ, неоплаченный взнос этому не мешает."""
 
-    def publish(self):
+    def test_publish_card_with_paid_target_paper(self):
         from django.forms import modelform_factory
         from speakers.models import Speaker, SpeakerGroup
+        from speakers.services import create_draft_card
+        user = self.make_user(email='spk@example.com')
+        reg = Registration.objects.create(full_name='Докладчик', organization='X', email='spk@example.com',
+                                          day='6', role='speaker', status='confirmed', user=user)
+        card, _ = create_draft_card(reg)
+        self.assertFalse(card.is_published)  # сам по себе на сайт не попадает
+        Paper.objects.create(user=user, title='Платная', authors='A', abstract='B', target='tuva', file=doc(), status='accepted')
         Form = modelform_factory(Speaker, fields=('group', 'day', 'name_ru', 'is_published'))
-        f = Form({'group': SpeakerGroup.objects.get(key='panels').pk, 'day': '6', 'name_ru': self.card.name_ru, 'is_published': 'on'},
-                 instance=self.card)
-        return f.is_valid(), f.errors
-
-    def test_paid_publication_requires_payment(self):
-        paper = Paper.objects.create(user=self.user, title='Платная статья', authors='A', abstract='B', target='tuva',
-                                     file=doc(), status='accepted')
-        ok, errors = self.publish()
-        self.assertFalse(ok)
-        self.assertIn('не оплачен взнос', str(errors))
-        self.assertIn('⏳ не оплачен', self.client.get('/admin/speakers/speaker/').content.decode())
-        self.assertIn('⏳ не оплачен', self.client.get('/admin/registrations/registration/').content.decode())
-        pay = Payment.objects.create(user=self.user, paper=paper, amount=300, currency='USD', provider='manual')
-        with self.captureOnCommitCallbacks(execute=True):
-            mark_paid(pay.pk)
-        self.assertIn('скрытая карточка докладчика', mail.outbox[-1].body)
-        ok, _ = self.publish()
-        self.assertTrue(ok)
-
-    def test_free_proceedings_only_needs_approval(self):
-        Paper.objects.create(user=self.user, title='Сборник', authors='A', abstract='B', target='proceedings', file=doc())
-        self.assertTrue(self.publish()[0])
-
-    def test_setting_off(self):
-        Paper.objects.create(user=self.user, title='Платная', authors='A', abstract='B', target='tuva', file=doc(), status='accepted')
-        c = SiteSettings.load()
-        c.speaker_requires_payment = False
-        c.save()
-        self.assertTrue(self.publish()[0])
-
-    def test_admin_change_form_blocks_publish(self):
-        Paper.objects.create(user=self.user, title='Платная', authors='A', abstract='B', target='tuva', file=doc(), status='accepted')
-        from speakers.models import Speaker
-        self.assertEqual(self.client.get(f'/admin/speakers/speaker/{self.card.pk}/change/').status_code, 200)
-        r = self.client.post(f'/admin/speakers/speaker/{self.card.pk}/change/', {
-            'group': self.card.group_id, 'day': '6', 'order': 0, 'is_published': 'on', 'name_ru': self.card.name_ru,
-            'program_entries-TOTAL_FORMS': '0', 'program_entries-INITIAL_FORMS': '0'})
-        self.assertEqual(r.status_code, 200)  # форма вернулась с ошибкой
-        self.assertIn('не оплачен взнос', r.content.decode())
-        self.assertFalse(Speaker.objects.get(pk=self.card.pk).is_published)
+        f = Form({'group': SpeakerGroup.objects.get(key='panels').pk, 'day': '6', 'name_ru': card.name_ru, 'is_published': 'on'},
+                 instance=card)
+        self.assertTrue(f.is_valid(), f.errors)
+        admin = User.objects.create_superuser(email='admin@example.com', password='Strong-pass-123', full_name='Админ')
+        self.client.force_login(admin)
+        page = self.client.get('/admin/speakers/speaker/').content.decode()
+        self.assertNotIn('не оплачен', page)
 
 
 class HeaderPolishTests(BaseAPITest):

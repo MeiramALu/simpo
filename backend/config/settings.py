@@ -164,12 +164,16 @@ CORS_ALLOWED_ORIGINS = env_list('CORS_ALLOWED_ORIGINS')
 CORS_ALLOW_ALL_ORIGINS = DEBUG and not CORS_ALLOWED_ORIGINS
 
 # --- Почта ---
-EMAIL_BACKEND = env('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
 EMAIL_HOST = env('EMAIL_HOST', '')
 EMAIL_PORT = int(env('EMAIL_PORT', '587'))
 EMAIL_HOST_USER = env('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', '')
-EMAIL_USE_TLS = env_bool('EMAIL_USE_TLS', True)
+# Пока пароль SMTP не вписан — письма печатаются в консоль сервера
+EMAIL_BACKEND = env('EMAIL_BACKEND') or ('django.core.mail.backends.smtp.EmailBackend' if EMAIL_HOST and EMAIL_HOST_PASSWORD
+                                         else 'django.core.mail.backends.console.EmailBackend')
+EMAIL_USE_SSL = env_bool('EMAIL_USE_SSL', False)  # порт 465
+EMAIL_USE_TLS = not EMAIL_USE_SSL and env_bool('EMAIL_USE_TLS', True)  # порт 587
+EMAIL_TIMEOUT = 20
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', 'Al-Farabi Symposium <al-farabi@kaznu.kz>')
 # Куда приходят уведомления о новых заявках, статьях и оплатах
 ORGANIZERS_EMAILS = env_list('ORGANIZERS_EMAILS', 'al-farabi@kaznu.kz')

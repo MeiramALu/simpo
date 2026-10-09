@@ -21,11 +21,6 @@
 .st i{width:9px;height:9px;border-radius:50%;background:#9AA0AB;flex:none}
 .st-ok i{background:#2E9D55}.st-warn i{background:#D39B2A}.st-bad i{background:#C0392B}
 .tab .cnt{display:inline-block;min-width:22px;padding:0 6px;border-radius:11px;background:var(--wash);color:var(--ink);font-size:13px;line-height:22px;text-align:center;margin-left:4px}
-.cab-pay{margin-top:18px;padding:16px 18px;border-radius:12px;background:var(--wash)}
-.cab-pay.ok{font-weight:700;color:#2E9D55}
-.bank{display:grid;grid-template-columns:auto 1fr auto;gap:8px 16px;align-items:baseline;margin:12px 0 0}
-.bank dt{color:var(--muted);font-size:14.5px}
-.bank dd{margin:0;font-weight:700;overflow-wrap:anywhere}
 .cab .form{margin-top:20px}
 .cab .subh{margin-top:44px}
 .form[aria-busy="true"]{opacity:.65}
@@ -33,7 +28,7 @@ input[readonly]{background:var(--wash)!important;color:var(--muted)!important}
 #regstate .notice:first-child{margin-top:0}
 #regstate{margin-bottom:18px;max-width:880px}
 .pub-cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
-@media (max-width:760px){.cab-card{padding:18px}.bank{grid-template-columns:1fr auto}.bank dt{grid-column:1/-1}.btn-sm{font-size:15px;padding:9px 18px}}
+@media (max-width:760px){.cab-card{padding:18px}.btn-sm{font-size:15px;padding:9px 18px}}
 /* --- шапка: кнопка кабинета в строке меню (на телефоне — в выпадающем меню), подпись партнёра,
    слова с дефисом не разрываются; казахские пункты меню длиннее — для них компактнее --- */
 .nw{white-space:nowrap}

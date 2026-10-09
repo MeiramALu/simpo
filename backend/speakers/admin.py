@@ -23,7 +23,7 @@ class SpeakerGroupAdmin(admin.ModelAdmin):
 
 @admin.register(Speaker)
 class SpeakerAdmin(admin.ModelAdmin):
-    list_display = ['thumb', 'name_ru', 'country_ru', 'group', 'day', 'has_topic', 'from_application', 'payment', 'order', 'is_published']
+    list_display = ['thumb', 'name_ru', 'country_ru', 'group', 'day', 'has_topic', 'from_application', 'order', 'is_published']
     list_display_links = ['thumb', 'name_ru']
     list_editable = ['order', 'is_published']
     list_filter = ['group', 'day', 'is_published']
@@ -63,13 +63,6 @@ class SpeakerAdmin(admin.ModelAdmin):
             return '—'
         return format_html('<a href="{}">{} — {}</a>', reverse('admin:registrations_registration_change', args=[r.pk]),
                            r.full_name, r.get_status_display())
-
-    @admin.display(description='Взнос')
-    def payment(self, obj):
-        if not obj.registration_id:
-            return '—'
-        from .services import PAYMENT_LABEL, payment_state
-        return PAYMENT_LABEL[payment_state(obj.registration)[0]]
 
     @admin.display(boolean=True, description='Из заявки')
     def from_application(self, obj):

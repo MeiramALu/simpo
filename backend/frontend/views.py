@@ -9,7 +9,6 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from papers.models import PublicationFee
-from payments.providers import available_providers
 from registrations.models import Registration
 from config.i18n import current_lang, target_label
 from siteconfig.models import SiteSettings, closed_message, open_until_message
@@ -63,21 +62,15 @@ def meta(request):
             'max_upload_mb': settings.PAPER_MAX_UPLOAD_MB,
             'require_verified_email': conf.require_verified_email,
         },
-        'payments': {
-            'open': conf.payments_open,
-            'closed_message': '' if conf.payments_open else closed_message('payments'),
-        },
         'publication_targets': [
             {'value': f.target, 'label': target_label(f.target), 'fee_amount': str(f.amount),
              'fee_currency': f.currency, 'is_active': f.is_active}
             for f in PublicationFee.objects.all()
         ],
-        'payment_providers': [{'code': p.code, 'title': p.title.get(lang, p.title['ru'])} for p in available_providers()],
         # старые ключи — для совместимости
         'languages': [c for c, _ in settings.LANGUAGES],
         'registration_open': reg_open,
         'papers_open': papers_open,
-        'payments_open': conf.payments_open,
         'paper_max_upload_mb': settings.PAPER_MAX_UPLOAD_MB,
     })
     response['Cache-Control'] = 'no-store'

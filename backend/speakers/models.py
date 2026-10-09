@@ -1,7 +1,6 @@
 import os
 import uuid
 
-from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
 from django.db import models
 
@@ -88,18 +87,6 @@ class Speaker(models.Model):
 
     def __str__(self):
         return self.name_ru
-
-    def clean(self):
-        """Показать на сайте (и в программе) можно только после оплаты взноса, если он нужен."""
-        from siteconfig.models import SiteSettings
-        if not (self.is_published and self.registration_id and SiteSettings.load().speaker_requires_payment):
-            return
-        from .services import payment_state
-        state, papers = payment_state(self.registration)
-        if state == 'unpaid':
-            raise ValidationError({'is_published': (
-                f'Нельзя показать на сайте: не оплачен взнос за статью «{papers[0].title}». '
-                f'Дождитесь оплаты (раздел «Платежи»), затем включите показ.')})
 
     def as_card(self, lang, photo_url=''):
         """Формат, который ждёт spCard() во фронте."""

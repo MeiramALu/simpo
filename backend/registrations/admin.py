@@ -65,7 +65,7 @@ def _set_status(new_status, label):
 
 @admin.register(Registration)
 class RegistrationAdmin(ExportPermissionMixin, admin.ModelAdmin):
-    list_display = ['full_name', 'organization', 'country', 'email', 'day', 'role', 'status', 'fee_state', 'site_card', 'created_at']
+    list_display = ['full_name', 'organization', 'country', 'email', 'day', 'role', 'status', 'site_card', 'created_at']
     list_filter = ['status', 'day', 'role', 'lang', 'country', 'direction']
     search_fields = ['full_name', 'organization', 'email', 'phone', 'topic']
     readonly_fields = ['user', 'lang', 'site_card_links', 'created_at', 'updated_at']
@@ -130,12 +130,6 @@ class RegistrationAdmin(ExportPermissionMixin, admin.ModelAdmin):
         if not card.group.is_published:
             return 'скрыта (группа скрыта)'
         return 'на сайте'
-
-    @admin.display(description='Взнос за статью')
-    def fee_state(self, obj):
-        from speakers.services import PAYMENT_LABEL, payment_state
-        state, _ = payment_state(obj)
-        return '—' if state == 'none' else PAYMENT_LABEL[state]
 
     @admin.display(description='Карточка на сайте')
     def site_card(self, obj):
