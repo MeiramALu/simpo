@@ -16,6 +16,7 @@
 """
 import base64
 import io
+import json
 import re
 import sys
 from pathlib import Path
@@ -150,8 +151,8 @@ CABINET_STEPS = [
     ('${esc(L.pubWarn)}</div></div>',
      '${esc(L.pubWarn)}</div></div><div class="pub pub-cta"><a class="btn btn-maroon" href="#/cabinet?tab=papers">'
      '${esc(ct().newPaper)} ${ARROW}</a><span class="muted">${esc(ct().pubCtaHint)}</span></div>'),
-    # «Открыть на карте»: вместо одной ссылки на Google — меню: место, отели, где поесть, остановки
-    # в Google Maps, 2ГИС и Яндекс Картах (mapMenu в cabinet.js)
+    # «Открыть на карте»: вместо ссылки на Google — карта на сайте: площадка, отели, где поесть, остановки
+    # (mapMenu в cabinet.js) и ссылки для маршрута в Google Maps, 2ГИС, Яндекс Картах
     ('<a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v[3])}" '
      'target="_blank" rel="noopener">${esc(L.map)}</a>', '${mapMenu(vi, v, L.map)}'),
 ]
@@ -161,6 +162,9 @@ def build(src: Path, dst: Path):
     html = src.read_text(encoding='utf-8')
     cab_css = (HERE / 'cabinet.css').read_text(encoding='utf-8')
     cab_js = (HERE / 'cabinet.js').read_text(encoding='utf-8')
+    # отели, кафе, остановки рядом с площадками (frontend/fetch_nearby.py)
+    nearby = (HERE / 'nearby.json').read_text(encoding='utf-8') if (HERE / 'nearby.json').exists() else '[]'
+    cab_js = f'const NEARBY = {json.dumps(json.loads(nearby), ensure_ascii=False, separators=(",", ":"))};\n' + cab_js
     steps = [
         ('</style>', FORM_CSS.replace('</style>', cab_css + '</style>')),
         (REQ_CHECK_LINE, FORM_VALIDATION),

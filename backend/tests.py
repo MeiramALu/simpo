@@ -763,5 +763,6 @@ class HeaderPolishTests(BaseAPITest):
     def test_venue_map_menu(self):
         html = self.c.get('/').content.decode()
         self.assertIn('${mapMenu(vi, v, L.map)}', html)
-        for marker in ('2gis.kz/almaty/search/', 'yandex.kz/maps/', 'VENUE_GEO', "hotels:'Отели рядом'"):
+        for marker in ('2gis.kz/almaty/search/', 'yandex.kz/maps/', 'const NEARBY = [', 'Ғылым', "hotels:'Отели'",
+                       'ajax/libs/leaflet/1.9.4/', 'tile.openstreetmap.org'):
             self.assertIn(marker, html)

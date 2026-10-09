@@ -599,39 +599,92 @@ async function loadProgram(){
 }
 const progDays = () => PRG[lang] || P();
 
-/* ---- «Открыть на карте»: место, отели, где поесть, остановки — в Google, 2ГИС и Яндексе ---- */
-// координаты — OpenStreetMap: библиотека КазНУ и «Ғылым ордасы»; addr — для поиска здания в 2ГИС
-const VENUE_GEO = [{lat:43.22209, lon:76.92392, addr:'проспект аль-Фараби, 71'}, {lat:43.24618, lon:76.95230, addr:'улица Шевченко, 28'}];
+/* ---- «Открыть на карте»: одна карта — площадка, отели, где поесть, остановки ---- */
+// NEARBY — из frontend/nearby.json (OpenStreetMap, обновляется frontend/fetch_nearby.py), вставляет build_site.py
 const MAP_TXT = {
-  ru:{place:'Место проведения', hotels:'Отели рядом', food:'Где поесть', stops:'Остановки', g:'Google Maps', d:'2ГИС', y:'Яндекс Карты'},
-  kk:{place:'Өткізу орны', hotels:'Жақын қонақүйлер', food:'Тамақтану орындары', stops:'Аялдамалар', g:'Google Maps', d:'2ГИС', y:'Яндекс Карталар'},
-  en:{place:'Venue', hotels:'Hotels nearby', food:'Places to eat', stops:'Bus stops', g:'Google Maps', d:'2GIS', y:'Yandex Maps'}
+  ru:{place:'Место проведения', hotels:'Отели', food:'Где поесть', stops:'Остановки', route:'Маршрут:', g:'Google Maps', d:'2ГИС', y:'Яндекс Карты',
+      m:'м', km:'км', open2gis:'Открыть в 2ГИС', close:'Скрыть карту', fail:'Карта не загрузилась. Откройте место в одном из сервисов ниже.'},
+  kk:{place:'Өткізу орны', hotels:'Қонақүйлер', food:'Тамақтану', stops:'Аялдамалар', route:'Бағыт:', g:'Google Maps', d:'2ГИС', y:'Яндекс Карталар',
+      m:'м', km:'км', open2gis:'2ГИС-те ашу', close:'Картаны жасыру', fail:'Карта жүктелмеді. Төмендегі сервистердің бірінде ашыңыз.'},
+  en:{place:'Venue', hotels:'Hotels', food:'Places to eat', stops:'Bus stops', route:'Directions:', g:'Google Maps', d:'2GIS', y:'Yandex Maps',
+      m:'m', km:'km', open2gis:'Open in 2GIS', close:'Hide map', fail:'The map did not load. Open the venue in one of the services below.'}
 };
-// что искать: 2ГИС и Яндекс лучше понимают русские запросы, Google — язык сайта
-const MAP_Q = {
-  hotels:{ru:'гостиницы', en:'hotels'}, food:{ru:'кафе', en:'restaurants'}, stops:{ru:'остановки', en:'bus stops'}
-};
-function mapLinks(g, kind, gq){
+const MAP_KINDS = [['hotels', '#4C8DF6', '🛏'], ['food', '#F08A3C', '🍽'], ['stops', '#2FB36B', '🚌']];
+const mapT = () => MAP_TXT[lang] || MAP_TXT.en;
+const poiName = p => (lang === 'en' && p.name_en) || (lang === 'kk' && p.name_kk) || p.name;
+const poiDist = m => m < 1000 ? `${Math.round(m / 10) * 10} ${mapT().m}` : `${(m / 1000).toFixed(1)} ${mapT().km}`;
+
+function placeLinks(g, query){
   const e = encodeURIComponent, ll = `${g.lon},${g.lat}`;
-  if (kind === 'place') return [
-    `https://www.google.com/maps/search/?api=1&query=${e(gq)}`,
-    `https://2gis.kz/almaty/search/${e(g.addr)}?m=${e(ll + '/17')}`,
-    `https://yandex.kz/maps/?pt=${ll}&z=17&l=map`];
-  const q = MAP_Q[kind], gword = lang === 'en' ? q.en : q.ru;
-  return [
-    `https://www.google.com/maps/search/${e(gword)}/@${g.lat},${g.lon},16z`,
-    `https://2gis.kz/almaty/search/${e(q.ru)}?m=${e(ll + '/16')}`,
-    `https://yandex.kz/maps/?ll=${ll}&z=16&text=${e(q.ru)}`];
+  return [[`https://www.google.com/maps/search/?api=1&query=${e(query)}`, mapT().g],
+          [`https://2gis.kz/almaty/search/${e(g.addr)}?m=${e(ll + '/17')}`, mapT().d],
+          [`https://yandex.kz/maps/?pt=${ll}&z=17&l=map`, mapT().y]];
 }
+
 function mapMenu(vi, v, label){
-  const g = VENUE_GEO[vi], M = MAP_TXT[lang] || MAP_TXT.en;
-  const fallback = `<a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v[3])}" target="_blank" rel="noopener">${esc(label)}</a>`;
-  if (!g) return fallback;
-  const rows = ['place', 'hotels', 'food', 'stops'].map(k => {
-    const [gu, du, yu] = mapLinks(g, k, v[3]);
-    return `<div class="maps-row"><span>${esc(M[k])}</span><div>`
-      + [[gu, M.g], [du, M.d], [yu, M.y]].map(([u, n]) => `<a href="${u}" target="_blank" rel="noopener">${esc(n)}</a>`).join('')
-      + `</div></div>`;
-  }).join('');
-  return `<details class="maps"><summary class="btn btn-outline">${esc(label)}</summary><div class="maps-pop">${rows}</div></details>`;
+  const g = NEARBY[vi], M = mapT();
+  if (!g) return `<a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v[3])}" target="_blank" rel="noopener">${esc(label)}</a>`;
+  const chips = `<span class="vm-chip on" style="--c:#C9A227"><i></i>${esc(M.place)}</span>`
+    + MAP_KINDS.filter(([k]) => g[k].length).map(([k, c]) =>
+      `<button type="button" class="vm-chip on" style="--c:${c}" data-vmkind="${k}" aria-pressed="true"><i></i>${esc(M[k])} <small>${g[k].length}</small></button>`).join('');
+  return `<button type="button" class="btn btn-outline" data-vmap="${vi}" aria-expanded="false">${esc(label)}</button>`
+    + `<div class="vm hidden" id="vm-${vi}"><div class="vm-chips">${chips}</div><div class="vm-map" role="region" aria-label="${esc(v[1])}"></div>`
+    + `<div class="vm-route"><span>${esc(M.route)}</span>${placeLinks(g, v[3]).map(([u, n]) => `<a href="${u}" target="_blank" rel="noopener">${esc(n)}</a>`).join('')}</div></div>`;
 }
+
+let leafletP = null;
+function loadLeaflet(){
+  if (window.L && window.L.map) return Promise.resolve(window.L);
+  if (leafletP) return leafletP;
+  const base = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/';
+  const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = base + 'leaflet.min.css'; document.head.appendChild(css);
+  leafletP = new Promise((ok, fail) => {
+    const s = document.createElement('script'); s.src = base + 'leaflet.min.js';
+    s.onload = () => ok(window.L); s.onerror = () => { leafletP = null; fail(); };
+    document.head.appendChild(s);
+  });
+  return leafletP;
+}
+
+async function openVenueMap(vi, btn){
+  const box = document.getElementById('vm-' + vi); if (!box) return;
+  const open = box.classList.toggle('hidden') === false;
+  btn.setAttribute('aria-expanded', open);
+  btn.textContent = open ? mapT().close : t().map;
+  if (!open || box.dataset.ready) return;
+  box.dataset.ready = '1';
+  const el = box.querySelector('.vm-map'), g = NEARBY[vi], M = mapT();
+  let Lf;
+  try { Lf = await loadLeaflet(); } catch(e){ el.innerHTML = `<p class="vm-fail">${esc(M.fail)}</p>`; delete box.dataset.ready; return; }
+  const map = Lf.map(el, {scrollWheelZoom:false});
+  // тайлы OpenStreetMap: бесплатно при небольшой посещаемости и с подписью источника
+  Lf.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom:19, attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+  const icon = (c, sym, big) => Lf.divIcon({className:'vm-pin' + (big ? ' big' : ''), html:`<span style="--c:${c}">${sym}</span>`,
+                                              iconSize:big ? [40, 40] : [28, 28], iconAnchor:big ? [20, 20] : [14, 14]});
+  const V = t().venues[vi];
+  const venue = Lf.marker([g.lat, g.lon], {icon:icon('#C9A227', '★', true), zIndexOffset:1000}).addTo(map)
+    .bindPopup(`<b>${esc(V[1])}</b><br>${esc(V[2])}`);
+  const layers = {}, near = [[g.lat, g.lon]];
+  MAP_KINDS.forEach(([k, c, sym]) => {
+    layers[k] = Lf.layerGroup(g[k].map(p => {
+      if (p.m < 450) near.push([p.lat, p.lon]);
+      const link = `https://2gis.kz/almaty/search/${encodeURIComponent(p.name)}?m=${encodeURIComponent(`${p.lon},${p.lat}/18`)}`;
+      return Lf.marker([p.lat, p.lon], {icon:icon(c, sym)}).bindPopup(
+        `<b>${esc(poiName(p))}</b><br><span class="vm-pop-m">${esc(M[k])} · ${esc(poiDist(p.m))}</span><br>`
+        + `<a href="${link}" target="_blank" rel="noopener">${esc(M.open2gis)}</a>`);
+    })).addTo(map);
+  });
+  // сначала — площадка и всё, что ближе 450 м; дальние отели видны при отдалении
+  map.fitBounds(near, {padding:[30, 30], maxZoom:17});
+  box.querySelectorAll('[data-vmkind]').forEach(b => b.onclick = () => {
+    const on = !b.classList.contains('on');
+    b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
+    on ? layers[b.dataset.vmkind].addTo(map) : map.removeLayer(layers[b.dataset.vmkind]);
+  });
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-vmap]');
+  if (b) openVenueMap(+b.dataset.vmap, b);
+});

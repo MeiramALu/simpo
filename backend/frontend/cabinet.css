@@ -61,17 +61,28 @@ html[lang="kk"] .partner span{display:none}
   html[lang="kk"] nav.main ul{gap:0 16px}
   html[lang="kk"] nav.main a{font-size:13.5px}
 }
-/* меню «Открыть на карте» в карточках мест проведения */
-.maps summary{list-style:none;cursor:pointer;display:inline-flex}
-.maps summary::-webkit-details-marker{display:none}
-.maps summary::after{content:'▾';margin-left:8px;transition:transform .2s}
-.maps[open] summary::after{transform:rotate(180deg)}
-.maps-pop{margin-top:16px;border-top:1px solid rgba(255,255,255,.14)}
-.maps-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.1)}
-.maps-row span{font-weight:700;color:#fff}
-.maps-row div{display:flex;flex-wrap:wrap;gap:8px}
-.maps-row a{padding:6px 12px;border:1px solid rgba(255,255,255,.25);border-radius:999px;color:var(--gold-text);font-size:14px;text-decoration:none;white-space:nowrap}
-.maps-row a:hover{background:rgba(255,255,255,.08);border-color:var(--gold)}
+/* карта мест проведения: площадка, отели, где поесть, остановки */
+.vm{margin-top:18px}
+.vm-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.vm-chip{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:transparent;color:#fff;font:inherit;font-size:14px;cursor:default}
+button.vm-chip{cursor:pointer}
+.vm-chip i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.vm-chip small{opacity:.6}
+.vm-chip:not(.on){opacity:.45}
+.vm-chip:not(.on) i{background:transparent;box-shadow:inset 0 0 0 2px var(--c)}
+.vm-map{height:360px;border-radius:12px;overflow:hidden;background:#e8e4da;color:#222}
+.vm-fail{padding:24px;margin:0}
+.vm-route{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:12px;font-size:14px}
+.vm-route span{color:rgba(255,255,255,.7)}
+.vm-route a{padding:5px 12px;border:1px solid rgba(255,255,255,.25);border-radius:999px;color:var(--gold-text);text-decoration:none;white-space:nowrap}
+.vm-route a:hover{border-color:var(--gold);background:rgba(255,255,255,.06)}
+.vm-pin{background:none;border:0}
+.vm-pin span{display:flex;align-items:center;justify-content:center;width:100%;height:100%;box-sizing:border-box;border-radius:50%;background:var(--c);color:#fff;font-size:13px;line-height:1;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.4)}
+.vm-pin.big span{font-size:20px;color:#1B2238}
+.vm .leaflet-popup-content{font:14px/1.45 system-ui,sans-serif;color:#1B2238}
+.vm .leaflet-popup-content a{color:#8B1E3F;font-weight:600}
+.vm-pop-m{color:#666}
+@media (max-width:760px){.vm-map{height:300px}}
 /* длинные названия направлений в выпадающем списке растягивали форму шире экрана телефона */
 .form > .field, .form > fieldset{min-width:0}
 .form select, .form input, .form textarea{max-width:100%;min-width:0}
