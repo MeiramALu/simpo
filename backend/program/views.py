@@ -47,14 +47,20 @@ def program(request):
     return response
 
 
+DOC_TYPES = {'pdf': 'application/pdf', 'doc': 'application/msword',
+             'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'}
+
+
 def document(request, kind):
-    """GET /api/documents/<program|letter>/?lang=ru — загруженный в админке PDF (на языке или русский)."""
+    """GET /api/documents/<program|letter>/?lang=ru — загруженный в админке файл (на языке или русский)."""
     lang = request.GET.get('lang', 'ru')
     docs = {d.lang: d for d in Document.objects.filter(kind=kind)}
     doc = docs.get(lang) or docs.get('ru') or next(iter(docs.values()), None)
     if not doc or not doc.file:
         raise Http404
-    name = f'Al-Farabi_Symposium_2026_{"programme" if kind == "program" else "info_letter"}_{doc.lang.upper()}.pdf'
-    response = FileResponse(doc.file.open('rb'), content_type='application/pdf', as_attachment=True, filename=name)
+    ext = doc.file.name.rsplit('.', 1)[-1].lower()
+    name = f'Al-Farabi_Symposium_2026_{"programme" if kind == "program" else "info_letter"}_{doc.lang.upper()}.{ext}'
+    response = FileResponse(doc.file.open('rb'), content_type=DOC_TYPES.get(ext, 'application/octet-stream'),
+                            as_attachment=True, filename=name)
     response['Cache-Control'] = 'no-cache'
     return response

@@ -137,15 +137,19 @@ def document_upload_to(instance, filename):
 
 
 class Document(models.Model):
-    """PDF для кнопок «Скачать программу» и «Скачать информационное письмо». Нет файла — сайт отдаёт встроенный."""
+    """
+    Файлы для кнопок «Скачать программу» и «Скачать информационное письмо» — на каждом языке свой.
+    Нет файла на языке сайта — отдаётся русский; нет никакого — встроенный во фронт PDF.
+    """
 
     class Kind(models.TextChoices):
-        PROGRAM = 'program', 'Программа (PDF)'
-        LETTER = 'letter', 'Информационное письмо (PDF)'
+        PROGRAM = 'program', 'Программа'
+        LETTER = 'letter', 'Информационное письмо'
 
     kind = models.CharField('Документ', max_length=10, choices=Kind.choices)
     lang = models.CharField('Язык', max_length=2, choices=[('ru', 'Русский'), ('kk', 'Қазақша'), ('en', 'English')])
-    file = models.FileField('Файл PDF', upload_to=document_upload_to, validators=[FileExtensionValidator(['pdf'])])
+    file = models.FileField('Файл', upload_to=document_upload_to, validators=[FileExtensionValidator(['pdf', 'docx', 'doc'])],
+                            help_text='PDF (лучше — откроется у всех одинаково) или Word (DOCX, DOC).')
     updated_at = models.DateTimeField('Загружен', auto_now=True)
 
     class Meta:

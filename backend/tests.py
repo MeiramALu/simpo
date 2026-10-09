@@ -711,6 +711,18 @@ class ProgramTests(BaseAPITest):
         self.assertEqual(r.status_code, 200)
         self.assertEqual(b''.join(r.streaming_content), b'%PDF-1.4 ru')
         self.assertIn('programme_RU.pdf', r['Content-Disposition'])
+        # у каждого языка свой файл, Word тоже можно
+        Document.objects.create(kind='letter', lang='kk', file=SimpleUploadedFile('l.docx', b'PK-kk'))
+        Document.objects.create(kind='letter', lang='en', file=SimpleUploadedFile('l.pdf', b'%PDF en'))
+        r = self.c.get('/api/documents/letter/?lang=kk')
+        self.assertEqual(b''.join(r.streaming_content), b'PK-kk')
+        self.assertIn('info_letter_KK.docx', r['Content-Disposition'])
+        self.assertIn('wordprocessingml', r['Content-Type'])
+        r = self.c.get('/api/documents/letter/?lang=en')
+        self.assertIn('info_letter_EN.pdf', r['Content-Disposition'])
+        html = self.c.get('/').content.decode()
+        self.assertIn("r.headers.get('Content-Disposition')", html)
+        self.assertNotIn('(PDF, in Russian)', html)
 
     def test_admin_pages(self):
         from program.models import ProgramBlock, ProgramDay, ProgramEntry, ProgramSlot

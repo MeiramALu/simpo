@@ -163,6 +163,7 @@ REST_FRAMEWORK = {
 # --- CORS: если фронт размещён на другом домене ---
 CORS_ALLOWED_ORIGINS = env_list('CORS_ALLOWED_ORIGINS')
 CORS_ALLOW_ALL_ORIGINS = DEBUG and not CORS_ALLOWED_ORIGINS
+CORS_EXPOSE_HEADERS = ['Content-Disposition']  # имя скачиваемого документа
 
 # --- Почта ---
 # Referer с домена сайта нужен тайлам OpenStreetMap на странице /map/ (без него — «Access blocked»)

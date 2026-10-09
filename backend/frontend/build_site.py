@@ -138,11 +138,24 @@ CABINET_STEPS = [
      "    if (!(lang in PRG)) loadProgram();\n    const tabsP = PRG[lang] ? PRG[lang].map(d => d.tab) : L.dayTabs;\n"
      "    const cur = Math.min(window.__day ?? 1, tabsP.length - 1);\n    return head(L.progTitle"),
     ('${L.dayTabs.map((d,i)=>`<button class="tab" role="tab"', '${tabsP.map((d,i)=>`<button class="tab" role="tab"'),
+    # информационное письмо теперь на трёх языках (загружено в «Документы для скачивания»)
+    ("const key = kind === 'letter' ? 'letter_ru' : 'prog_' + lang;",
+     "const key = kind === 'letter' ? 'letter_ru' : 'prog_' + lang;  // встроенный запасной вариант"),
+    ("const name = kind === 'letter' ? 'Al-Farabi_Symposium_2026_info_letter_RU.pdf'",
+     "let name = kind === 'letter' ? `Al-Farabi_Symposium_2026_info_letter_${lang.toUpperCase()}.pdf`"),
+    # формат файла задаёт админка (PDF или Word) — в подписях его не указываем
+    ("docLetter:'Информационное письмо (PDF, рус.)'", "docLetter:'Информационное письмо'"),
+    ("docLetter:'Ақпараттық хат (PDF, орыс тілінде)'", "docLetter:'Ақпараттық хат'"),
+    ("docLetter:'Information letter (PDF, in Russian)'", "docLetter:'Information letter'"),
+    ("dlProgram:'Скачать программу (PDF)'", "dlProgram:'Скачать программу'"),
+    ("dlProgram:'Бағдарламаны жүктеу (PDF)'", "dlProgram:'Бағдарламаны жүктеу'"),
+    ("dlProgram:'Download programme (PDF)'", "dlProgram:'Download programme'"),
     # кнопки «Скачать программу / письмо»: файл из админки, если загружен
     ("  const blob = b64ToBlob(FILES[key], 'application/pdf');",
      "  let blob = null;\n"
      "  if (location.protocol !== 'file:'){ try { const r = await fetch(API + `/api/documents/${kind}/?lang=${lang}`); "
-     "if (r.ok) blob = await r.blob(); } catch(e) {} }\n"
+     "if (r.ok){ blob = await r.blob(); "
+     "const m = /filename=\"?([^\";]+)/.exec(r.headers.get('Content-Disposition') || ''); if (m) name = m[1]; } } catch(e) {} }\n"
      "  if (!blob) blob = b64ToBlob(FILES[key], 'application/pdf');"),
     # страница «Публикации»: суммы из админки и кнопка «Подать статью»
     ('${esc(L.fee1)}', "${esc(feeText('tuva', L.fee1))}"),
