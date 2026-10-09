@@ -12,6 +12,29 @@ def _pick(accept_language):
     return 'en'
 
 
+class AdminLoginThrottleMiddleware:
+    """
+    Подбор пароля к админке: не больше 10 попыток входа за 15 минут с одного IP.
+    Удачный вход счётчик не сбрасывает — 10 попыток хватает с запасом.
+    """
+    LIMIT, WINDOW = 10, 15 * 60
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        if request.method == 'POST' and request.path.rstrip('/').endswith('/admin/login'):
+            from django.core.cache import cache
+            from django.http import HttpResponse
+            key = 'admin-login:' + request.META.get('REMOTE_ADDR', '')
+            tries = cache.get(key, 0)
+            if tries >= self.LIMIT:
+                return HttpResponse('Слишком много попыток входа. Попробуйте через 15 минут.', status=429,
+                                    content_type='text/plain; charset=utf-8')
+            cache.set(key, tries + 1, self.WINDOW)
+        return self.get_response(request)
+
+
 class ApiLanguageMiddleware:
     """
     API отвечает на языке посетителя: сайт отправляет Accept-Language с выбранным

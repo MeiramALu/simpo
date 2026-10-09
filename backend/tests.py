@@ -751,6 +751,26 @@ class SpeakerPublishTests(BaseAPITest):
         self.assertNotIn('не оплачен', page)
 
 
+class SecurityTests(BaseAPITest):
+    def test_admin_login_throttled(self):
+        for _ in range(10):
+            self.assertEqual(self.client.post('/admin/login/', {'username': 'x@x.kz', 'password': 'bad'}).status_code, 200)
+        self.assertEqual(self.client.post('/admin/login/', {'username': 'x@x.kz', 'password': 'bad'}).status_code, 429)
+
+    def test_private_endpoints_need_login(self):
+        for url in ('/api/papers/', '/api/papers/1/file/', '/api/registrations/', '/api/auth/me/'):
+            self.assertEqual(self.c.get(url).status_code, 401, url)
+
+    def test_prod_refuses_default_secret_key(self):
+        import subprocess
+        import sys
+        env = {**__import__('os').environ, 'DJANGO_DEBUG': 'false', 'DJANGO_SECRET_KEY': 'dev-insecure-change-me',
+               'PYTHONIOENCODING': 'utf-8'}
+        r = subprocess.run([sys.executable, 'manage.py', 'check'], env=env, capture_output=True, text=True, encoding='utf-8')
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn('DJANGO_SECRET_KEY', r.stderr)
+
+
 class HeaderPolishTests(BaseAPITest):
     def test_header_and_hyphen_fixes_in_site(self):
         html = self.c.get('/').content.decode()

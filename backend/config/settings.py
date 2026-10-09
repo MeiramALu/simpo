@@ -66,6 +66,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'config.middleware.AdminLoginThrottleMiddleware',  # не больше 10 попыток входа в админку за 15 минут
     'django.contrib.sessions.middleware.SessionMiddleware',
     'config.middleware.ApiLanguageMiddleware',  # API — на языке посетителя, админка — по-русски
     'django.middleware.common.CommonMiddleware',
@@ -218,7 +219,15 @@ PAYMENT_BANK_DETAILS = {
 }
 
 if not DEBUG:
+    # на сервере без настоящего ключа не запускаемся: им подписываются сессии, ссылки сброса пароля и т.п.
+    if SECRET_KEY == 'dev-insecure-change-me' or len(SECRET_KEY) < 40:
+        from django.core.exceptions import ImproperlyConfigured
+        raise ImproperlyConfigured('Задайте DJANGO_SECRET_KEY в .env (не короче 40 символов). Сгенерировать: '
+                                   'python -c "import secrets; print(secrets.token_urlsafe(50))"')
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = env_bool('DJANGO_SSL_REDIRECT', True)   # http → https
+    # HSTS: браузер потом сам ходит только по https. Включайте, когда HTTPS настроен окончательно (напр. 31536000)
+    SECURE_HSTS_SECONDS = int(env('DJANGO_HSTS_SECONDS', '0'))
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
