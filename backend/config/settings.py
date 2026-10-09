@@ -164,6 +164,9 @@ CORS_ALLOWED_ORIGINS = env_list('CORS_ALLOWED_ORIGINS')
 CORS_ALLOW_ALL_ORIGINS = DEBUG and not CORS_ALLOWED_ORIGINS
 
 # --- Почта ---
+# Referer с домена сайта нужен тайлам OpenStreetMap на странице /map/ (без него — «Access blocked»)
+SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
+
 EMAIL_HOST = env('EMAIL_HOST', '')
 EMAIL_PORT = int(env('EMAIL_PORT', '587'))
 EMAIL_HOST_USER = env('EMAIL_HOST_USER', '')

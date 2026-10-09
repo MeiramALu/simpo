@@ -24,6 +24,26 @@ def index(request):
     return HttpResponse(SITE_INDEX.read_bytes(), content_type='text/html; charset=utf-8')
 
 
+NEARBY_FILE = Path(__file__).resolve().parent / 'nearby.json'
+
+
+def venue_map(request):
+    """
+    /map/?v=0&lang=ru — отдельная страница: площадка, отели, где поесть, остановки на одной карте.
+    Места рядом — frontend/nearby.json (обновляет frontend/fetch_nearby.py).
+    """
+    import json
+    from django.shortcuts import render
+    venues = json.loads(NEARBY_FILE.read_text(encoding='utf-8')) if NEARBY_FILE.exists() else []
+    try:
+        venue = venues[int(request.GET.get('v', 0))]
+    except (ValueError, IndexError):
+        raise Http404
+    lang = request.GET.get('lang') if request.GET.get('lang') in ('ru', 'kk', 'en') else 'en'
+    title = venue.get('title', {}).get(lang) or venue.get('addr', '')
+    return render(request, 'venue_map.html', {'venue': venue, 'lang': lang, 'title': title})
+
+
 def icon(request, name):
     """Значки вкладки (логотип КазНУ), их создаёт build_site.py."""
     path = SITE_DIR / name

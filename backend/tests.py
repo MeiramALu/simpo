@@ -760,9 +760,22 @@ class HeaderPolishTests(BaseAPITest):
         self.assertIn('progDays()[di]', html)
         self.assertIn('/api/documents/', html)
 
-    def test_venue_map_menu(self):
+    def test_venue_map_page(self):
         html = self.c.get('/').content.decode()
         self.assertIn('${mapMenu(vi, v, L.map)}', html)
-        for marker in ('2gis.kz/almaty/search/', 'yandex.kz/maps/', 'const NEARBY = [', 'Ғылым', "hotels:'Отели'",
-                       'ajax/libs/leaflet/1.9.4/', 'tile.openstreetmap.org'):
-            self.assertIn(marker, html)
+        self.assertIn('/map/?v=${vi}&lang=${lang}', html)
+        r = self.c.get('/map/?v=1&lang=ru')
+        self.assertEqual(r.status_code, 200)
+        page = r.content.decode()
+        self.assertIn('<title>«Ғылым ордасы»', page)
+        for marker in ('tile.openstreetmap.org', 'leaflet.min.js', '2gis.kz/almaty/search/', 'id="venue"'):
+            self.assertIn(marker, page)
+        venue = r.context['venue']
+        self.assertIn('Шевченко', venue['address']['ru'])
+        self.assertIn('Тянь-шань', [h['name'] for h in venue['hotels']])
+        self.assertTrue(venue['food'] and venue['stops'])
+        # OpenStreetMap блокирует тайлы без Referer
+        self.assertEqual(r['Referrer-Policy'], 'strict-origin-when-cross-origin')
+        self.assertIn('<title>Gylym Ordasy', self.c.get('/map/?v=1').content.decode())  # по умолчанию английский
+        self.assertEqual(self.c.get('/map/?v=9').status_code, 404)
+        self.assertEqual(self.c.get('/map/?v=x').status_code, 404)

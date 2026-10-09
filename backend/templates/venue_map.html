@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>{{ title }} — Al-Farabi Global Symposium 2026</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=PT+Serif:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1E2640;--navy-2:#27304D;--gold:#CC9C62;--gold-text:#D8AA6E;--line:rgba(255,255,255,.12)}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{display:grid;grid-template-columns:380px 1fr;background:var(--navy);color:#fff;font:16px/1.5 "PT Sans",system-ui,sans-serif}
+aside{display:flex;flex-direction:column;min-height:0;border-right:1px solid var(--line)}
+.head{padding:20px 22px 16px;border-bottom:1px solid var(--line)}
+.back{color:var(--gold-text);text-decoration:none;font-size:14px}
+.back:hover{text-decoration:underline}
+.day{margin-top:14px;color:var(--gold-text);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.08em}
+h1{font:700 24px/1.25 "PT Serif",Georgia,serif;margin:6px 0 6px}
+.addr{color:rgba(255,255,255,.72);font-size:14.5px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:14px 22px;border-bottom:1px solid var(--line)}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:transparent;color:#fff;font:inherit;font-size:14px;cursor:pointer}
+.chip i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.chip small{opacity:.6}
+.chip:not(.on){opacity:.45}
+.chip:not(.on) i{background:transparent;box-shadow:inset 0 0 0 2px var(--c)}
+.list{flex:1;overflow:auto;padding:4px 0 12px}
+.list h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.55);margin:16px 22px 6px}
+.list button{display:flex;width:100%;gap:10px;align-items:baseline;padding:8px 22px;border:0;background:none;color:#fff;font:inherit;font-size:15px;text-align:left;cursor:pointer}
+.list button:hover,.list button:focus-visible{background:rgba(255,255,255,.06);outline:none}
+.list button i{flex:none;width:9px;height:9px;border-radius:50%;background:var(--c);transform:translateY(-1px)}
+.list button span{flex:1}
+.list button em{font-style:normal;color:rgba(255,255,255,.55);font-size:13.5px;white-space:nowrap}
+.list .off{display:none}
+.route{padding:14px 22px 18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;font-size:14px}
+.route span{color:rgba(255,255,255,.7)}
+.route a{padding:5px 12px;border:1px solid rgba(255,255,255,.25);border-radius:999px;color:var(--gold-text);text-decoration:none;white-space:nowrap}
+.route a:hover{border-color:var(--gold);background:rgba(255,255,255,.06)}
+#map{height:100%;min-height:300px;background:#e8e4da}
+.pin{background:none;border:0}
+.pin span{display:flex;align-items:center;justify-content:center;width:100%;height:100%;border-radius:50%;background:var(--c);color:#fff;font-size:13px;line-height:1;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.4)}
+.pin.big span{font-size:20px;color:#1B2238}
+.leaflet-popup-content{font:14px/1.45 "PT Sans",system-ui,sans-serif;color:#1B2238}
+.leaflet-popup-content a{color:#8B1E3F;font-weight:700}
+.pop-m{color:#666}
+.fail{padding:24px;color:#1B2238}
+@media (max-width:820px){
+  body{display:flex;flex-direction:column;height:auto}
+  aside{display:contents}
+  .head{order:1}.chips{order:2}#map{order:3;height:60vh}.list{order:4;overflow:visible}.route{order:5}
+}
+</style>
+</head>
+<body>
+<aside>
+  <div class="head">
+    <a class="back" href="/#/participants" id="back"></a>
+    <div class="day" id="day"></div>
+    <h1 id="title">{{ title }}</h1>
+    <div class="addr" id="addr"></div>
+  </div>
+  <div class="chips" id="chips"></div>
+  <div class="list" id="list"></div>
+  <div class="route" id="route"></div>
+</aside>
+<div id="map" role="region"></div>
+{{ venue|json_script:"venue" }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const lang = '{{ lang }}';
+const V = JSON.parse(document.getElementById('venue').textContent);
+const TXT = {
+  ru:{back:'← На сайт симпозиума', place:'Место проведения', hotels:'Отели', food:'Где поесть', stops:'Остановки', route:'Маршрут:',
+      g:'Google Maps', d:'2ГИС', y:'Яндекс Карты', m:'м', km:'км', open2gis:'Открыть в 2ГИС', fail:'Карта не загрузилась. Откройте место в одном из сервисов ниже.'},
+  kk:{back:'← Симпозиум сайтына', place:'Өткізу орны', hotels:'Қонақүйлер', food:'Тамақтану', stops:'Аялдамалар', route:'Бағыт:',
+      g:'Google Maps', d:'2ГИС', y:'Яндекс Карталар', m:'м', km:'км', open2gis:'2ГИС-те ашу', fail:'Карта жүктелмеді. Төмендегі сервистердің бірінде ашыңыз.'},
+  en:{back:'← Back to the symposium site', place:'Venue', hotels:'Hotels', food:'Places to eat', stops:'Bus stops', route:'Directions:',
+      g:'Google Maps', d:'2GIS', y:'Yandex Maps', m:'m', km:'km', open2gis:'Open in 2GIS', fail:'The map did not load. Open the venue in one of the services below.'}
+}[lang];
+const KINDS = [['hotels', '#4C8DF6', '🛏'], ['food', '#F08A3C', '🍽'], ['stops', '#2FB36B', '🚌']];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+const pick = o => (o && (o[lang] || o.ru)) || '';
+const name = p => (lang === 'en' && p.name_en) || (lang === 'kk' && p.name_kk) || p.name;
+const dist = m => m < 1000 ? `${Math.round(m / 10) * 10} ${TXT.m}` : `${(m / 1000).toFixed(1)} ${TXT.km}`;
+const e = encodeURIComponent, ll = `${V.lon},${V.lat}`;
+
+document.getElementById('back').textContent = TXT.back;
+document.getElementById('day').textContent = pick(V.day);
+document.getElementById('addr').textContent = pick(V.address);
+document.getElementById('map').setAttribute('aria-label', pick(V.title));
+document.getElementById('route').innerHTML = `<span>${esc(TXT.route)}</span>` + [
+  [`https://www.google.com/maps/search/?api=1&query=${e(pick(V.title) + ', ' + pick(V.address))}`, TXT.g],
+  [`https://2gis.kz/almaty/search/${e(V.addr)}?m=${e(ll + '/17')}`, TXT.d],
+  [`https://yandex.kz/maps/?pt=${ll}&z=17&l=map`, TXT.y]
+].map(([u, n]) => `<a href="${u}" target="_blank" rel="noopener">${esc(n)}</a>`).join('');
+document.getElementById('chips').innerHTML = `<span class="chip on" style="--c:#C9A227;cursor:default"><i></i>${esc(TXT.place)}</span>`
+  + KINDS.filter(([k]) => V[k].length).map(([k, c]) =>
+    `<button type="button" class="chip on" style="--c:${c}" data-kind="${k}" aria-pressed="true"><i></i>${esc(TXT[k])} <small>${V[k].length}</small></button>`).join('');
+document.getElementById('list').innerHTML = KINDS.filter(([k]) => V[k].length).map(([k, c]) =>
+  `<div data-list="${k}"><h2>${esc(TXT[k])}</h2>` + V[k].map((p, i) =>
+    `<button type="button" style="--c:${c}" data-k="${k}" data-i="${i}"><i></i><span>${esc(name(p))}</span><em>${esc(dist(p.m))}</em></button>`).join('') + `</div>`).join('');
+
+if (!window.L){
+  document.getElementById('map').innerHTML = `<p class="fail">${esc(TXT.fail)}</p>`;
+} else {
+  const map = L.map('map');
+  // OpenStreetMap: бесплатно при небольшой посещаемости, нужна подпись и Referer (meta referrer выше)
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom:19, referrerPolicy:'strict-origin-when-cross-origin',
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+  const icon = (c, sym, big) => L.divIcon({className:'pin' + (big ? ' big' : ''), html:`<span style="--c:${c}">${sym}</span>`,
+                                           iconSize:big ? [40, 40] : [28, 28], iconAnchor:big ? [20, 20] : [14, 14]});
+  L.marker([V.lat, V.lon], {icon:icon('#C9A227', '★', true), zIndexOffset:1000}).addTo(map)
+    .bindPopup(`<b>${esc(pick(V.title))}</b><br>${esc(pick(V.address))}`);
+  const layers = {}, markers = {}, near = [[V.lat, V.lon]];
+  KINDS.forEach(([k, c, sym]) => {
+    markers[k] = V[k].map(p => {
+      if (p.m < 450 || V[k].indexOf(p) < 3) near.push([p.lat, p.lon]);
+      const link = `https://2gis.kz/almaty/search/${e(p.name)}?m=${e(`${p.lon},${p.lat}/18`)}`;
+      return L.marker([p.lat, p.lon], {icon:icon(c, sym)}).bindPopup(
+        `<b>${esc(name(p))}</b><br><span class="pop-m">${esc(TXT[k])} · ${esc(dist(p.m))}</span><br>`
+        + `<a href="${link}" target="_blank" rel="noopener">${esc(TXT.open2gis)}</a>`);
+    });
+    layers[k] = L.layerGroup(markers[k]).addTo(map);
+  });
+  // сначала — площадка, всё ближе 450 м и по 3 ближайших каждого вида; дальние видны при отдалении
+  map.fitBounds(near, {padding:[40, 40], maxZoom:17});
+  document.getElementById('chips').addEventListener('click', ev => {
+    const b = ev.target.closest('[data-kind]'); if (!b) return;
+    const on = !b.classList.contains('on');
+    b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
+    on ? layers[b.dataset.kind].addTo(map) : map.removeLayer(layers[b.dataset.kind]);
+    document.querySelector(`[data-list="${b.dataset.kind}"]`).classList.toggle('off', !on);
+  });
+  document.getElementById('list').addEventListener('click', ev => {
+    const b = ev.target.closest('[data-k]'); if (!b) return;
+    const m = markers[b.dataset.k][+b.dataset.i];
+    map.setView(m.getLatLng(), Math.max(map.getZoom(), 17)); m.openPopup();
+    if (window.innerWidth <= 820) document.getElementById('map').scrollIntoView({behavior:'smooth'});
+  });
+}
+</script>
+</body>
+</html>

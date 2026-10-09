@@ -10,6 +10,7 @@
 """
 import json
 import math
+import re
 import sys
 import time
 import urllib.parse
@@ -24,8 +25,10 @@ OVERPASS = ['https://overpass-api.de/api/interpreter', 'https://overpass.private
 
 # порядок — как в L.venues во фронте; координаты из OpenStreetMap
 VENUES = [
-    {'lat': 43.22209, 'lon': 76.92392, 'addr': 'проспект аль-Фараби, 71'},   # Научная библиотека КазНУ
-    {'lat': 43.24618, 'lon': 76.95230, 'addr': 'улица Шевченко, 28'},        # «Ғылым ордасы»
+    {'lat': 43.22209, 'lon': 76.92392, 'addr': 'проспект аль-Фараби, 71',
+     **{"title": {"ru": "Научная библиотека «Аль-Фараби»", "kk": "«Әл-Фараби» ғылыми кітапханасы", "en": "Al-Farabi Scientific Library"}, "address": {"ru": "КазНУ имени аль-Фараби, пр. аль-Фараби, 71, г. Алматы", "kk": "Әл-Фараби атындағы ҚазҰУ, әл-Фараби даңғылы, 71, Алматы қ.", "en": "Al-Farabi Kazakh National University, 71 al-Farabi Avenue, Almaty"}, "day": {"ru": "6 ноября", "kk": "6 қараша", "en": "6 November"}}},
+    {'lat': 43.24618, 'lon': 76.9523, 'addr': 'улица Шевченко, 28',
+     **{"title": {"ru": "«Ғылым ордасы»", "kk": "«Ғылым ордасы»", "en": "Gylym Ordasy"}, "address": {"ru": "Комитет науки МНВО РК, ул. Шевченко, 28, г. Алматы", "kk": "ҚР ҒЖБМ Ғылым комитеті, Шевченко көшесі, 28, Алматы қ.", "en": "28 Shevchenko Street, Almaty"}, "day": {"ru": "7 ноября", "kk": "7 қараша", "en": "7 November"}}},
 ]
 RADIUS = {'hotels': 1500, 'food': 700, 'stops': 900}   # метров
 LIMIT = {'hotels': 15, 'food': 20, 'stops': 10}
@@ -35,6 +38,9 @@ FILTERS = {
     'stops': ['node["highway"="bus_stop"]', 'node["public_transport"="platform"]["bus"="yes"]',
               'node["railway"="station"]["station"="subway"]'],
 }
+
+
+JUNK = re.compile(r'^(hotel|отель|гостиница|кафе|cafe|ЖК.*)$', re.I)
 
 
 def dist(a, b):
@@ -69,6 +75,8 @@ def fetch(venue, kind):
         t = e.get('tags', {})
         name = t.get('name:ru') or t.get('name') or ''
         if not name or name in seen:   # у остановки бывает несколько точек с одним названием
+            continue
+        if JUNK.match(name):           # «Hotel», «ЖК …» — ошибки разметки, не заведения
             continue
         seen.add(name)
         p = {'lat': round(c['lat'], 6), 'lon': round(c['lon'], 6)}
