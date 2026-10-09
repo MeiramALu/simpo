@@ -11,3 +11,9 @@ staticfiles/
 
 # Собирается командой: python frontend/build_site.py
 backend/frontend/site/
+
+# программы для показа (cloudflared)
+.tools/
+
+# настройки редактора — у каждого свои
+.vscode/
