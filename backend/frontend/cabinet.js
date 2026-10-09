@@ -600,9 +600,11 @@ async function loadProgram(){
 const progDays = () => PRG[lang] || P();
 
 /* ---- «Открыть на карте»: отдельная страница /map/ — площадка, отели, где поесть, остановки ---- */
+// две кнопки: своя карта (/map/) и Google Карты (/map/google/ — карта из «Google Мои карты», если задана в админке)
+const GMAP_LABEL = {ru:'Google Карты', kk:'Google Maps', en:'Google Maps'};
 function mapMenu(vi, v, label){
-  const href = location.protocol === 'file:'
-    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v[3])}`
-    : `${API}/map/?v=${vi}&lang=${lang}`;
-  return `<a class="btn btn-outline" href="${href}" target="_blank" rel="noopener">${esc(label)}</a>`;
+  const google = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v[3])}`;
+  if (location.protocol === 'file:') return `<a class="btn btn-outline" href="${google}" target="_blank" rel="noopener">${esc(label)}</a>`;
+  return `<div class="map-btns"><a class="btn btn-outline" href="${API}/map/?v=${vi}&lang=${lang}" target="_blank" rel="noopener">${esc(label)}</a>`
+    + `<a class="btn btn-outline" href="${API}/map/google/?v=${vi}" target="_blank" rel="noopener">${esc(GMAP_LABEL[lang] || GMAP_LABEL.en)}</a></div>`;
 }

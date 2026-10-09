@@ -64,3 +64,5 @@ html[lang="kk"] .partner span{display:none}
 /* длинные названия направлений в выпадающем списке растягивали форму шире экрана телефона */
 .form > .field, .form > fieldset{min-width:0}
 .form select, .form input, .form textarea{max-width:100%;min-width:0}
+/* кнопки карты в карточке места проведения */
+.map-btns{display:flex;flex-wrap:wrap;gap:10px}

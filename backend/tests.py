@@ -779,3 +779,29 @@ class HeaderPolishTests(BaseAPITest):
         self.assertIn('<title>Gylym Ordasy', self.c.get('/map/?v=1').content.decode())  # по умолчанию английский
         self.assertEqual(self.c.get('/map/?v=9').status_code, 404)
         self.assertEqual(self.c.get('/map/?v=x').status_code, 404)
+
+    def test_google_map_button_and_kml(self):
+        html = self.c.get('/').content.decode()
+        self.assertIn('/map/google/?v=${vi}', html)
+        r = self.c.get('/map/google/?v=1')
+        self.assertEqual(r.status_code, 302)
+        self.assertIn('google.com/maps/search/', r['Location'])
+        self.assertIn('Gylym%20Ordasy', r['Location'])
+        conf = SiteSettings.load()
+        conf.google_map_url = 'https://www.google.com/maps/d/viewer?mid=TEST'
+        conf.save()
+        self.assertEqual(self.c.get('/map/google/?v=0')['Location'], 'https://www.google.com/maps/d/viewer?mid=TEST')
+        import xml.etree.ElementTree as ET
+        ns = {'k': 'http://www.opengis.net/kml/2.2'}
+        for kind, least in (('venues', 2), ('hotels', 5), ('food', 10), ('stops', 5)):
+            r = self.c.get(f'/map/kml/{kind}.kml')
+            self.assertEqual(r.status_code, 200)
+            self.assertIn(f'{kind}.kml', r['Content-Disposition'])
+            marks = ET.fromstring(r.content).findall('.//k:Placemark', ns)
+            self.assertGreaterEqual(len(marks), least, kind)
+        self.assertEqual(self.c.get('/map/kml/secret.kml').status_code, 404)
+        admin = User.objects.create_superuser(email='admin@example.com', password='Strong-pass-123', full_name='Админ')
+        self.client.force_login(admin)
+        page = self.client.get('/admin/siteconfig/sitesettings/1/change/').content.decode()
+        self.assertIn('name="google_map_url"', page)
+        self.assertIn('/map/kml/hotels.kml', page)

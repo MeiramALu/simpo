@@ -32,9 +32,8 @@ def venue_map(request):
     /map/?v=0&lang=ru — отдельная страница: площадка, отели, где поесть, остановки на одной карте.
     Места рядом — frontend/nearby.json (обновляет frontend/fetch_nearby.py).
     """
-    import json
     from django.shortcuts import render
-    venues = json.loads(NEARBY_FILE.read_text(encoding='utf-8')) if NEARBY_FILE.exists() else []
+    venues = _nearby()
     try:
         venue = venues[int(request.GET.get('v', 0))]
     except (ValueError, IndexError):
@@ -42,6 +41,71 @@ def venue_map(request):
     lang = request.GET.get('lang') if request.GET.get('lang') in ('ru', 'kk', 'en') else 'en'
     title = venue.get('title', {}).get(lang) or venue.get('addr', '')
     return render(request, 'venue_map.html', {'venue': venue, 'lang': lang, 'title': title})
+
+
+KML_KINDS = {
+    'venues': ('Места проведения', 'ylw-stars'),
+    'hotels': ('Отели рядом', 'blu-circle'),
+    'food': ('Где поесть', 'orange-circle'),
+    'stops': ('Остановки', 'grn-circle'),
+}
+KML_LABEL = {'hotels': 'Отель', 'food': 'Кафе / ресторан', 'stops': 'Остановка'}
+
+
+def _nearby():
+    import json
+    return json.loads(NEARBY_FILE.read_text(encoding='utf-8')) if NEARBY_FILE.exists() else []
+
+
+def venue_kml(request, kind):
+    """/map/kml/<kind>.kml — точки для импорта в «Google Мои карты» (один файл — один слой)."""
+    from xml.sax.saxutils import escape
+    if kind not in KML_KINDS:
+        raise Http404
+    title, icon_name = KML_KINDS[kind]
+    marks = []
+    for v in _nearby():
+        venue = v.get('title', {}).get('ru', v['addr'])
+        if kind == 'venues':
+            marks.append((venue, f"{v.get('day', {}).get('ru', '')} · {v.get('address', {}).get('ru', '')}", v))
+        else:
+            # одно место может быть рядом с обеими площадками — оставляем одну точку
+            for p in v.get(kind, []):
+                desc = f'{KML_LABEL[kind]} · {p["m"]} м до места проведения: {venue}' + (f' · {p["name_en"]}' if p.get('name_en') else '')
+                marks.append((p['name'], desc, p))
+    seen, body = set(), []
+    for name, desc, p in marks:
+        key = (name, round(p['lat'], 4), round(p['lon'], 4))
+        if key in seen:
+            continue
+        seen.add(key)
+        body.append(f'<Placemark><name>{escape(name)}</name><description>{escape(desc)}</description><styleUrl>#s</styleUrl>'
+                    f'<Point><coordinates>{p["lon"]},{p["lat"]},0</coordinates></Point></Placemark>')
+    kml = ('<?xml version="1.0" encoding="UTF-8"?>\n<kml xmlns="http://www.opengis.net/kml/2.2"><Document>'
+           f'<name>{escape(title)}</name><Style id="s"><IconStyle><Icon>'
+           f'<href>https://maps.google.com/mapfiles/kml/paddle/{icon_name}.png</href></Icon></IconStyle></Style>'
+           + ''.join(body) + '</Document></kml>')
+    response = HttpResponse(kml, content_type='application/vnd.google-earth.kml+xml; charset=utf-8')
+    response['Content-Disposition'] = f'attachment; filename="{kind}.kml"'
+    return response
+
+
+def google_map(request):
+    """/map/google/?v=0 — кнопка «Google Карты»: карта с точками из настроек, иначе — площадка в Google Картах."""
+    from urllib.parse import quote
+    from django.shortcuts import redirect
+    url = SiteSettings.load().google_map_url
+    if url:
+        return redirect(url)
+    venues = _nearby()
+    try:
+        v = venues[int(request.GET.get('v', 0))]
+    except (ValueError, IndexError):
+        v = None
+    if not v:
+        return redirect('https://www.google.com/maps/search/?api=1&query=' + quote('Al-Farabi Kazakh National University, Almaty'))
+    query = f"{v.get('title', {}).get('en', '')}, {v.get('address', {}).get('en', v['addr'])}"
+    return redirect('https://www.google.com/maps/search/?api=1&query=' + quote(query))
 
 
 def icon(request, name):

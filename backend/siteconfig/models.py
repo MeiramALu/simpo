@@ -46,7 +46,13 @@ class SiteSettings(models.Model):
                   'пока взнос не оплачен. Для бесплатного сборника достаточно одобрения оргкомитета.')
     require_verified_email = models.BooleanField(
         'Требовать подтверждённую почту', default=True,
-        help_text='Подавать статьи и платить можно только после подтверждения email.')
+        help_text='Подавать статьи можно только после подтверждения email.')
+
+    # --- карта мест проведения ---
+    google_map_url = models.URLField(
+        'Ссылка на Google-карту с точками', max_length=500, blank=True,
+        help_text='Карта из «Google Мои карты» (как сделать — в описании раздела). Кнопка «Google Карты» на сайте ведёт сюда; '
+                  'пусто — на место проведения в обычных Google Картах.')
 
     # --- уведомления ---
     organizers_emails = models.TextField(

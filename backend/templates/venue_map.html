@@ -91,7 +91,7 @@ document.getElementById('day').textContent = pick(V.day);
 document.getElementById('addr').textContent = pick(V.address);
 document.getElementById('map').setAttribute('aria-label', pick(V.title));
 document.getElementById('route').innerHTML = `<span>${esc(TXT.route)}</span>` + [
-  [`https://www.google.com/maps/search/?api=1&query=${e(pick(V.title) + ', ' + pick(V.address))}`, TXT.g],
+  [`/map/google/?v=${new URLSearchParams(location.search).get('v') || 0}`, TXT.g],
   [`https://2gis.kz/almaty/search/${e(V.addr)}?m=${e(ll + '/17')}`, TXT.d],
   [`https://yandex.kz/maps/?pt=${ll}&z=17&l=map`, TXT.y]
 ].map(([u, n]) => `<a href="${u}" target="_blank" rel="noopener">${esc(n)}</a>`).join('');
