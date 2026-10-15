@@ -66,3 +66,7 @@ html[lang="kk"] .partner span{display:none}
 .form select, .form input, .form textarea{max-width:100%;min-width:0}
 /* кнопки карты в карточке места проведения */
 .map-btns{display:flex;flex-wrap:wrap;gap:10px}
+/* логотипы организаторов */
+.orgs .o{display:flex;align-items:center;gap:20px}
+.org-logo{flex:none;height:64px;width:132px;object-fit:contain;background:#fff;border-radius:12px;padding:6px}
+@media (max-width:760px){.org-logo{height:52px;width:96px}}

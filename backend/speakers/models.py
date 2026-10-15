@@ -32,6 +32,8 @@ class SpeakerGroup(models.Model):
     subtitle_en = models.CharField('Подзаголовок (англ)', max_length=255, blank=True)
     order = models.PositiveIntegerField('Порядок', default=0)
     is_published = models.BooleanField('Показывать на сайте', default=True)
+    show_topic = models.BooleanField('У людей есть темы докладов', default=True,
+                                     help_text='Снимите для приветственных слов: тогда без темы не пишется «Тема доклада уточняется».')
 
     class Meta:
         verbose_name = 'Группа докладчиков'
@@ -97,7 +99,7 @@ class Speaker(models.Model):
             'country': tr(self, 'country', lang),
             'role': tr(self, 'role', lang),
             'topic': topic,
-            'tbc': not topic,
+            'tbc': not topic and self.group.show_topic,
             'where': tr(self, 'session', lang),
             'day': DAY_LABEL.get(lang, DAY_LABEL['ru']).get(self.day, ''),
             'photo': photo_url,

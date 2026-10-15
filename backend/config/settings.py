@@ -1,10 +1,11 @@
 """
-Настройки бэкенда Al-Farabi Global Symposium 2026.
+Настройки бэкенда Al-Farabi International Symposium 2026.
 
 Все чувствительные значения берутся из переменных окружения (или из файла .env
 рядом с manage.py). Пример — в .env.example.
 """
 import os
+import sys
 from decimal import Decimal
 from pathlib import Path
 
@@ -138,6 +139,13 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # только через API с проверкой владельца.
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(env('MEDIA_ROOT', BASE_DIR / 'media'))
+if len(sys.argv) > 1 and sys.argv[1] == 'test':
+    # миграции при создании тестовой базы загружают фото докладчиков — не в настоящую media/
+    import atexit
+    import shutil
+    import tempfile
+    MEDIA_ROOT = Path(tempfile.mkdtemp(prefix='afgs-test-media-'))
+    atexit.register(shutil.rmtree, MEDIA_ROOT, True)
 FILE_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024
 DATA_UPLOAD_MAX_MEMORY_SIZE = 25 * 1024 * 1024
 

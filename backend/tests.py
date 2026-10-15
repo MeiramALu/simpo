@@ -424,31 +424,37 @@ class FaviconTests(BaseAPITest):
 
 
 class SpeakerTests(BaseAPITest):
-    def test_seeded_from_program(self):
-        from speakers.models import Speaker, SpeakerGroup
-        self.assertEqual(SpeakerGroup.objects.count(), 4)
-        self.assertEqual(Speaker.objects.count(), 39)
+    def test_seeded_2026_10(self):
+        """Докладчики по документам 15.10.2026: приветствия, пленарное заседание, четыре панели — с фото."""
+        from speakers.models import Speaker
         data = self.c.get('/api/speakers/?lang=ru').data
-        self.assertEqual([g['title'] for g in data],
-                         ['Пленарное заседание 6 ноября', 'Панели', 'Пленарное заседание 7 ноября', 'Модераторы'])
-        self.assertEqual([len(g['speakers']) for g in data], [6, 14, 8, 11])
-        first = data[0]['speakers'][0]
-        self.assertEqual((first['name'], first['country'], first['day'], first['where'], first['tbc']),
-                         ('Эллиотт Марк С.', 'США', '6 ноября', 'Пленарное заседание', True))
+        self.assertEqual([g['title'] for g in data], ['Приветственные слова', 'Пленарное заседание 6 ноября', 'Панели'])
+        self.assertEqual([len(g['speakers']) for g in data], [6, 8, 30])
+        karin = data[0]['speakers'][0]
+        self.assertEqual((karin['name'], karin['tbc'], karin['where']), ('Ерлан Тынымбайулы Карин', False, 'Торжественное открытие'))
+        self.assertTrue(karin['photo'])
+        altayev = data[1]['speakers'][0]
+        self.assertEqual((altayev['name'], altayev['topic']), ('Алтаев Жакыпбек Алтаевич', 'Аль-Фараби и золотой век тюрко-мусульманской философии'))
+        purmand = data[2]['speakers'][0]
+        self.assertTrue(purmand['tbc'])  # тема уточняется
+        self.assertIn('Панель 1', purmand['where'])
+        self.assertEqual(Speaker.objects.filter(group__key__in=('welcome', 'plenary6', 'panels')).exclude(photo='').count(), 43)
         en = self.c.get('/api/speakers/?lang=en').data[0]['speakers'][0]
-        self.assertEqual((en['name'], en['day']), ('Mark C. Elliott', '6 November'))
+        self.assertEqual((en['name'], en['day']), ('Yerlan Tynymbayuly Karin', '6 November'))
+        kk = self.c.get('/api/speakers/?lang=kk').data[2]['speakers'][-1]
+        self.assertEqual(kk['name'], 'Жолмухамедова Наиля Хусаиновна')
 
     def test_admin_changes_reach_api(self):
         from speakers.models import Speaker, SpeakerGroup
         g = SpeakerGroup.objects.get(key='plenary6')
         Speaker.objects.create(group=g, order=1, day='6', name_ru='Новый Докладчик', topic_ru='О добродетели')
         Speaker.objects.filter(name_ru='Аяди Салем').update(is_published=False)
-        names = [s['name'] for s in self.c.get('/api/speakers/?lang=kk').data[0]['speakers']]
+        names = [s['name'] for s in self.c.get('/api/speakers/?lang=kk').data[1]['speakers']]
         self.assertEqual(names[0], 'Новый Докладчик')  # нет перевода — показывается русский
         self.assertNotIn('Аяди Салем', names)
-        self.assertEqual(len(names), 6)
-        SpeakerGroup.objects.filter(key='moderators').update(is_published=False)
-        self.assertEqual(len(self.c.get('/api/speakers/').data), 3)
+        self.assertEqual(len(names), 8)
+        SpeakerGroup.objects.filter(key='panels').update(is_published=False)
+        self.assertEqual(len(self.c.get('/api/speakers/').data), 2)
 
     def test_photo(self):
         import io
@@ -459,7 +465,7 @@ class SpeakerTests(BaseAPITest):
         s = Speaker.objects.get(name_ru='Аяди Салем')
         s.photo = SimpleUploadedFile('a.png', buf.getvalue(), content_type='image/png')
         s.save()
-        card = next(x for x in self.c.get('/api/speakers/').data[0]['speakers'] if x['id'] == s.pk)
+        card = next(x for x in self.c.get('/api/speakers/').data[1]['speakers'] if x['id'] == s.pk)
         self.assertIn(f'/api/speakers/{s.pk}/photo/', card['photo'])
         self.assertEqual(self.c.get(card['photo']).status_code, 200)
 
@@ -496,7 +502,7 @@ class DefaultLanguageTests(BaseAPITest):
         html = self.c.get('/').content.decode()
         self.assertIn('<html lang="en">', html)
         self.assertIn("let lang = 'en';", html)
-        self.assertIn('<title>Al-Farabi Global Symposium – 2026</title>', html)
+        self.assertIn('<title>Al-Farabi International Symposium – 2026</title>', html)
         # выбор посетителя по-прежнему запоминается
         self.assertIn("localStorage.getItem('afgs-lang')", html)
 
@@ -662,46 +668,43 @@ class ProgramTests(BaseAPITest):
         line = next(l for l in html.split('\n') if l.startswith('const PROGRAM = '))
         return json.loads(line[len('const PROGRAM = '):].rstrip().rstrip(';'))[lang]
 
-    def test_seed_matches_frontend_program_ru(self):
-        from program.models import ProgramDay, ProgramEntry, ProgramSlot
-        self.assertEqual((ProgramDay.objects.count(), ProgramSlot.objects.count(), ProgramEntry.objects.count()), (4, 36, 62))
-        self.assertGreaterEqual(ProgramEntry.objects.filter(speaker__isnull=False).count(), 38)
+    def test_program_2026_10(self):
+        """Программа из базы = новая версия (13.10.2026), и та же — во встроенной копии сайта."""
+        import json
+        from program.models import ProgramDay, ProgramEntry
+        self.assertEqual(ProgramDay.objects.count(), 3)
+        self.assertEqual(ProgramEntry.objects.filter(speaker__isnull=False).count(), 44)
         api = self.c.get('/api/program/?lang=ru').data
-        src = self.source_program('ru')
-        self.assertEqual(len(api), len(src))
-        for d_api, d_src in zip(api, src):
-            self.assertEqual(d_api['date'], d_src['date'])
-            self.assertEqual(d_api['event'], d_src.get('event'))
-            self.assertEqual(len(d_api['rows']), len(d_src['rows']))
-            for r_api, r_src in zip(d_api['rows'], d_src['rows']):
-                self.assertEqual((r_api['time'], r_api['title'], r_api['room']), (r_src['time'], r_src['title'], r_src.get('room') or ''))
-                self.assertEqual(len(r_api.get('blocks', [])), len(r_src.get('blocks', [])), r_src['title'])
-                for b_api, b_src in zip(r_api.get('blocks', []), r_src.get('blocks', [])):
-                    self.assertEqual(b_api['label'], b_src.get('label'))
-                    for i_api, i_src in zip(b_api['items'], b_src['items']):
-                        if 'text' in i_src:
-                            self.assertEqual(i_api, {'text': i_src['text']})
-                        else:
-                            for f in ('name', 'country', 'role', 'topic'):
-                                self.assertEqual(i_api[f], i_src.get(f, ''), (r_src['title'], f))
-                            self.assertEqual(i_api['tbc'], bool(i_src.get('tbc')) and not i_src.get('topic'))
+        self.assertEqual([d['tab'] for d in api], ['5 ноября', '6 ноября', '7 ноября'])
+        day = api[1]
+        self.assertEqual(day['event'], ['МЕЖДУНАРОДНЫЙ СИМПОЗИУМ АЛЬ-ФАРАБИ-2026', '«Философия. Добродетель. Будущее»'])
+        titles = [r['title'] for r in day['rows']]
+        for p in ('Панель 1: «Наследие аль-Фараби и глобальные вызовы»', 'Панель 4: «Казахстанский опыт постижения аль-Фараби»'):
+            self.assertIn(p, titles)
+        self.assertTrue(all(re.match(r'^\d{2}:\d{2} – \d{2}:\d{2}$', r['time']) for r in day['rows']), [r['time'] for r in day['rows']])
+        plenary = next(r for r in day['rows'] if r['title'] == 'Пленарные доклады')
+        self.assertEqual([b['label'] for b in plenary['blocks']], ['Модератор', 'Докладчики'])
+        self.assertEqual(len(plenary['blocks'][1]['items']), 8)
+        html = self.c.get('/').content.decode()
+        line = next(l for l in html.split('\n') if l.startswith('const PROGRAM = '))
+        front = json.loads(line[len('const PROGRAM = '):].rstrip().rstrip(';'))['ru']
+        self.assertEqual([r['title'] for r in front[1]['rows']], titles)
 
     def test_languages_and_hidden_speaker(self):
         from speakers.models import Speaker
         en = self.c.get('/api/program/?lang=en').data
         self.assertEqual(en[1]['tab'], '6 November')
-        self.assertIn('AL-FARABI', en[1]['event'][0].upper())
+        self.assertIn('INTERNATIONAL', en[1]['event'][0])
         kk = self.c.get('/api/program/?lang=kk').data
-        mono = kk[1]['rows'][6]['blocks'][0]['items'][0]
-        self.assertIn('text', mono)  # в казахской версии — строкой текста
+        self.assertEqual(kk[2]['tab'], '7 қараша')
 
         def names(data):
             return [i.get('name') for d in data for r in d['rows'] for b in r.get('blocks', []) for i in b['items']]
-        self.assertIn('Эллиотт Марк С.', names(self.c.get('/api/program/?lang=ru').data))
-        Speaker.objects.filter(name_ru='Эллиотт Марк С.').update(is_published=False)
-        self.assertNotIn('Эллиотт Марк С.', names(self.c.get('/api/program/?lang=ru').data))
-        Speaker.objects.filter(name_ru='Эллиотт Марк С.').update(name_ru='Эллиотт М.', is_published=True)
-        self.assertIn('Эллиотт М.', names(self.c.get('/api/program/?lang=ru').data))  # правка карточки видна в программе
+        self.assertIn('Аяди Салем', names(self.c.get('/api/program/?lang=ru').data))
+        Speaker.objects.filter(name_ru='Аяди Салем').update(is_published=False)
+        self.assertNotIn('Аяди Салем', names(self.c.get('/api/program/?lang=ru').data))
+        Speaker.objects.filter(name_ru='Аяди Салем').update(name_ru='Аяди С.', is_published=True)
+        self.assertIn('Аяди С.', names(self.c.get('/api/program/?lang=ru').data))  # правка карточки видна в программе
 
     def test_documents(self):
         from program.models import Document
@@ -837,3 +840,27 @@ class HeaderPolishTests(BaseAPITest):
         page = self.client.get('/admin/siteconfig/sitesettings/1/change/').content.decode()
         self.assertIn('name="google_map_url"', page)
         self.assertIn('/map/kml/hotels.kml', page)
+
+
+class SiteUpdate202610Tests(BaseAPITest):
+    """Правки сайта по документу 15.10.2026."""
+
+    def test_site_texts(self):
+        html = self.c.get('/').content.decode()
+        self.assertNotRegex(html, r'Global Symposium|[Гг]лобальн\w* симпозиум|[Жж]аһандық симпозиум')
+        self.assertIn('<button data-lang="kk">KZ</button><button data-lang="ru">RU</button><button data-lang="en">EN</button>', html)
+        self.assertNotIn('<div class="partners">', html)               # герб у языков убран
+        self.assertNotIn('Чжэнчжоу (КНР)\'],', html)                   # среди партнёров его нет
+        self.assertNotIn("'Университет Чжэнчжоу (КНР)'", html)
+        self.assertIn("'Казахский национальный университет имени аль-Фараби', 'kaznu'", html.replace('"', "'"))
+        self.assertIn('const ORG_LOGOS = {"icesco": "data:image/png;base64,', html)
+        self.assertIn("viewProgram:'Бағдарлама'", html)
+        self.assertIn('Фарабитанудың қазақстандық тәжірибесі', html)   # четвёртая панель
+        self.assertIn("sectionWrap(L.ctTitle", html)                    # контакты — на странице организаторов
+        self.assertIn('dirOpts = t().dirs.map(d=>d.t);', html)
+
+    def test_documents_and_group_setting(self):
+        from speakers.models import SpeakerGroup
+        self.assertFalse(SpeakerGroup.objects.get(key='welcome').show_topic)
+        self.assertFalse(SpeakerGroup.objects.get(key='plenary7').is_published)
+        self.assertFalse(SpeakerGroup.objects.get(key='moderators').is_published)

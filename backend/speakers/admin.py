@@ -11,7 +11,7 @@ class SpeakerGroupAdmin(admin.ModelAdmin):
     list_editable = ['order', 'is_published']
     prepopulated_fields = {'key': ('title_en',)}
     fieldsets = (
-        (None, {'fields': ('key', 'order', 'is_published')}),
+        (None, {'fields': ('key', 'order', 'is_published', 'show_topic')}),
         ('Название вкладки', {'fields': ('title_ru', 'title_kk', 'title_en')}),
         ('Подзаголовок', {'fields': ('subtitle_ru', 'subtitle_kk', 'subtitle_en')}),
     )

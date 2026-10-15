@@ -256,8 +256,7 @@ function missing(form, names){
 function flashHTML(){ return CAB.flash.splice(0).map(([m, e]) => cabNote(m, e)).join(''); }
 function cabFlash(msg, err){ CAB.flash.push([msg, err]); }
 function dirOpts(current){
-  const D = P();
-  const list = [D[1].rows[10], D[1].rows[13], D[1].rows[15], D[2].rows[8], D[2].rows[9], D[2].rows[10]].filter(Boolean).map(r => r.title);
+  const list = t().dirs.map(d => d.t);  // четыре панели симпозиума
   if (current && !list.includes(current)) list.push(current);
   return [['', ct().dirNone], ...list.map(x => [x, x])];
 }

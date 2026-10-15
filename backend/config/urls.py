@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import include, path
 
-admin.site.site_header = 'Al-Farabi Global Symposium 2026'
+admin.site.site_header = 'Al-Farabi International Symposium 2026'
 admin.site.site_title = 'AFGS 2026'
 admin.site.index_title = 'Администрирование'
 

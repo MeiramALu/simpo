@@ -20,6 +20,9 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import update_2026_10  # noqa: E402
+
 HERE = Path(__file__).resolve().parent
 DEFAULT_SRC = HERE.parent.parent / 'al-farabi-symposium-2026 V2.html'
 
@@ -187,7 +190,7 @@ def build(src: Path, dst: Path):
         # выбор запоминается (localStorage 'afgs-lang') и в следующий раз открывается он.
         ("let lang = 'ru';", "let lang = 'en';"),
         ('<html lang="ru">', '<html lang="en">'),
-        ('<title>Глобальный симпозиум аль-Фараби – 2026</title>', '<title>Al-Farabi Global Symposium – 2026</title>'),
+        ('<title>Глобальный симпозиум аль-Фараби – 2026</title>', '<title>Al-Farabi International Symposium – 2026</title>'),
         *CABINET_STEPS,
     ]
     if build_favicons(html, dst.parent):
@@ -196,6 +199,8 @@ def build(src: Path, dst: Path):
         if html.count(old) != 1:
             sys.exit(f'Не найдено место для вставки: {old!r} — структура фронта изменилась, поправьте build_site.py')
         html = html.replace(old, new)
+    # правки по документам 13–15.10.2026: International, 4 панели, организаторы, новая программа
+    html = update_2026_10.apply(html)
     dst.parent.mkdir(parents=True, exist_ok=True)
     dst.write_text(html, encoding='utf-8')
     print(f'Готово: {dst} ({dst.stat().st_size // 1024} КБ)')

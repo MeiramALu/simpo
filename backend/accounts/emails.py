@@ -13,8 +13,8 @@ log = logging.getLogger(__name__)
 
 SIGNATURE = {
     'ru': '\n\n—\nОргкомитет Глобального симпозиума аль-Фараби – 2026\nal-farabi@kaznu.kz',
-    'kk': '\n\n—\nӘл-Фараби жаһандық симпозиумы – 2026 ұйымдастыру комитеті\nal-farabi@kaznu.kz',
-    'en': '\n\n—\nOrganising Committee, Al-Farabi Global Symposium 2026\nal-farabi@kaznu.kz',
+    'kk': '\n\n—\nӘл-Фараби халықаралық симпозиумы – 2026 ұйымдастыру комитеті\nal-farabi@kaznu.kz',
+    'en': '\n\n—\nOrganising Committee, Al-Farabi International Symposium 2026\nal-farabi@kaznu.kz',
 }
 
 MESSAGES = {
@@ -30,8 +30,8 @@ MESSAGES = {
     },
     'registration_received': {
         'ru': ('Заявка на участие получена', 'Здравствуйте, {name}!\n\nМы получили вашу заявку на участие в Глобальном симпозиуме аль-Фараби – 2026.\nДень участия: {day}\nФормат: {role}\n\nОргкомитет свяжется с вами по электронной почте.'),
-        'kk': ('Қатысуға өтінім алынды', 'Сәлеметсіз бе, {name}!\n\nӘл-Фараби жаһандық симпозиумы – 2026-ға қатысу өтініміңіз алынды.\nҚатысу күні: {day}\nФормат: {role}\n\nҰйымдастыру комитеті сізбен электрондық пошта арқылы байланысады.'),
-        'en': ('Application received', 'Dear {name},\n\nWe have received your application to take part in the Al-Farabi Global Symposium 2026.\nDay of attendance: {day}\nParticipation: {role}\n\nThe organising committee will contact you by email.'),
+        'kk': ('Қатысуға өтінім алынды', 'Сәлеметсіз бе, {name}!\n\nӘл-Фараби халықаралық симпозиумы – 2026-ға қатысу өтініміңіз алынды.\nҚатысу күні: {day}\nФормат: {role}\n\nҰйымдастыру комитеті сізбен электрондық пошта арқылы байланысады.'),
+        'en': ('Application received', 'Dear {name},\n\nWe have received your application to take part in the Al-Farabi International Symposium 2026.\nDay of attendance: {day}\nParticipation: {role}\n\nThe organising committee will contact you by email.'),
     },
     'registration_status': {
         'ru': ('Статус заявки изменён', 'Здравствуйте, {name}!\n\nСтатус вашей заявки: {status}.\n{comment}'),
