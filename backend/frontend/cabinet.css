@@ -73,3 +73,7 @@ html[lang="kk"] .partner span{display:none}
 /* фото докладчика — всегда вверху карточки, а не по центру имени из 2–3 строк */
 .sp .top2{align-items:flex-start}
 .sp .top2 .ini{margin-top:2px}
+/* плашка «день: сессия» — внизу карточки: в одном ряду у всех на одной линии */
+.sp{display:flex;flex-direction:column}
+.sp .where{margin-top:auto;align-self:flex-start}
+.sp .role:last-of-type,.sp .topic{margin-bottom:14px}
