@@ -70,3 +70,6 @@ html[lang="kk"] .partner span{display:none}
 .orgs .o{display:flex;align-items:center;gap:20px}
 .org-logo{flex:none;height:64px;width:132px;object-fit:contain;background:#fff;border-radius:12px;padding:6px}
 @media (max-width:760px){.org-logo{height:52px;width:96px}}
+/* фото докладчика — всегда вверху карточки, а не по центру имени из 2–3 строк */
+.sp .top2{align-items:flex-start}
+.sp .top2 .ini{margin-top:2px}
