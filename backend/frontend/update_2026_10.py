@@ -220,6 +220,11 @@ def apply(html):
                       "spLead:'Welcome remarks, plenary reports and the participants of the four panels of the symposium on 6 November.'")):
         html = sub(html, old, new)
 
+    # сайт всегда открывается на английском: выбранный язык держится только в открытой вкладке (sessionStorage),
+    # а не навсегда в браузере (localStorage) — иначе повторный заход открывался на прошлом языке
+    html = sub(html, "try { const s = localStorage.getItem('afgs-lang');", "try { const s = sessionStorage.getItem('afgs-lang');")
+    html = sub(html, "try { localStorage.setItem('afgs-lang', lang); }", "try { sessionStorage.setItem('afgs-lang', lang); }")
+
     # языки: KZ, RU, EN
     html = sub(html, '<button data-lang="ru">RU</button><button data-lang="kk">KK</button><button data-lang="en">EN</button>',
                '<button data-lang="kk">KZ</button><button data-lang="ru">RU</button><button data-lang="en">EN</button>')

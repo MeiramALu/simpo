@@ -187,7 +187,7 @@ def build(src: Path, dst: Path):
         (SPEAKERS_PAGE_OLD, SPEAKERS_PAGE_NEW),
         (SPEAKER_AVATAR_OLD, SPEAKER_AVATAR_NEW),
         # Сайт открывается на английском. Если посетитель сам выбрал язык кнопкой,
-        # выбор запоминается (localStorage 'afgs-lang') и в следующий раз открывается он.
+        # выбор держится только в открытой вкладке (sessionStorage, см. update_2026_10.py).
         ("let lang = 'ru';", "let lang = 'en';"),
         ('<html lang="ru">', '<html lang="en">'),
         ('<title>Глобальный симпозиум аль-Фараби – 2026</title>', '<title>Al-Farabi International Symposium – 2026</title>'),

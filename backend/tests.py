@@ -503,8 +503,9 @@ class DefaultLanguageTests(BaseAPITest):
         self.assertIn('<html lang="en">', html)
         self.assertIn("let lang = 'en';", html)
         self.assertIn('<title>Al-Farabi International Symposium – 2026</title>', html)
-        # выбор посетителя по-прежнему запоминается
-        self.assertIn("localStorage.getItem('afgs-lang')", html)
+        # выбранный язык держится только в открытой вкладке: новый заход — снова английский
+        self.assertIn("sessionStorage.getItem('afgs-lang')", html)
+        self.assertNotIn("localStorage.getItem('afgs-lang')", html)
 
 
 class SpeakerFromRegistrationTests(BaseAPITest):
