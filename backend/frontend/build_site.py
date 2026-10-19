@@ -172,6 +172,23 @@ CABINET_STEPS = [
      'target="_blank" rel="noopener">${esc(L.map)}</a>', '${mapMenu(vi, v, L.map)}'),
 ]
 
+# Баннер симпозиума (frontend/hero_banner.jpg) вместо фото зала в правой карточке главной.
+# На баннере есть текст, поэтому он показывается целиком, а карточки дней — под ним, а не поверх.
+HERO_CSS = ('.hero-art.has-photo{min-height:520px}\n'
+            '.hero-art.has-banner{min-height:0;justify-content:flex-start}\n'
+            '.hero-art.has-banner .photo{position:static;height:auto;object-fit:contain}\n'
+            '.hero-art.has-banner .hero-days{background:var(--navy-2);padding-top:0}')
+
+
+def hero_steps():
+    banner = base64.b64encode((HERE / 'hero_banner.jpg').read_bytes()).decode()
+    return [
+        ('const HERO = (() => { for (const v of CC.ru.venues) for (const p of v.photos) if (p.hero) '
+         'return PHOTOS[p.i]; return null; })();', f"const HERO = 'data:image/jpeg;base64,{banner}';"),
+        ("<div class=\"hero-art${HERO?' has-photo':''}\">", "<div class=\"hero-art${HERO?' has-photo has-banner':''}\">"),
+        ('.hero-art.has-photo{min-height:520px}', HERO_CSS),
+    ]
+
 
 def build(src: Path, dst: Path):
     html = src.read_text(encoding='utf-8')
@@ -192,6 +209,7 @@ def build(src: Path, dst: Path):
         ('<html lang="ru">', '<html lang="en">'),
         ('<title>Глобальный симпозиум аль-Фараби – 2026</title>', '<title>Al-Farabi International Symposium – 2026</title>'),
         *CABINET_STEPS,
+        *hero_steps(),
     ]
     if build_favicons(html, dst.parent):
         steps.append(('</head>', FAVICON_LINKS + '</head>'))
