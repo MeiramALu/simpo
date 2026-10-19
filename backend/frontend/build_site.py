@@ -174,11 +174,22 @@ CABINET_STEPS = [
 
 # Баннер симпозиума (frontend/hero_banner.jpg) вместо фото зала в правой карточке главной.
 # Вёрстка карточки та же, что у фото: картинка на фоне, дни — поверх.
+# На телефоне дни идут столбиком, карточка высокая, и баннер сильно увеличивается —
+# поэтому там баннер целиком сверху, дни под ним.
+HERO_MOBILE_CSS = ('.hero-art.has-photo{min-height:520px}\n'
+                   '@media (max-width:760px){\n'
+                   '  .hero-art.has-photo{justify-content:flex-start}\n'
+                   '  .hero-art.has-photo .photo{position:static;height:auto;object-fit:contain}\n'
+                   '  .hero-art.has-photo .hero-days{background:var(--navy-2);padding-top:0}\n'
+                   '}')
+
+
 def hero_steps():
     banner = base64.b64encode((HERE / 'hero_banner.jpg').read_bytes()).decode()
     return [
         ('const HERO = (() => { for (const v of CC.ru.venues) for (const p of v.photos) if (p.hero) '
          'return PHOTOS[p.i]; return null; })();', f"const HERO = 'data:image/jpeg;base64,{banner}';"),
+        ('.hero-art.has-photo{min-height:520px}', HERO_MOBILE_CSS),
     ]
 
 
