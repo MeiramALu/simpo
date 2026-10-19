@@ -52,7 +52,9 @@ html[lang="kk"] .partner span{display:none}
   html[lang="kk"] .partners{display:none}
 }
 @media (max-width:1180px){
-  nav.main a.acct-nav{display:block;color:var(--gold-text);padding:13px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+  /* в мобильном меню — обычный пункт списка, без рамки-«таблетки» от .acct */
+  nav.main a.acct-nav{display:block;color:var(--gold-text);padding:13px 0;border:0;border-radius:0;border-bottom:1px solid rgba(255,255,255,.08)}
+  nav.main a.acct-nav:hover,nav.main a.acct-nav[aria-current="page"]{color:#fff;border-color:rgba(255,255,255,.08)}
 }
 @media (min-width:1181px) and (max-width:1300px){
   nav.main{gap:16px}
